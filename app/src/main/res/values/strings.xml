@@ -6,4 +6,5 @@
     <string name="include_kanji_text">Include Kanji Pronounciation</string>
     <string name="title_activity_main_play">MainPlay</string>
     <string name="high_score_text">Current High Score:</string>
+    <string name="title_activity_high_score">HighScore</string>
 </resources>

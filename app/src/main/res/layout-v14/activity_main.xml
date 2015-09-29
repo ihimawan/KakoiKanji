@@ -21,9 +21,9 @@
     <ImageView
         android:layout_width="280dp"
         android:layout_height="280dp"
+        android:scaleType="fitXY"
         android:id="@+id/logo"
         android:src="@drawable/logo"
-        android:scaleType="fitXY"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/high_score_text"
+        android:text="BEST SCORE:"
         android:id="@+id/textView2"
         android:textColor="#ffffff"
         android:layout_below="@+id/logo"

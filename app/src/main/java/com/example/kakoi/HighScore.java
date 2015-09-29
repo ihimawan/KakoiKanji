@@ -6,43 +6,29 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
-
-
+public class HighScore extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        ImageButton playButton = (ImageButton) findViewById(R.id.playButton);
-
-//        playButton.setOnClickListener(
-//                new Button.OnClickListener(){
-//                    public void onClick(View v){
-//                        //EDIT ACTIONS
-//                        TextView myText = (TextView) findViewById(R.id.textView2);
-//                        myText.setText("Bye");
-//                    }
-//                }
-//        );
-
+        setContentView(R.layout.activity_high_score);
     }
 
-    //this method does the intent and pulls up the play screen when the play button is clicked.
-    public void playClicked(View view){
-        Intent i = new Intent(this, HighScore.class);
+    public void quitClicked(View view){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
+    public void replayClicked(View view){
+        Intent i = new Intent(this, MainPlay.class);
         startActivity(i);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_high_score, menu);
         return true;
     }
 
