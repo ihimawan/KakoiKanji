@@ -7,6 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+/*
+THIS IS THE HIGHSCORE SCREEN
+ */
+
 public class HighScore extends AppCompatActivity {
 
     @Override
@@ -15,11 +19,13 @@ public class HighScore extends AppCompatActivity {
         setContentView(R.layout.activity_high_score);
     }
 
+    //function for quit button
     public void quitClicked(View view){
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
+    //function for replay button
     public void replayClicked(View view){
         Intent i = new Intent(this, MainPlay.class);
         startActivity(i);
