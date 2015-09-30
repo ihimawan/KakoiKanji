@@ -12,6 +12,7 @@ public class MainPlay extends AppCompatActivity {
     TextView myText;
     MyDBHandler dbHandler;
 
+    //itworks!!!
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
