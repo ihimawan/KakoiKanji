@@ -16,12 +16,11 @@ public class MainPlay extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_play);
-        databaseContent = (TextView) findViewById(R.id.databaseContent);
+        databaseContent = (TextView) findViewById(R.id.highscore);
         dbHandler = new MyDBHandler(this, null, null, 1);
         addQuestion("Chicken");
         addQuestion("Whale");
         addQuestion("Wolf");
-        addQuestion("Someanimal");
         printDatabase();
     }
 
@@ -32,11 +31,11 @@ public class MainPlay extends AppCompatActivity {
 //        printDatabase();
     }
 
-    //Delete method
-    public void deleteQuestion(String englishWord){
-        dbHandler.deleteQuestion(englishWord);
-        //        printDatabase();
-    }
+//    //Delete method
+//    public void deleteQuestion(String englishWord){
+//        dbHandler.deleteQuestion(englishWord);
+//        //        printDatabase();
+//    }
 
     public void printDatabase(){
         String dbString = dbHandler.databaseToString();

@@ -21,7 +21,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
 
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         //need to pass information along to the superclass
-        super(context, name, factory, version);
+        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
         //name = name of database (to know which file to save it under)
         //version = database version
     }
@@ -54,7 +54,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     //Delete product from database
     public void deleteQuestion(String englishWord){
         SQLiteDatabase db = getWritableDatabase(); //db := the database we're gonna write to.
-        db.execSQL("DELETE FROM +" + TABLE_PRODUCTS + " WHERE " + COLUMN_ENGLISHWORD + "=\"" + englishWord + "\"");
+        db.execSQL("DELETE FROM " + TABLE_PRODUCTS + " WHERE " + COLUMN_ENGLISHWORD + "=\"" + englishWord + "\";");
     }
 
     //Print out the database as a string.
