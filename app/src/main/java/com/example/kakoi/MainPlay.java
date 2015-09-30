@@ -24,14 +24,14 @@ public class MainPlay extends AppCompatActivity {
     }
 
     public void addButtonClicked(View view){
-        Products product = new Products(myInput.getText().toString());
-        dbHandler.addProduct(product);
+        Questions question = new Questions(myInput.getText().toString());
+        dbHandler.addQuestion(question);
         printDatabase();
     }
 
     public void deleteButtonClicked(View view){
         String inputText = myInput.getText().toString();
-        dbHandler.deleteProduct(inputText);
+        dbHandler.deleteQuestion(inputText);
         printDatabase();
     }
 
