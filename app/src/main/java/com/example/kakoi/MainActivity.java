@@ -20,17 +20,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ImageButton playButton = (ImageButton) findViewById(R.id.playButton);
-
-//        playButton.setOnClickListener(
-//                new Button.OnClickListener(){
-//                    public void onClick(View v){
-//                        //EDIT ACTIONS
-//                        TextView myText = (TextView) findViewById(R.id.textView2);
-//                        myText.setText("Bye");
-//                    }
-//                }
-//        );
-
     }
 
     //this method does the intent and pulls up the play screen when the play button is clicked.

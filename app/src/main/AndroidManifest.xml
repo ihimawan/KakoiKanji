@@ -17,12 +17,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainPlay"
-            android:label="@string/title_activity_main_play" >
-        </activity>
-        <activity
             android:name=".HighScore"
             android:label="@string/title_activity_high_score" >
+        </activity>
+        <activity
+            android:name=".MainPlay"
+            android:label="@string/title_activity_main_play" >
         </activity>
     </application>
 
