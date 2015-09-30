@@ -3,8 +3,7 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.kakoi.MainPlay">
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
 
     <EditText
         android:layout_width="300dp"
@@ -12,28 +11,27 @@
         android:id="@+id/myInput"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="73dp" />
+        android:layout_marginTop="50dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="add"
+        android:text="ADD"
         android:id="@+id/addButton"
+        android:layout_marginTop="26dp"
         android:layout_below="@+id/myInput"
-        android:layout_alignRight="@+id/myInput"
-        android:layout_alignEnd="@+id/myInput"
-        android:layout_marginRight="210dp"
-        android:layout_marginEnd="210dp"
+        android:layout_alignLeft="@+id/myInput"
+        android:layout_alignStart="@+id/myInput"
         android:onClick="addButtonClicked" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="delete"
+        android:text="DELETE"
         android:id="@+id/deleteButton"
-        android:layout_below="@+id/myInput"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/addButton"
+        android:layout_alignRight="@+id/myInput"
+        android:layout_alignEnd="@+id/myInput"
         android:onClick="deleteButtonClicked" />
 
     <TextView
