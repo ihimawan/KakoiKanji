@@ -5,7 +5,7 @@ package com.example.kakoi;
  */
 
 /* a question class contains the ID of the question and the english word
-TODO: ADD PICTURE ATTRIBUTE TO THIS CLASS
+TODO: ADD PICTURE ATTRIBUTE TO THIS CLASS.
  */
 
 public class Questions {
