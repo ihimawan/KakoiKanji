@@ -15,6 +15,7 @@ public class MainPlay extends AppCompatActivity {
     EditText myInput;
     TextView myText;
     MyDBHandler dbHandler;
+    TextView randomText;
 
     //initial function
     @Override
@@ -23,9 +24,12 @@ public class MainPlay extends AppCompatActivity {
         setContentView(R.layout.activity_main_play);
         myInput = (EditText) findViewById(R.id.myInput);
         myText = (TextView) findViewById(R.id.myText);
+        randomText = (TextView) findViewById(R.id.randomText);
         dbHandler = new MyDBHandler(this, null, null, 1);
         printDatabase();
     }
+
+
 
     //function that adds items to the database
     public void addButtonClicked(View view){
@@ -34,11 +38,21 @@ public class MainPlay extends AppCompatActivity {
         printDatabase();
     }
 
+    public void addingQuestion(String englishWord){
+        Questions question = new Questions(englishWord);
+        dbHandler.addQuestion(question);
+    }
+
     //function that deletes items from the database
     public void deleteButtonClicked(View view){
         String inputText = myInput.getText().toString();
         dbHandler.deleteQuestion(inputText);
         printDatabase();
+    }
+
+    public void randomButtonClicked(View view){
+        String dbString = dbHandler.generateRandomQuestion();
+        randomText.setText(dbString);
     }
 
     //function that prints the contents of the database

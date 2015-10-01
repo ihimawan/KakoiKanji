@@ -12,7 +12,7 @@ public class Questions {
     private int _id;
     private String _englishword;
 
-    public Questions(){
+    public Questions() {
 
     }
 

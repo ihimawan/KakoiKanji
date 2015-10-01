@@ -40,6 +40,25 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/myText"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/addButton"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RANDOM"
+        android:id="@+id/randomButton"
+        android:onClick="randomButtonClicked"
+        android:layout_above="@+id/myText"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/randomText"
+        android:layout_below="@+id/randomButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="87dp" />
 </RelativeLayout>
