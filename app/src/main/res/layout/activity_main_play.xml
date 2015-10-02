@@ -91,7 +91,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="yon"
+        android:text="yong"
         android:id="@+id/answer4"
         android:layout_alignBottom="@+id/answer3"
         android:layout_alignLeft="@+id/answer2"

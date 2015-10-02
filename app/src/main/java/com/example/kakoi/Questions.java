@@ -17,7 +17,7 @@ public class Questions {
 
     }
 
-    public Questions(String _answer, String _englishword) {
+    public Questions(String _englishword, String _answer) {
         this._answer = _answer;
         this._englishword = _englishword;
     }
