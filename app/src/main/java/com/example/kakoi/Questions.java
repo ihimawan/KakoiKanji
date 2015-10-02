@@ -11,13 +11,23 @@ TODO: ADD PICTURE ATTRIBUTE TO THIS CLASS.
 public class Questions {
     private int _id;
     private String _englishword;
+    private String _answer;
 
     public Questions() {
 
     }
 
-    public Questions(String englishword) {
-        this._englishword = englishword;
+    public Questions(String _answer, String _englishword) {
+        this._answer = _answer;
+        this._englishword = _englishword;
+    }
+
+    public String get_answer() {
+        return _answer;
+    }
+
+    public void set_answer(String _answer) {
+        this._answer = _answer;
     }
 
     public void set_id(int _id) {

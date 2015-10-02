@@ -17,10 +17,11 @@ TODO: NEED TO WORK ON HOW TO DO THE HIGHSCORE THING.
  */
 public class MyDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "questions.db"; //name of database
+    private static final String DATABASE_NAME = "questions4.db"; //name of database
     public static final String TABLE_QUESTIONS = "questions"; //name of the table
     public static final String COLUMN_ID = "id"; //name of the column containing ID
     public static final String COLUMN_ENGLISHWORD = "englishword"; //name of column containing the englishwords
+    public static final String COLUMN_ANSWER = "answer"; //name of column containing the englishwords
 
     //just a constructor for the database
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -76,7 +77,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 dbString += c.getString(c.getColumnIndex(COLUMN_ENGLISHWORD));
                 dbString += posString;
                 dbString += "\n";
-
             }
             c.moveToPosition(++position);
         }
@@ -86,42 +86,31 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     }
 
-
-
     //to check if it is correct answer
-//    public boolean isCorrectAnswer(String question, String answerChoice){
-//        boolean flag = true;
+    public boolean isCorrectAnswer(String question, String answerChoice){
+        boolean flag = true;
 //        String dbString = "";
-//        SQLiteDatabase db = getWritableDatabase();
-//        String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
-//
-//        Cursor c = db.rawQuery(query, null);
-//        c.moveToFirst();
-//
-//        while (!c.isAfterLast()){
-//            if((c.getString(c.getColumnIndex(COLUMN_ENGLISHWORD))).equals(question)){
-//                flag = (c.getString(c.getColumnIndex(COLUMN_ANSWER))).equals(answerChoice);
-//                break;
-//            }
-//            c.moveToNext();
-//        }
-//
-//        db.close();
-//        return flag;
-//
-//    }
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
 
-//    public Cursor getRandomDataItemFromDb(String tableName, int limit) {
-//        SQLiteDatabase db = getWritableDatabase();
-//        Cursor cursor = db.rawQuery("SELECT * FROM " + tableName+ " ORDER BY RANDOM() LIMIT " + limit, null);
-//        if (cursor.moveToFirst()) {
-//            return cursor;
-//        }
-//        return cursor;
-//    }
+        Cursor c = db.rawQuery(query, null);
+        c.moveToFirst();
+
+        while (!c.isAfterLast()){
+            if((c.getString(c.getColumnIndex(COLUMN_ENGLISHWORD))).equals(question)){
+                flag = (c.getString(c.getColumnIndex(COLUMN_ANSWER))).equals(answerChoice);
+                break;
+            }
+            c.moveToNext();
+        }
+
+        db.close();
+        return flag;
+
+    }
+
 
     //chooses a random row in the database and displays the question
-
     public String generateRandomQuestion(){
 
         String dbString = "";
@@ -129,11 +118,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
         String query2 = "SELECT * FROM " + TABLE_QUESTIONS + " ORDER BY RANDOM() LIMIT 1";
 
-
         Cursor c = db.rawQuery(query, null);
 
         Random rand = new Random();
-        int n = 30 + rand.nextInt(10); // Gives n such that 0 <= n < 20
+        int n = rand.nextInt(4); // Gives n such that 0 <= n < 4
 
         c.moveToPosition(n);
 

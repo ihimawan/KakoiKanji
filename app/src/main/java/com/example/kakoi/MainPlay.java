@@ -3,6 +3,7 @@ package com.example.kakoi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -13,9 +14,10 @@ THIS IS THE MAIN PLAYING SCREEN
 public class MainPlay extends AppCompatActivity {
 
     EditText myInput;
-    TextView myText;
+    TextView dummytext;
     MyDBHandler dbHandler;
     TextView randomText;
+
 
     //initial function
     @Override
@@ -23,23 +25,43 @@ public class MainPlay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_play);
         myInput = (EditText) findViewById(R.id.myInput);
-        myText = (TextView) findViewById(R.id.myText);
+        //myText = (TextView) findViewById(R.id.myText);
         randomText = (TextView) findViewById(R.id.randomText);
         dbHandler = new MyDBHandler(this, null, null, 1);
-        printDatabase();
+        addingQuestion("one", "ichi");
+        addingQuestion("two", "ni");
+        addingQuestion("three", "san");
+        addingQuestion("four", "yong");
+
+        generateRandom();
+
+
+
+//        addingQuestion("five", "go");
+//        addingQuestion("six", "roku");
+//        addingQuestion("seven", "nana");
+//        addingQuestion("eight", "hachi");
+//        addingQuestion("nine", "kyuu");
+//        addingQuestion("ten", "jyuu");
+        //printDatabase();
     }
-
-
 
     //function that adds items to the database
-    public void addButtonClicked(View view){
-        Questions question = new Questions(myInput.getText().toString());
-        dbHandler.addQuestion(question);
-        printDatabase();
+//    public void addButtonClicked(View view){
+//        Questions question = new Questions(myInput.getText().toString());
+//        dbHandler.addQuestion(question);
+//        printDatabase();
+//    }
+
+    public void onClick1(View view){
+        Button answer1 = (Button) findViewById(R.id.answer1);
+        String buttonText = answer1.getText().toString();
+        TextView dummytext = (TextView) findViewById(R.id.dummytext);
+
     }
 
-    public void addingQuestion(String englishWord){
-        Questions question = new Questions(englishWord);
+    public void addingQuestion(String englishWord, String answer){
+        Questions question = new Questions(englishWord, answer);
         dbHandler.addQuestion(question);
     }
 
@@ -55,10 +77,15 @@ public class MainPlay extends AppCompatActivity {
         randomText.setText(dbString);
     }
 
+    public void generateRandomQuestion(){
+        String dbString = dbHandler.generateRandomQuestion();
+        randomText.setText(dbString);
+    }
+
     //function that prints the contents of the database
     public void printDatabase(){
         String dbString = dbHandler.databaseToString();
-        myText.setText(dbString);
+        //myText.setText(dbString);
         myInput.setText("");
     }
 
