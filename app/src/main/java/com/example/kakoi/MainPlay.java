@@ -17,10 +17,8 @@ public class MainPlay extends AppCompatActivity {
 
     TextView feedbackText; //text that shows if the answer chosen is Correct or Wrong
     MyDBHandler dbHandler; //create the database
-    TextView questionText; 
-    String currentQuestion;
-    int n;
-
+    TextView questionText; //text that shows the question (english word)
+    int n; //the position of the random question in the database
 
     //initial function
     @Override
@@ -51,68 +49,77 @@ public class MainPlay extends AppCompatActivity {
         //printDatabaseAnswer();
     }
 
-    //function that adds items to the database
+
+
+    //function that runs if the first button is clicked.
+    public void onClick1 (View view){
+        Button answer1 = (Button) findViewById(R.id.answer1);
+        String buttonText = answer1.getText().toString(); //get the text of the button clicked
+        isCorrectAnswer(n, buttonText); //checks if it is the correct answer
+        setRandomQuestion(); //get another random question
+    }
+
+    //function that runs if the second button is clicked.
+    public void onClick2 (View view){
+        Button answer2 = (Button) findViewById(R.id.answer2);
+        String buttonText = answer2.getText().toString();
+        isCorrectAnswer(n, buttonText);
+        setRandomQuestion();
+    }
+
+    //function that runs if the third button is clicked.
+    public void onClick3 (View view){
+        Button answer3 = (Button) findViewById(R.id.answer3);
+        String buttonText = answer3.getText().toString();
+        isCorrectAnswer(n, buttonText);
+        setRandomQuestion();
+    }
+
+    //function that runs if the fourth button is clicked.
+    public void onClick4 (View view){
+        Button answer4 = (Button) findViewById(R.id.answer4);
+        String buttonText = answer4.getText().toString();
+        isCorrectAnswer(n, buttonText);
+        setRandomQuestion();
+    }
+
+    //checks if correct answer
+    public void isCorrectAnswer(int n, String answerChoice){
+        if ((dbHandler.isCorrectAnswer(n, answerChoice))){
+            feedbackText.setText("Correct!");
+            /*
+            TODO: INCREMENT SCORE BY 5
+             */
+        }else{
+            feedbackText.setText("Wrong!");
+            /*
+            TODO: DECREMENT LIFE BY 1
+             */
+        }
+    }
+
+    /*
+    TODO: LIFESUBSTRACTION() & SCOREGENERATOR()
+     */
+
+    //this function changes the question text to a random question in the database
+    public void setRandomQuestion (){
+        n = dbHandler.generateRandomQuestion(); //get the random position
+        questionText.setText(dbHandler.getQuestion(n)); //get the question based on the random position
+    }
+
+    /*
+    BELOW ARE FUNCTIONS FOR BACK-END/DEBUGGING PURPOSES
+     */
+
+////    function that adds items to the database (when add button is clicked)
 //    public void addButtonClicked(View view){
 //        Questions question = new Questions(myInput.getText().toString());
 //        dbHandler.addQuestion(question);
 //        printDatabase();
 //    }
 
-    //function that runs if the first button is clicked.
-    public void onClick1 (View view){
-        Button answer1 = (Button) findViewById(R.id.answer1);
-        String buttonText = answer1.getText().toString();
-        feedbackText = (TextView) findViewById(R.id.feedbackText);
-        if ((dbHandler.isCorrectAnswer(n, buttonText))){
-            feedbackText.setText("Correct!");
-        }else{
-            feedbackText.setText("Wrong!");
-        }
-
-        setRandomQuestion();
-    }
-
-    public void onClick2 (View view){
-        Button answer2 = (Button) findViewById(R.id.answer2);
-        String buttonText = answer2.getText().toString();
-        feedbackText = (TextView) findViewById(R.id.feedbackText);
-
-        if ((dbHandler.isCorrectAnswer(n, buttonText))){
-            feedbackText.setText("Correct!");
-        }else{
-            feedbackText.setText("Wrong!");
-        }
-
-        setRandomQuestion();
-    }
-
-    public void onClick3 (View view){
-        Button answer3 = (Button) findViewById(R.id.answer3);
-        String buttonText = answer3.getText().toString();
-        feedbackText = (TextView) findViewById(R.id.feedbackText);
-        if ((dbHandler.isCorrectAnswer(n, buttonText))){
-            feedbackText.setText("Correct!");
-        }else{
-            feedbackText.setText("Wrong!");
-        }
-
-        setRandomQuestion();
-    }
-
-    public void onClick4 (View view){
-        Button answer4 = (Button) findViewById(R.id.answer4);
-        String buttonText = answer4.getText().toString();
-        feedbackText = (TextView) findViewById(R.id.feedbackText);
-        if ((dbHandler.isCorrectAnswer(n, buttonText))){
-            feedbackText.setText("Correct!");
-        }else{
-            feedbackText.setText("Wrong!");
-        }
-
-        setRandomQuestion();
-    }
-
-    //function that adds question
+    //function that adds question to the database (add button is not clicked)
     public void addingQuestion(String englishWord, String answer){
         Questions question = new Questions(englishWord, answer);
         dbHandler.addQuestion(question);
@@ -130,33 +137,17 @@ public class MainPlay extends AppCompatActivity {
         setRandomQuestion();
     }
 
-    public void setRandomQuestion (){
-        n = dbHandler.generateRandomQuestion();
-        currentQuestion = dbHandler.getQuestion(n);
-        questionText.setText(currentQuestion);
-    }
-
-    public String generateRandomQuestion(){
-        n = dbHandler.generateRandomQuestion();
-        String dbString = dbHandler.getQuestion(n);
-        questionText.setText(dbString);
-        return dbString;
-    }
-
-    //function that prints the contents of the database
+    //function that prints the questions in the database (for debugging purposes)
     public void printDatabase(){
         String dbString = dbHandler.databaseToString();
         feedbackText.setText(dbString);
-        //feedbackText.setText("");
     }
 
+    //function that prints the answers in the database (for debugging purposes)
     public void printDatabaseAnswer(){
         String dbString = dbHandler.databaseToStringAnswer();
-        //myText.setText(dbString);
-        //myInput.setText("");
         feedbackText.setText(dbString);
     }
-
 
 }
 

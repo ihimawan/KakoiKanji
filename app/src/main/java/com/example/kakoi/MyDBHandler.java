@@ -12,9 +12,6 @@ import android.content.ContentValues;
 
 import java.util.Random;
 
-/* this is the class where all the database operations happen
-TODO: NEED TO WORK ON HOW TO DO THE HIGHSCORE THING.
- */
 public class MyDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "questions7.db"; //name of database
@@ -63,7 +60,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM " + TABLE_QUESTIONS + " WHERE " + COLUMN_ENGLISHWORD + "=\"" + englishWord + "\";");
     }
 
-    //printing the strings in the database
+    //printing the english words in the database (DEBUGGING PURPOSES)
     public String databaseToString(){
         String dbString = "";
         SQLiteDatabase db = getWritableDatabase();
@@ -85,9 +82,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         db.close();
         return dbString;
-
     }
 
+    //printing all the answers in the database (DEBUGGING PURPOSES)
     public String databaseToStringAnswer(){
         String dbString = "";
         SQLiteDatabase db = getWritableDatabase();
@@ -100,7 +97,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
         while (position<4){
             if(c.getString(c.getColumnIndex(COLUMN_ENGLISHWORD))!= null){
                 String posString = Integer.toString(position);
-//                int flagExist = c.getColumnIndex(COLUMN_ANSWER);
                 dbString += c.getString(c.getColumnIndex(COLUMN_ANSWER));
                 dbString += posString;
                 dbString += "\n";
@@ -116,7 +112,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
     //to check if it is correct answer
     public boolean isCorrectAnswer(int position, String answerChoice){
         boolean flag = false;
-//        String dbString = "";
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
 
@@ -133,7 +128,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     }
 
+    //get the question given the position of the word.
     public String getQuestion (int position){
+
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
         Cursor c = db.rawQuery(query, null);
@@ -143,27 +140,11 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return c.getString(c.getColumnIndex(COLUMN_ENGLISHWORD));
     }
 
-    //chooses a random row in the database and displays the question
+    //chooses a random row in the database and returns the random row number.
     public int generateRandomQuestion(){
-
-        String dbString = "";
-        SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
-        //String query2 = "SELECT * FROM " + TABLE_QUESTIONS + " ORDER BY RANDOM() LIMIT 1";
-
-        Cursor c = db.rawQuery(query, null);
-
         Random rand = new Random();
         int n = rand.nextInt(4); // Gives n such that 0 <= n < 4
-
-        c.moveToPosition(n);
-
-        //dbString += c.getString(c.getColumnIndex(COLUMN_ENGLISHWORD));
-
-        c.close();
-        db.close();
         return n;
-
     }
 
 }
