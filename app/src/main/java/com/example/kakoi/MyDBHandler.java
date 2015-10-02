@@ -114,23 +114,17 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
 
     //to check if it is correct answer
-    public boolean isCorrectAnswer(String question, String answerChoice){
+    public boolean isCorrectAnswer(int position, String answerChoice){
         boolean flag = false;
 //        String dbString = "";
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
 
         Cursor c = db.rawQuery(query, null);
-        c.moveToFirst();
+        c.moveToPosition(position);
 
-        while (!c.isAfterLast()){
-            if((c.getString(c.getColumnIndex(COLUMN_ENGLISHWORD))).equalsIgnoreCase(question)){
-                if((c.getString(c.getColumnIndex(COLUMN_ANSWER))).equalsIgnoreCase(answerChoice)){
-                    flag = true;
-                }
-                break;
-            }
-            c.moveToNext();
+        if((c.getString(c.getColumnIndex(COLUMN_ANSWER))).equalsIgnoreCase(answerChoice)) {
+            flag = true;
         }
 
         c.close();
@@ -139,13 +133,23 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     }
 
+    public String getQuestion (int position){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
+        Cursor c = db.rawQuery(query, null);
+
+        c.moveToPosition(position);
+
+        return c.getString(c.getColumnIndex(COLUMN_ENGLISHWORD));
+    }
+
     //chooses a random row in the database and displays the question
-    public String generateRandomQuestion(){
+    public int generateRandomQuestion(){
 
         String dbString = "";
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
-        String query2 = "SELECT * FROM " + TABLE_QUESTIONS + " ORDER BY RANDOM() LIMIT 1";
+        //String query2 = "SELECT * FROM " + TABLE_QUESTIONS + " ORDER BY RANDOM() LIMIT 1";
 
         Cursor c = db.rawQuery(query, null);
 
@@ -154,11 +158,11 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         c.moveToPosition(n);
 
-        dbString += c.getString(c.getColumnIndex(COLUMN_ENGLISHWORD));
+        //dbString += c.getString(c.getColumnIndex(COLUMN_ENGLISHWORD));
 
         c.close();
         db.close();
-        return dbString;
+        return n;
 
     }
 

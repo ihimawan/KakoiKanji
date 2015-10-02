@@ -13,11 +13,13 @@ THIS IS THE MAIN PLAYING SCREEN
 
 public class MainPlay extends AppCompatActivity {
 
-    EditText myInput;
-    TextView dummytext;
-    MyDBHandler dbHandler;
-    TextView randomText;
+    EditText myInput; //not used now.
+
+    TextView feedbackText; //text that shows if the answer chosen is Correct or Wrong
+    MyDBHandler dbHandler; //create the database
+    TextView questionText; 
     String currentQuestion;
+    int n;
 
 
     //initial function
@@ -25,17 +27,17 @@ public class MainPlay extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_play);
-        myInput = (EditText) findViewById(R.id.myInput);
-        randomText = (TextView) findViewById(R.id.randomText);
+
+        myInput = (EditText) findViewById(R.id.myInput); //not used now.
+
+        questionText = (TextView) findViewById(R.id.questionText);
         dbHandler = new MyDBHandler(this, null, null, 1);
-        dummytext = (TextView) findViewById(R.id.dummytext);
+        feedbackText = (TextView) findViewById(R.id.feedbackText);
 
 //        addingQuestion("one", "ichi");
 //        addingQuestion("two", "ni");
 //        addingQuestion("three", "san");
 //        addingQuestion("four", "yong");
-
-        currentQuestion = generateRandomQuestion();
 
 //        addingQuestion("five", "go");
 //        addingQuestion("six", "roku");
@@ -44,7 +46,9 @@ public class MainPlay extends AppCompatActivity {
 //        addingQuestion("nine", "kyuu");
 //        addingQuestion("ten", "jyuu");
 
-        printDatabaseAnswer();
+        setRandomQuestion();
+
+        //printDatabaseAnswer();
     }
 
     //function that adds items to the database
@@ -54,58 +58,61 @@ public class MainPlay extends AppCompatActivity {
 //        printDatabase();
 //    }
 
+    //function that runs if the first button is clicked.
     public void onClick1 (View view){
         Button answer1 = (Button) findViewById(R.id.answer1);
         String buttonText = answer1.getText().toString();
-        dummytext = (TextView) findViewById(R.id.dummytext);
-        if ((dbHandler.isCorrectAnswer(currentQuestion, buttonText))==true){
-            dummytext.setText("Correct!");
+        feedbackText = (TextView) findViewById(R.id.feedbackText);
+        if ((dbHandler.isCorrectAnswer(n, buttonText))){
+            feedbackText.setText("Correct!");
         }else{
-            dummytext.setText("Wrong!");
+            feedbackText.setText("Wrong!");
         }
 
-        currentQuestion = generateRandomQuestion();
+        setRandomQuestion();
     }
 
     public void onClick2 (View view){
         Button answer2 = (Button) findViewById(R.id.answer2);
         String buttonText = answer2.getText().toString();
-        dummytext = (TextView) findViewById(R.id.dummytext);
-        if ((dbHandler.isCorrectAnswer(currentQuestion, buttonText))==true){
-            dummytext.setText("Correct!");
+        feedbackText = (TextView) findViewById(R.id.feedbackText);
+
+        if ((dbHandler.isCorrectAnswer(n, buttonText))){
+            feedbackText.setText("Correct!");
         }else{
-            dummytext.setText("Wrong!");
+            feedbackText.setText("Wrong!");
         }
 
-        currentQuestion = generateRandomQuestion();
+        setRandomQuestion();
     }
 
     public void onClick3 (View view){
         Button answer3 = (Button) findViewById(R.id.answer3);
         String buttonText = answer3.getText().toString();
-        dummytext = (TextView) findViewById(R.id.dummytext);
-        if ((dbHandler.isCorrectAnswer(currentQuestion, buttonText))==true){
-            dummytext.setText("Correct!");
+        feedbackText = (TextView) findViewById(R.id.feedbackText);
+        if ((dbHandler.isCorrectAnswer(n, buttonText))){
+            feedbackText.setText("Correct!");
         }else{
-            dummytext.setText("Wrong!");
+            feedbackText.setText("Wrong!");
         }
 
-        currentQuestion = generateRandomQuestion();
+        setRandomQuestion();
     }
 
     public void onClick4 (View view){
         Button answer4 = (Button) findViewById(R.id.answer4);
         String buttonText = answer4.getText().toString();
-        dummytext = (TextView) findViewById(R.id.dummytext);
-        if ((dbHandler.isCorrectAnswer(currentQuestion, buttonText))==true){
-            dummytext.setText("Correct!");
+        feedbackText = (TextView) findViewById(R.id.feedbackText);
+        if ((dbHandler.isCorrectAnswer(n, buttonText))){
+            feedbackText.setText("Correct!");
         }else{
-            dummytext.setText("Wrong!");
+            feedbackText.setText("Wrong!");
         }
 
-        currentQuestion = generateRandomQuestion();
+        setRandomQuestion();
     }
 
+    //function that adds question
     public void addingQuestion(String englishWord, String answer){
         Questions question = new Questions(englishWord, answer);
         dbHandler.addQuestion(question);
@@ -118,29 +125,36 @@ public class MainPlay extends AppCompatActivity {
         printDatabase();
     }
 
+    //random button to generate random question
     public void randomButtonClicked(View view){
-        String dbString = dbHandler.generateRandomQuestion();
-        randomText.setText(dbString);
+        setRandomQuestion();
+    }
+
+    public void setRandomQuestion (){
+        n = dbHandler.generateRandomQuestion();
+        currentQuestion = dbHandler.getQuestion(n);
+        questionText.setText(currentQuestion);
     }
 
     public String generateRandomQuestion(){
-        String dbString = dbHandler.generateRandomQuestion();
-        randomText.setText(dbString);
+        n = dbHandler.generateRandomQuestion();
+        String dbString = dbHandler.getQuestion(n);
+        questionText.setText(dbString);
         return dbString;
     }
 
     //function that prints the contents of the database
     public void printDatabase(){
         String dbString = dbHandler.databaseToString();
-        dummytext.setText(dbString);
-        //dummytext.setText("");
+        feedbackText.setText(dbString);
+        //feedbackText.setText("");
     }
 
     public void printDatabaseAnswer(){
         String dbString = dbHandler.databaseToStringAnswer();
         //myText.setText(dbString);
         //myInput.setText("");
-        dummytext.setText(dbString);
+        feedbackText.setText(dbString);
     }
 
 
