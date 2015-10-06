@@ -1,6 +1,7 @@
 package com.example.kakoi;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     //this method does the intent and pulls up the play screen when the play button is clicked.
     public void playClicked(View view){
+        final MediaPlayer goButtonClicked = MediaPlayer.create(this, R.raw.go);
+        goButtonClicked.start();
         Intent i = new Intent(this, MainPlay.class);
         startActivity(i);
     }

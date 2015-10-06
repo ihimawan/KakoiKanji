@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,8 +19,6 @@ THIS IS THE MAIN PLAYING SCREEN
 
 public class MainPlay extends AppCompatActivity {
 
-
-
     //EditText myInput; //not used now.
 
     TextView feedbackText; //text that shows if the answer chosen is Correct or Wrong
@@ -28,9 +27,6 @@ public class MainPlay extends AppCompatActivity {
     int n; //the position of the random question in the database
     ImageView feedbackImg;
     Button quitButton;
-
-
-
 
     //initial function
     @Override
@@ -42,12 +38,13 @@ public class MainPlay extends AppCompatActivity {
 
         questionText = (TextView) findViewById(R.id.questionText);
         dbHandler = new MyDBHandler(this, null, null, 1);
-        quitButton = (Button) findViewById(R.id.quitButton);
+        //quitButton = (Button) findViewById(R.id.quitButton);
         //feedbackText = (TextView) findViewById(R.id.feedbackText);
         feedbackImg = (ImageView) findViewById(R.id.feedbackImg);
 
-
-
+        /*
+        TODO: COMMENT THESE OUT WHEN DOING THE DEMO.
+         */
 //        addingQuestion("one", "ichi");
 //        addingQuestion("two", "ni");
 //        addingQuestion("three", "san");
@@ -64,26 +61,6 @@ public class MainPlay extends AppCompatActivity {
 
         //printDatabaseAnswer();
     }
-
-    public void quitButtonClicked(final View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you want to quit?")
-                .setCancelable(false)
-                .setPositiveButton("Yes, I give up!", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Intent i = new Intent(view.getContext(), HighScore.class);
-                        startActivity(i);
-                    }
-                })
-                .setNegativeButton("Nevermind.", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
-    }
-
 
     //function that runs if the first button is clicked.
     public void onClick1 (View view){
@@ -120,14 +97,22 @@ public class MainPlay extends AppCompatActivity {
     //checks if correct answer
     public void isCorrectAnswer(int n, String answerChoice){
         if ((dbHandler.isCorrectAnswer(n, answerChoice))){
-            //feedbackText.setText("Correct!");
             feedbackImg.setImageResource(R.drawable.correctsign);
+
+            //set up button sounds
+            final MediaPlayer correctButtonClick = MediaPlayer.create(this, R.raw.correct);
+            correctButtonClick.start();
+
             /*
             TODO: INCREMENT SCORE BY 5
              */
         }else{
-            //feedbackText.setText("Wrong!");
             feedbackImg.setImageResource(R.drawable.incorrectsign);
+
+            //set up button sounds
+            final MediaPlayer incorrectButtonClick = MediaPlayer.create(this, R.raw.wrong);
+            incorrectButtonClick.start();
+
             /*
             TODO: DECREMENT LIFE BY 1
              */
@@ -143,6 +128,9 @@ public class MainPlay extends AppCompatActivity {
         n = dbHandler.generateRandomQuestion(); //get the random position
         questionText.setText(dbHandler.getQuestion(n)); //get the question based on the random position
     }
+
+
+
 
     /*
     BELOW ARE FUNCTIONS FOR BACK-END/DEBUGGING PURPOSES

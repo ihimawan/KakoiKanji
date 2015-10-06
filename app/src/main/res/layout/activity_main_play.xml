@@ -13,17 +13,24 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageView3"
         android:src="@drawable/card"
-        android:layout_above="@+id/answer1" />
+        android:layout_above="@+id/answer1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:clickable="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="questionhere"
         android:id="@+id/questionText"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="68dp"
+        android:textSize="35sp"
+        android:clickable="true"
         android:layout_alignTop="@+id/imageView3"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignLeft="@+id/answer1"
+        android:layout_alignStart="@+id/answer1" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -93,18 +100,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/imageView3"
-        android:layout_alignEnd="@+id/imageView3" />
-
-    <Button
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:text="x"
-        android:id="@+id/quitButton"
-        android:layout_alignTop="@+id/imageView3"
-        android:layout_alignRight="@+id/imageView3"
         android:layout_alignEnd="@+id/imageView3"
-        android:onClick="quitButtonClicked"
-        android:nestedScrollingEnabled="true" />
+        android:clickable="true"
+        android:contextClickable="false" />
 
 
 </RelativeLayout>
