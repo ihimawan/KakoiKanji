@@ -43,7 +43,7 @@ public class MainPlay extends AppCompatActivity {
         feedbackImg = (ImageView) findViewById(R.id.feedbackImg);
 
         /*
-        TODO: COMMENT THESE OUT WHEN DOING THE DEMO.
+        TODO: COMMENT THESE OUT WHEN DOING THE DEMO.d
          */
 //        addingQuestion("one", "ichi");
 //        addingQuestion("two", "ni");
