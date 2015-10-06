@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     //this method does the intent and pulls up the play screen when the play button is clicked.
     public void playClicked(View view){
-        Intent i = new Intent(this, HighScore.class);
+        Intent i = new Intent(this, MainPlay.class);
         startActivity(i);
     }
 

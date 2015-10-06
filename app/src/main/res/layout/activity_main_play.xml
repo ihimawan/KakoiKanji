@@ -4,43 +4,16 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
-    android:background="#4E555E">
+    android:background="#4E555E"
+    android:onClick="quitButtonClicked">
 
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/myInput"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
 
-    <Button
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ADD"
-        android:id="@+id/addButton"
-        android:onClick="addButtonClicked"
-        android:layout_above="@+id/myInput"
-        android:layout_alignLeft="@+id/myInput"
-        android:layout_alignStart="@+id/myInput" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DELETE"
-        android:id="@+id/deleteButton"
-        android:layout_alignBottom="@+id/addButton"
-        android:layout_alignRight="@+id/myInput"
-        android:layout_alignEnd="@+id/myInput"
-        android:onClick="deleteButtonClicked" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RANDOM"
-        android:id="@+id/randomButton"
-        android:onClick="randomButtonClicked"
-        android:layout_above="@+id/myInput"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/imageView3"
+        android:src="@drawable/card"
+        android:layout_above="@+id/answer1" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -48,7 +21,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="questionhere"
         android:id="@+id/questionText"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="80dp"
+        android:layout_alignTop="@+id/imageView3"
         android:layout_centerHorizontal="true" />
 
     <ImageView
@@ -59,53 +33,78 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:text="ichi"
         android:id="@+id/answer1"
+        android:onClick="onClick1"
+        android:background="#F55D60"
         android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/addButton"
-        android:layout_alignStart="@+id/addButton"
-        android:onClick="onClick1" />
+        android:layout_toLeftOf="@+id/imageView2"
+        android:layout_toStartOf="@+id/imageView2"
+        android:textColor="#fff"
+        android:layout_margin="3dp" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:text="ni"
         android:id="@+id/answer2"
-        android:layout_alignTop="@+id/answer1"
-        android:layout_alignRight="@+id/deleteButton"
-        android:layout_alignEnd="@+id/deleteButton"
-        android:onClick="onClick2" />
+        android:onClick="onClick2"
+        android:background="#F55D60"
+        android:layout_above="@+id/answer4"
+        android:layout_toRightOf="@+id/imageView2"
+        android:layout_toEndOf="@+id/imageView2"
+        android:textColor="#fff"
+        android:layout_margin="3dp" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:text="san"
         android:id="@+id/answer3"
         android:layout_below="@+id/answer1"
         android:layout_alignLeft="@+id/answer1"
         android:layout_alignStart="@+id/answer1"
-        android:onClick="onClick3" />
+        android:onClick="onClick3"
+        android:layout_alignRight="@+id/answer1"
+        android:layout_alignEnd="@+id/answer1"
+        android:background="#F55D60"
+        android:textColor="#fff" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:text="yong"
         android:id="@+id/answer4"
         android:layout_alignBottom="@+id/answer3"
         android:layout_alignLeft="@+id/answer2"
         android:layout_alignStart="@+id/answer2"
-        android:onClick="onClick4" />
+        android:onClick="onClick4"
+        android:background="#F55D60"
+        android:textColor="#fff" />
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="feedbackhere"
-        android:id="@+id/feedbackText"
+        android:id="@+id/feedbackImg"
         android:layout_below="@+id/answer3"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/imageView3"
+        android:layout_alignEnd="@+id/imageView3" />
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="x"
+        android:id="@+id/quitButton"
+        android:layout_alignTop="@+id/imageView3"
+        android:layout_alignRight="@+id/imageView3"
+        android:layout_alignEnd="@+id/imageView3"
+        android:onClick="quitButtonClicked"
+        android:nestedScrollingEnabled="true" />
 
 
 </RelativeLayout>
