@@ -44,7 +44,7 @@ public class MainPlay extends AppCompatActivity {
         questionText = (TextView) findViewById(R.id.questionText);
         dbHandler = new MyDBHandler(this, null, null, 1);
         dbHighScore = new HighscoreDB(this, null, null, 1);
-        //quitButton = (Button) findViewById(R.id.quitButton);
+        quitButton = (Button) findViewById(R.id.quitButton);
         feedbackImg = (ImageView) findViewById(R.id.feedbackImg);
         livesCounter = (TextView) findViewById(R.id.livesCounter);
 
@@ -54,10 +54,10 @@ public class MainPlay extends AppCompatActivity {
         TODO: COMMENT THESE OUT WHEN DOING THE DEMO.
          */
 
-        addingQuestion("one", "ichi");
-        addingQuestion("two", "ni");
-        addingQuestion("three", "san");
-        addingQuestion("four", "yong");
+//        addingQuestion("one", "ichi");
+//        addingQuestion("two", "ni");
+//        addingQuestion("three", "san");
+//        addingQuestion("four", "yong");
 
 //        addingQuestion("five", "go");
 //        addingQuestion("six", "roku");
@@ -69,6 +69,27 @@ public class MainPlay extends AppCompatActivity {
         setRandomQuestion();
 
         //printDatabaseAnswer();
+    }
+
+    public void quitButtonClicked(final View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to quit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes, I give up!", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent i = new Intent(view.getContext(), HighScore.class);
+                        startActivity(i);
+                    }
+                })
+                .setNegativeButton("Nevermind.", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+        final MediaPlayer goButtonClicked = MediaPlayer.create(this, R.raw.go);
+        goButtonClicked.start();
     }
 
     //function that runs if the first button is clicked.

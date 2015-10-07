@@ -118,12 +118,23 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="3"
-        android:textColor="#FFFFFF"
+        android:textColor="#FF0000"
         android:textSize="50dp"
         android:id="@+id/livesCounter"
         android:layout_alignTop="@+id/imageView3"
         android:layout_alignRight="@+id/imageView3"
         android:layout_alignEnd="@+id/imageView3" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="x"
+        android:id="@+id/quitButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="quitButtonClicked" />
 
 
 </RelativeLayout>
