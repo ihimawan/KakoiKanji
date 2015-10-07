@@ -52,22 +52,6 @@ public class MainPlay extends AppCompatActivity {
 
         setRandomQuestion();
 
-
-
-//        addingQuestion("one", "ichi");
-//        addingQuestion("two", "ni");
-//        addingQuestion("three", "san");
-//        addingQuestion("four", "yong");
-
-//        addingQuestion("five", "go");
-//        addingQuestion("six", "roku");
-//        addingQuestion("seven", "nana");
-//        addingQuestion("eight", "hachi");
-//        addingQuestion("nine", "kyuu");
-//        addingQuestion("ten", "jyuu");
-
-
-
         //printDatabaseAnswer();
     }
 
@@ -77,8 +61,17 @@ public class MainPlay extends AppCompatActivity {
                 .setCancelable(false)
                 .setPositiveButton("Yes, I give up!", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        if (dbHighScore.getHighScore()<highScoreValueInt) {
+                            addingHighscore(highScoreValueInt);
+                        }
+
                         Intent i = new Intent(view.getContext(), HighScore.class);
-                        startActivity(i);
+
+
+                        final TextView highScoreDisp = (TextView) findViewById(R.id.highScoreDisp);
+                        String userMessage = highScoreDisp.getText().toString();
+                        i.putExtra("highscoredisp", userMessage); //extra information, using appleMessage as the reference
+                        startActivity(i); // to call the intent
                     }
                 })
                 .setNegativeButton("Nevermind.", new DialogInterface.OnClickListener() {
@@ -179,9 +172,6 @@ public class MainPlay extends AppCompatActivity {
         n = dbHandler.generateRandomQuestion(); //get the random position
         questionText.setText(dbHandler.getQuestion(n)); //get the question based on the random position
     }
-
-
-
 
     /*
     BELOW ARE FUNCTIONS FOR BACK-END/DEBUGGING PURPOSES
