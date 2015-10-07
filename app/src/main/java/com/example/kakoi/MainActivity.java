@@ -17,12 +17,30 @@ THIS IS THE HOMEPAGESCREEN
 
 public class MainActivity extends AppCompatActivity {
 
+    HighscoreDB dbHighScore;
+    TextView highscore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ImageButton playButton = (ImageButton) findViewById(R.id.playButton);
+
+        highscore = (TextView) findViewById(R.id.highscore);
+
+        dbHighScore = new HighscoreDB(this, null, null, 1);
+        highscore = (TextView) findViewById(R.id.highscore);
+        String bestscore = dbHighScore.databaseToInt();
+
+        if (bestscore!=null) {
+            highscore.setText(bestscore);
+        }
+    }
+
+    public void addingHighscore(int highScoreValue){
+        HighScoreItem highScoreItem = new HighScoreItem(highScoreValue);
+        dbHighScore.addHighScore(highScoreItem);
     }
 
     //this method does the intent and pulls up the play screen when the play button is clicked.

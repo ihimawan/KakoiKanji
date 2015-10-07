@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="0"
-        android:id="@+id/highScore"
+        android:id="@+id/highscore"
         android:layout_above="@+id/playButton"
         android:layout_centerHorizontal="true"
         android:textColor="#FFFFFF"

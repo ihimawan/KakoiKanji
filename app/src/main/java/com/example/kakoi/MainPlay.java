@@ -54,12 +54,10 @@ public class MainPlay extends AppCompatActivity {
         TODO: COMMENT THESE OUT WHEN DOING THE DEMO.
          */
 
-//        addingHighscore(0);
-//
-//        addingQuestion("one", "ichi");
-//        addingQuestion("two", "ni");
-//        addingQuestion("three", "san");
-//        addingQuestion("four", "yong");
+        addingQuestion("one", "ichi");
+        addingQuestion("two", "ni");
+        addingQuestion("three", "san");
+        addingQuestion("four", "yong");
 
 //        addingQuestion("five", "go");
 //        addingQuestion("six", "roku");
@@ -135,7 +133,7 @@ public class MainPlay extends AppCompatActivity {
 
             if(livesCounterInt==0){
 
-                if (dbHighScore.getHighScore()<highScoreValueInt) {
+                if (dbHighScore.getHighScore()==0 || dbHighScore.getHighScore()<highScoreValueInt) {
                     addingHighscore(highScoreValueInt);
                 }
 
@@ -147,13 +145,6 @@ public class MainPlay extends AppCompatActivity {
                 i.putExtra("highscoredisp", userMessage); //extra information, using appleMessage as the reference
                 startActivity(i); // to call the intent
             }
-
-
-
-
-
-
-
         }
     }
 

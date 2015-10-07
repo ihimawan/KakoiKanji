@@ -18,9 +18,6 @@ public class HighScore extends AppCompatActivity {
     HighscoreDB dbHighScore; //create the database
     TextView highscore;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +36,8 @@ public class HighScore extends AppCompatActivity {
 
         dbHighScore = new HighscoreDB(this, null, null, 1);
         highscore = (TextView) findViewById(R.id.highscore);
-        //int finalhighscore = dbHighScore.getHighScore();
-        highscore.setText(dbHighScore.databaseToInt());
+        String bestscore = dbHighScore.databaseToInt2();
+        highscore.setText(bestscore);
     }
 
     //function for quit button
