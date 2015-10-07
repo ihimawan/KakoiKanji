@@ -26,6 +26,11 @@ public class MainPlay extends AppCompatActivity {
     TextView questionText; //text that shows the question (english word)
     int n; //the position of the random question in the database
     ImageView feedbackImg;
+    TextView highScoreDisp;
+    TextView livesCounter;
+    HighscoreDB dbHighScore;
+    int highScoreValueInt;
+
     Button quitButton;
 
     //initial function
@@ -38,13 +43,17 @@ public class MainPlay extends AppCompatActivity {
 
         questionText = (TextView) findViewById(R.id.questionText);
         dbHandler = new MyDBHandler(this, null, null, 1);
+        dbHighScore = new HighscoreDB(this, null, null, 1);
         //quitButton = (Button) findViewById(R.id.quitButton);
-        //feedbackText = (TextView) findViewById(R.id.feedbackText);
         feedbackImg = (ImageView) findViewById(R.id.feedbackImg);
+        livesCounter = (TextView) findViewById(R.id.livesCounter);
+
+        highScoreDisp = (TextView) findViewById(R.id.highScoreDisp);
 
         /*
-        TODO: COMMENT THESE OUT WHEN DOING THE DEMO.d
+        TODO: COMMENT THESE OUT WHEN DOING THE DEMO.
          */
+
 //        addingQuestion("one", "ichi");
 //        addingQuestion("two", "ni");
 //        addingQuestion("three", "san");
@@ -103,9 +112,12 @@ public class MainPlay extends AppCompatActivity {
             final MediaPlayer correctButtonClick = MediaPlayer.create(this, R.raw.correct);
             correctButtonClick.start();
 
-            /*
-            TODO: INCREMENT SCORE BY 5
-             */
+            String highScoreValueStr = highScoreDisp.getText().toString();
+            highScoreValueInt = Integer.valueOf(highScoreValueStr);
+            highScoreValueInt += 5;
+            highScoreValueStr = Integer.toString(highScoreValueInt);
+            highScoreDisp.setText(highScoreValueStr);
+
         }else{
             feedbackImg.setImageResource(R.drawable.incorrectsign);
 
@@ -113,14 +125,30 @@ public class MainPlay extends AppCompatActivity {
             final MediaPlayer incorrectButtonClick = MediaPlayer.create(this, R.raw.wrong);
             incorrectButtonClick.start();
 
-            /*
-            TODO: DECREMENT LIFE BY 1
-             */
+            String livesCounterStr = livesCounter.getText().toString();
+            int livesCounterInt = Integer.valueOf(livesCounterStr);
+            livesCounterInt -= 1;
+            livesCounterStr = Integer.toString(livesCounterInt);
+            livesCounter.setText(livesCounterStr);
+
+            if(livesCounterInt==0){
+                addingHighscore(highScoreValueInt);
+                Intent i = new Intent(this, HighScore.class);
+                startActivity(i);
+            }
+
+
+
+
+
+
+
         }
     }
 
     /*
-    TODO: LIFESUBSTRACTION() & SCOREGENERATOR()
+    TODO: LIFESUBSTRACTION()
+
      */
 
     //this function changes the question text to a random question in the database
@@ -143,10 +171,17 @@ public class MainPlay extends AppCompatActivity {
 //        printDatabase();
 //    }
 
+public void addingHighscore(int highScoreValue){
+    HighScoreItem highScoreItem = new HighScoreItem(highScoreValue);
+    dbHighScore.addHighScore(highScoreItem);
+}
+
+
     //function that adds question to the database (add button is not clicked)
     public void addingQuestion(String englishWord, String answer){
         Questions question = new Questions(englishWord, answer);
         dbHandler.addQuestion(question);
+
     }
 
     //function that deletes items from the database

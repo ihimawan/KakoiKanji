@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 /*
 THIS IS THE HIGHSCORE SCREEN
@@ -14,10 +15,18 @@ THIS IS THE HIGHSCORE SCREEN
 
 public class HighScore extends AppCompatActivity {
 
+    HighscoreDB dbHighScore; //create the database
+    TextView highscore;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_high_score);
+        dbHighScore = new HighscoreDB(this, null, null, 1);
+        highscore = (TextView) findViewById(R.id.highscore);
+        int finalhighscore = dbHighScore.getHighScore();
+        highscore.setText(dbHighScore.databaseToInt());
     }
 
     //function for quit button

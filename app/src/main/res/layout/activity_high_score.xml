@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="0"
-        android:textSize="100sp"
+        android:textSize="20sp"
         android:id="@+id/highscore"
         android:textColor="#fff"
         android:layout_below="@+id/imageView"
