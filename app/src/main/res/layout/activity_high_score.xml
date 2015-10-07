@@ -54,20 +54,33 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="0"
-        android:textSize="20sp"
+        android:textSize="50dp"
         android:id="@+id/highscore"
         android:textColor="#fff"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/highscore2"
+        android:layout_toRightOf="@+id/bestscoreText"
+        android:layout_toEndOf="@+id/bestscoreText" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="BEST SCORE: 0"
+        android:text="BEST SCORE: "
         android:id="@+id/bestscoreText"
         android:textColor="#fff"
-        android:layout_below="@+id/highscore"
+        android:layout_alignTop="@+id/highscore"
+        android:layout_alignRight="@+id/imageView"
+        android:layout_alignEnd="@+id/imageView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0"
+        android:textSize="100sp"
+        android:id="@+id/highscore2"
+        android:textColor="#fff"
+        android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

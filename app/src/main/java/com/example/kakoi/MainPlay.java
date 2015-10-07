@@ -54,10 +54,12 @@ public class MainPlay extends AppCompatActivity {
         TODO: COMMENT THESE OUT WHEN DOING THE DEMO.
          */
 
-        addingQuestion("one", "ichi");
-        addingQuestion("two", "ni");
-        addingQuestion("three", "san");
-        addingQuestion("four", "yong");
+        //addingHighscore(0);
+
+//        addingQuestion("one", "ichi");
+//        addingQuestion("two", "ni");
+//        addingQuestion("three", "san");
+//        addingQuestion("four", "yong");
 
 //        addingQuestion("five", "go");
 //        addingQuestion("six", "roku");
@@ -132,9 +134,18 @@ public class MainPlay extends AppCompatActivity {
             livesCounter.setText(livesCounterStr);
 
             if(livesCounterInt==0){
-                addingHighscore(highScoreValueInt);
+
+                if (dbHighScore.getHighScore()<highScoreValueInt) {
+                    addingHighscore(highScoreValueInt);
+                }
+
                 Intent i = new Intent(this, HighScore.class);
-                startActivity(i);
+
+
+                final TextView highScoreDisp = (TextView) findViewById(R.id.highScoreDisp);
+                String userMessage = highScoreDisp.getText().toString();
+                i.putExtra("highscoredisp", userMessage); //extra information, using appleMessage as the reference
+                startActivity(i); // to call the intent
             }
 
 

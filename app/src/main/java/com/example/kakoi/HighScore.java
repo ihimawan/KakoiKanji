@@ -19,13 +19,27 @@ public class HighScore extends AppCompatActivity {
     TextView highscore;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_high_score);
+
+        Bundle highscoreData = getIntent().getExtras();
+
+        if (highscoreData==null){
+            return;
+        }
+
+        String highscoreMessage = highscoreData.getString("highscoredisp");
+        final TextView highscore2 = (TextView) findViewById(R.id.highscore2);
+        highscore2.setText(highscoreMessage);
+
+
         dbHighScore = new HighscoreDB(this, null, null, 1);
         highscore = (TextView) findViewById(R.id.highscore);
-        int finalhighscore = dbHighScore.getHighScore();
+        //int finalhighscore = dbHighScore.getHighScore();
         highscore.setText(dbHighScore.databaseToInt());
     }
 
