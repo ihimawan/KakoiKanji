@@ -54,8 +54,8 @@ public class MainPlay extends AppCompatActivity {
         TODO: COMMENT THESE OUT WHEN DOING THE DEMO.
          */
 
-        //addingHighscore(0);
-
+//        addingHighscore(0);
+//
 //        addingQuestion("one", "ichi");
 //        addingQuestion("two", "ni");
 //        addingQuestion("three", "san");
