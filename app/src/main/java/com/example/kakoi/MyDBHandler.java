@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class MyDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "questionsinit.db"; //name of database
+    private static final String DATABASE_NAME = "questionsnew.db"; //name of database
     public static final String TABLE_QUESTIONS = "questions"; //name of the table
     public static final String COLUMN_ID = "id"; //name of the column containing ID
     public static final String COLUMN_ENGLISHWORD = "englishword"; //name of column containing the englishwords
@@ -53,6 +53,16 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.insert(TABLE_QUESTIONS, null, values);
         db.close();
     }
+
+    public int getProfilesCount() {
+        String countQuery = "SELECT  * FROM " + TABLE_QUESTIONS;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int cnt = cursor.getCount();
+        cursor.close();
+        return cnt;
+    }
+
 
     //function to delete question
     public void deleteQuestion(String englishWord){

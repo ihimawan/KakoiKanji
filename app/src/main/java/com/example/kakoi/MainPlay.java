@@ -50,9 +50,9 @@ public class MainPlay extends AppCompatActivity {
 
         highScoreDisp = (TextView) findViewById(R.id.highScoreDisp);
 
-        /*
-        TODO: COMMENT THESE OUT WHEN DOING THE DEMO.
-         */
+        setRandomQuestion();
+
+
 
 //        addingQuestion("one", "ichi");
 //        addingQuestion("two", "ni");
@@ -66,7 +66,7 @@ public class MainPlay extends AppCompatActivity {
 //        addingQuestion("nine", "kyuu");
 //        addingQuestion("ten", "jyuu");
 
-        setRandomQuestion();
+
 
         //printDatabaseAnswer();
     }
@@ -154,7 +154,7 @@ public class MainPlay extends AppCompatActivity {
 
             if(livesCounterInt==0){
 
-                if (dbHighScore.getHighScore()==0 || dbHighScore.getHighScore()<highScoreValueInt) {
+                if (dbHighScore.getHighScore()<highScoreValueInt) {
                     addingHighscore(highScoreValueInt);
                 }
 

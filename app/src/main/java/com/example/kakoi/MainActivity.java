@@ -19,11 +19,13 @@ public class MainActivity extends AppCompatActivity {
 
     HighscoreDB dbHighScore;
     TextView highscore;
+    MyDBHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dbHandler = new MyDBHandler(this, null, null, 1);
 
         ImageButton playButton = (ImageButton) findViewById(R.id.playButton);
 
@@ -31,11 +33,24 @@ public class MainActivity extends AppCompatActivity {
 
         dbHighScore = new HighscoreDB(this, null, null, 1);
         highscore = (TextView) findViewById(R.id.highscore);
-        String bestscore = dbHighScore.databaseToInt();
 
-        if (bestscore!=null) {
-            highscore.setText(bestscore);
+        int profile_counts = dbHighScore.getProfilesCount();
+
+        if (profile_counts==0) {
+            addingHighscore(0);
+            addingQuestion("one", "ichi");
+            addingQuestion("two", "ni");
+            addingQuestion("three", "san");
+            addingQuestion("four", "yong");
         }
+
+        String bestscore = dbHighScore.databaseToInt();
+        highscore.setText(bestscore);
+    }
+
+    public void addingQuestion(String englishWord, String answer){
+        Questions question = new Questions(englishWord, answer);
+        dbHandler.addQuestion(question);
     }
 
     public void addingHighscore(int highScoreValue){
