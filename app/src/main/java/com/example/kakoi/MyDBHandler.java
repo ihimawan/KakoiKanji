@@ -1,7 +1,7 @@
 package com.example.kakoi;
 
 /**
- * Created by IndriHimawan on 9/30/15.
+ * Created by IndriHimawan on 9/30/15. UPDATE
  */
 
 import android.database.sqlite.SQLiteDatabase;

@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /*
-THIS IS THE MAIN PLAYING SCREEN
+THIS IS THE MAIN PLAYING SCREEN UPDATE
  */
 
 public class MainPlay extends AppCompatActivity {

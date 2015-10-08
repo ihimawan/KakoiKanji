@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 /*
-THIS IS THE HIGHSCORE SCREEN
+THIS IS THE HIGHSCORE SCREEN. UPDATE
  */
 
 public class HighScore extends AppCompatActivity {

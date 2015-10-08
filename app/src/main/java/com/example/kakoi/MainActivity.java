@@ -12,7 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 /*
-THIS IS THE HOMEPAGESCREEN
+THIS IS THE HOMEPAGESCREEN UPDATE
  */
 
 public class MainActivity extends AppCompatActivity {
