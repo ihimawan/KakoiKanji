@@ -40,6 +40,12 @@ public class HighScore extends AppCompatActivity {
         highscore.setText(bestscore);
     }
 
+    //player cannot move back to
+    @Override
+    public void onBackPressed() {
+        return;
+    }
+
     //function for quit button
     public void quitClicked(View view){
         final MediaPlayer goButtonClicked = MediaPlayer.create(this, R.raw.go);
