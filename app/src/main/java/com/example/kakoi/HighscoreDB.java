@@ -1,7 +1,7 @@
 package com.example.kakoi;
 
 /**
- * Created by IndriHimawan on 9/30/15. UPDATE
+ * Created by IndriHimawan on 9/30/15
  */
 
 import android.content.ContentValues;

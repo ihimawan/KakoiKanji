@@ -12,14 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /*
-THIS IS THE HIGHSCORE SCREEN. UPDATE
+THIS IS THE HIGHSCORE SCREEN
  */
 
 public class HighScore extends AppCompatActivity {
 
-    HighscoreDB dbHighScore; //create the database
-    TextView highscore;
-    ImageView newhighscore;
+    HighscoreDB dbHighScore;    //create the database
+    TextView highscore;         //the text that displays the current high score
+    ImageView newhighscore;     //the image that displays if a new high score is achieved
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,22 +30,28 @@ public class HighScore extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_high_score);
 
+        //get the score from previous intent
         Bundle highscoreData = getIntent().getExtras();
 
         if (highscoreData==null){
             return;
         }
 
+        //getting information from previous intent
         int newhighscoreMessage = highscoreData.getInt("newhighscoremessage");
         String highscoreMessage = highscoreData.getString("highscoredisp");
+
+        //displays the score the user obtains
         final TextView highscore2 = (TextView) findViewById(R.id.highscore2);
         highscore2.setText(highscoreMessage);
 
+        //if the user beats the high score, display the "new" image
         if (newhighscoreMessage!=-1) {
             newhighscore = (ImageView) findViewById(R.id.newHighScore);
             newhighscore.setImageResource(newhighscoreMessage);
         }
 
+        //display the high score in the database
         dbHighScore = new HighscoreDB(this, null, null, 1);
         highscore = (TextView) findViewById(R.id.highscore);
         String bestscore = dbHighScore.databaseToInt2();

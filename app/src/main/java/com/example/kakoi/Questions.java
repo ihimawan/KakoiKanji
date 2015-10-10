@@ -1,7 +1,7 @@
 package com.example.kakoi;
 
 /**
- * Created by IndriHimawan on 9/30/15. UPDATE
+ * Created by IndriHimawan on 9/30/15.
  */
 
 /* a question class contains the ID of the question and the english word

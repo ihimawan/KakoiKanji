@@ -1,7 +1,7 @@
 package com.example.kakoi;
 
 /**
- * Created by IndriHimawan on 10/6/15. UPDATE
+ * Created by IndriHimawan on 10/6/15
  */
 public class HighScoreItem {
     private int _id;

@@ -8,18 +8,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 /*
-THIS IS THE HOMEPAGESCREEN UPDATE
+THIS IS THE HOMEPAGESCREEN
  */
 
 public class MainActivity extends AppCompatActivity {
 
-    HighscoreDB dbHighScore;
-    TextView highscore;
-    MyDBHandler dbHandler;
+    HighscoreDB dbHighScore;    //create database for high score
+    MyDBHandler dbHandler;      //create database
+    TextView highscore;         //text of high score in the device
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,18 +29,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //database initializations
         dbHandler = new MyDBHandler(this, null, null, 1);
-
-        ImageButton playButton = (ImageButton) findViewById(R.id.playButton);
-
-        highscore = (TextView) findViewById(R.id.highscore);
-
         dbHighScore = new HighscoreDB(this, null, null, 1);
-        highscore = (TextView) findViewById(R.id.highscore);
 
-        int profile_counts = dbHighScore.getProfilesCount();
+        highscore = (TextView) findViewById(R.id.highscore); //obtain UI element
 
-        if (profile_counts==0) {
+        int profile_counts = dbHighScore.getProfilesCount(); //to see if database is empty
+
+        //database initializations
+        if (profile_counts==0) { //if database is empty, then add.
             addingHighscore(0);
             addingQuestion("one", "ichi");
             addingQuestion("two", "ni");
@@ -57,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        //display the high score in the device
         String bestscore = dbHighScore.databaseToInt();
         highscore.setText(bestscore);
     }
@@ -67,12 +65,13 @@ public class MainActivity extends AppCompatActivity {
         return;
     }
 
-
+    //to add english words to the database
     public void addingQuestion(String englishWord, String answer){
         Questions question = new Questions(englishWord, answer);
         dbHandler.addQuestion(question);
     }
 
+    //to add highscore to database
     public void addingHighscore(int highScoreValue){
         HighScoreItem highScoreItem = new HighScoreItem(highScoreValue);
         dbHighScore.addHighScore(highScoreItem);
