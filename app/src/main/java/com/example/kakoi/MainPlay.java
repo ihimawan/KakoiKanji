@@ -8,6 +8,8 @@ import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,10 +38,12 @@ public class MainPlay extends AppCompatActivity {
     //initial function
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Remove notification bar
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_play);
-
-        //myInput = (EditText) findViewById(R.id.myInput); //not used now.
 
         questionText = (TextView) findViewById(R.id.questionText);
         dbHandler = new MyDBHandler(this, null, null, 1);
@@ -51,38 +55,35 @@ public class MainPlay extends AppCompatActivity {
         highScoreDisp = (TextView) findViewById(R.id.highScoreDisp);
 
         setRandomQuestion();
+    }
 
-        //printDatabaseAnswer();
+    //player cannot move back to previous screen
+    @Override
+    public void onBackPressed() {
+        return;
     }
 
     public void quitButtonClicked(final View view){
+        final MediaPlayer goButtonClicked = MediaPlayer.create(this, R.raw.go);
+        goButtonClicked.start();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you want to quit?")
                 .setCancelable(false)
                 .setPositiveButton("Yes, I give up!", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        if (dbHighScore.getHighScore()<highScoreValueInt) {
-                            addingHighscore(highScoreValueInt);
-                        }
-
-                        Intent i = new Intent(view.getContext(), HighScore.class);
-
-
-                        final TextView highScoreDisp = (TextView) findViewById(R.id.highScoreDisp);
-                        String userMessage = highScoreDisp.getText().toString();
-                        i.putExtra("highscoredisp", userMessage); //extra information, using appleMessage as the reference
-                        startActivity(i); // to call the intent
+                        gameEnds();
                     }
                 })
                 .setNegativeButton("Nevermind.", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        goButtonClicked.start();
                         dialog.cancel();
                     }
                 });
         AlertDialog alert = builder.create();
         alert.show();
-        final MediaPlayer goButtonClicked = MediaPlayer.create(this, R.raw.go);
-        goButtonClicked.start();
+
+
     }
 
     //function that runs if the first button is clicked.
@@ -146,26 +147,35 @@ public class MainPlay extends AppCompatActivity {
             livesCounter.setText(livesCounterStr);
 
             if(livesCounterInt==0){
-
-                if (dbHighScore.getHighScore()<highScoreValueInt) {
-                    addingHighscore(highScoreValueInt);
-                }
-
-                Intent i = new Intent(this, HighScore.class);
-
-
-                final TextView highScoreDisp = (TextView) findViewById(R.id.highScoreDisp);
-                String userMessage = highScoreDisp.getText().toString();
-                i.putExtra("highscoredisp", userMessage); //extra information, using appleMessage as the reference
-                startActivity(i); // to call the intent
+                gameEnds();
             }
         }
     }
 
-    /*
-    TODO: LIFESUBSTRACTION()
+    public void gameEnds(){
+        Intent i = new Intent(this, HighScore.class);
+        int hsMessage = -1;
 
-     */
+        if (dbHighScore.getHighScore()<highScoreValueInt) {
+            final MediaPlayer winButtonClicked = MediaPlayer.create(this, R.raw.win);
+            winButtonClicked.start();
+            addingHighscore(highScoreValueInt);
+            hsMessage = R.drawable.newscore;
+            //extra information, using userMessage as the reference
+        }else{
+            final MediaPlayer loseButtonClicked = MediaPlayer.create(this, R.raw.lose);
+            loseButtonClicked.start();
+        }
+
+        i.putExtra("newhighscoremessage", hsMessage);
+
+        final TextView highScoreDisp = (TextView) findViewById(R.id.highScoreDisp);
+        String userMessage = highScoreDisp.getText().toString();
+
+        i.putExtra("highscoredisp", userMessage); //extra information, using userMessage as the reference
+        startActivity(i); // to call the intent
+
+    }
 
     //this function changes the question text to a random question in the database
     public void setRandomQuestion (){

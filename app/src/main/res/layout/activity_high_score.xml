@@ -14,7 +14,8 @@
         android:id="@+id/gameover"
         android:src="@drawable/gameoversign"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -47,7 +48,7 @@
         android:src="@drawable/scoretext"
         android:layout_below="@+id/gameover"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp" />
+        android:layout_marginTop="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,7 +58,7 @@
         android:textSize="50dp"
         android:id="@+id/highscore"
         android:textColor="#fff"
-        android:layout_below="@+id/highscore2"
+        android:layout_above="@+id/quitButton"
         android:layout_toRightOf="@+id/bestscoreText"
         android:layout_toEndOf="@+id/bestscoreText" />
 
@@ -77,10 +78,19 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="0"
-        android:textSize="100sp"
+        android:textSize="150sp"
         android:id="@+id/highscore2"
         android:textColor="#fff"
         android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-10dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/newHighScore"
+        android:layout_above="@+id/quitButton"
+        android:layout_toLeftOf="@+id/bestscoreText"
+        android:layout_toStartOf="@+id/bestscoreText" />
 
 </RelativeLayout>

@@ -19,13 +19,14 @@
         android:layout_alignParentStart="true" />
 
     <ImageView
-        android:layout_width="280dp"
-        android:layout_height="280dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:scaleType="fitXY"
         android:id="@+id/logo"
         android:src="@drawable/logo"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-10dp" />
 
     <Switch
         android:layout_width="wrap_content"
@@ -45,7 +46,8 @@
         android:id="@+id/textView2"
         android:textColor="#ffffff"
         android:layout_below="@+id/logo"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -53,10 +55,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="0"
         android:id="@+id/highscore"
-        android:layout_above="@+id/playButton"
-        android:layout_centerHorizontal="true"
         android:textColor="#FFFFFF"
-        android:textSize="37sp"
-        />
+        android:textSize="90sp"
+        android:layout_above="@+id/playButton"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

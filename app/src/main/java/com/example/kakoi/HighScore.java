@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /*
@@ -17,9 +19,14 @@ public class HighScore extends AppCompatActivity {
 
     HighscoreDB dbHighScore; //create the database
     TextView highscore;
+    ImageView newhighscore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Remove notification bar
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_high_score);
 
@@ -29,10 +36,15 @@ public class HighScore extends AppCompatActivity {
             return;
         }
 
+        int newhighscoreMessage = highscoreData.getInt("newhighscoremessage");
         String highscoreMessage = highscoreData.getString("highscoredisp");
         final TextView highscore2 = (TextView) findViewById(R.id.highscore2);
         highscore2.setText(highscoreMessage);
 
+        if (newhighscoreMessage!=-1) {
+            newhighscore = (ImageView) findViewById(R.id.newHighScore);
+            newhighscore.setImageResource(newhighscoreMessage);
+        }
 
         dbHighScore = new HighscoreDB(this, null, null, 1);
         highscore = (TextView) findViewById(R.id.highscore);
@@ -40,7 +52,7 @@ public class HighScore extends AppCompatActivity {
         highscore.setText(bestscore);
     }
 
-    //player cannot move back to
+    //player cannot move back to previous screen
     @Override
     public void onBackPressed() {
         return;

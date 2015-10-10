@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -23,8 +23,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Remove notification bar
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         dbHandler = new MyDBHandler(this, null, null, 1);
 
         ImageButton playButton = (ImageButton) findViewById(R.id.playButton);
@@ -55,6 +60,13 @@ public class MainActivity extends AppCompatActivity {
         String bestscore = dbHighScore.databaseToInt();
         highscore.setText(bestscore);
     }
+
+    //player cannot move back to previous screen
+    @Override
+    public void onBackPressed() {
+        return;
+    }
+
 
     public void addingQuestion(String englishWord, String answer){
         Questions question = new Questions(englishWord, answer);
