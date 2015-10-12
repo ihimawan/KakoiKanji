@@ -153,7 +153,7 @@ public class MainPlay extends AppCompatActivity {
             livesCounterStr = Integer.toString(livesCounterInt);
             livesCounter.setText(livesCounterStr);
 
-            //sets hearts to grey when a life is lost
+            //sets a hearts to grey when a life is lost
             if(livesCounterInt == 2){
                 life3.setImageResource(R.drawable.heartdie);
 

@@ -118,19 +118,6 @@
         android:background="#F55D60"
         android:textColor="#fff" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="3"
-        android:textColor="#FF0000"
-        android:textSize="50dp"
-        android:id="@+id/livesCounter"
-        android:background="#000"
-        android:layout_below="@+id/imageView3"
-        android:layout_alignRight="@+id/imageView3"
-        android:layout_alignEnd="@+id/imageView3" />
-
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
