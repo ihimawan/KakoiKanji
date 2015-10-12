@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 /*
 THIS IS THE HIGHSCORE SCREEN
+I'm trying to push, is it working?
  */
 
 public class HighScore extends AppCompatActivity {
