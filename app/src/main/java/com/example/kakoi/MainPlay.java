@@ -3,82 +3,92 @@ package com.example.kakoi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 /*
-THIS IS THE MAIN PLAYING SCREEN
+THIS IS THE MAIN PLAYING SCREEN UPDATE
  */
 
 public class MainPlay extends AppCompatActivity {
 
-    MyDBHandler dbHandler;      //create the database for englishwords
-    HighscoreDB dbHighScore;    //create the database for highscore
-    TextView questionText;      //text that shows the question (english word)
-    int n;                      //the position of the random question in the database
-    ImageView feedbackImg;      //the image that shows if the answer was correct/wrong
-    TextView highScoreDisp;     //the highscore display text
-    TextView livesCounter;      //the life counter display text
-    int highScoreValueInt;      //the int value of the high score
-    Button quitButton;          //the quit button
+    //EditText myInput; //not used now.
+
+    TextView feedbackText; //text that shows if the answer chosen is Correct or Wrong
+    ImageView life3; //The left heart that shows if there is a life or not
+    ImageView life2; //The middle heart that shows if there is a life or not
+    ImageView life1; //The right heart that shows if there is a life or not
+    MyDBHandler dbHandler; //create the database
+    TextView questionText; //text that shows the question (english word)
+    int n; //the position of the random question in the database
+    ImageView feedbackImg;
+    TextView highScoreDisp;
+    TextView livesCounter;
+    HighscoreDB dbHighScore;
+    int highScoreValueInt;
+
+    Button quitButton;
 
     //initial function
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        //Remove notification bar
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_play);
 
-        //getting the elements to variables
+        //myInput = (EditText) findViewById(R.id.myInput); //not used now.
+
         questionText = (TextView) findViewById(R.id.questionText);
         dbHandler = new MyDBHandler(this, null, null, 1);
         dbHighScore = new HighscoreDB(this, null, null, 1);
         quitButton = (Button) findViewById(R.id.quitButton);
         feedbackImg = (ImageView) findViewById(R.id.feedbackImg);
+        life3 = (ImageView) findViewById(R.id.life3);
+        life2 = (ImageView) findViewById(R.id.life2);
+        life1 = (ImageView) findViewById(R.id.life1);
         livesCounter = (TextView) findViewById(R.id.livesCounter);
+
         highScoreDisp = (TextView) findViewById(R.id.highScoreDisp);
 
-        //starts by getting a random english word from the database
         setRandomQuestion();
+
+        //printDatabaseAnswer();
     }
 
-    //player cannot move back to previous screen
-    @Override
-    public void onBackPressed() {
-        return;
-    }
-
-    //if quit button is clicked
     public void quitButtonClicked(final View view){
-        final MediaPlayer goButtonClicked = MediaPlayer.create(this, R.raw.go);
-        goButtonClicked.start();
-
-        //then show an alert dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you want to quit?")
                 .setCancelable(false)
                 .setPositiveButton("Yes, I give up!", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        gameEnds(); //then run the game end function
+                        if (dbHighScore.getHighScore()<highScoreValueInt) {
+                            addingHighscore(highScoreValueInt);
+                        }
+
+                        Intent i = new Intent(view.getContext(), HighScore.class);
+
+
+                        final TextView highScoreDisp = (TextView) findViewById(R.id.highScoreDisp);
+                        String userMessage = highScoreDisp.getText().toString();
+                        i.putExtra("highscoredisp", userMessage); //extra information, using appleMessage as the reference
+                        startActivity(i); // to call the intent
                     }
                 })
                 .setNegativeButton("Nevermind.", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        goButtonClicked.start();
-                        dialog.cancel(); //then do nothing
+                        dialog.cancel();
                     }
                 });
         AlertDialog alert = builder.create();
         alert.show();
+        final MediaPlayer goButtonClicked = MediaPlayer.create(this, R.raw.go);
+              goButtonClicked.start();
     }
 
     //function that runs if the first button is clicked.
@@ -115,16 +125,15 @@ public class MainPlay extends AppCompatActivity {
 
     //checks if correct answer
     public void isCorrectAnswer(int n, String answerChoice){
-        if ((dbHandler.isCorrectAnswer(n, answerChoice))){
 
-            //display "correct" image
+
+        if ((dbHandler.isCorrectAnswer(n, answerChoice))){
             feedbackImg.setImageResource(R.drawable.correctsign);
 
             //set up button sounds
             final MediaPlayer correctButtonClick = MediaPlayer.create(this, R.raw.correct);
             correctButtonClick.start();
 
-            //high score incrementation below
             String highScoreValueStr = highScoreDisp.getText().toString();
             highScoreValueInt = Integer.valueOf(highScoreValueStr);
             highScoreValueInt += 5;
@@ -132,63 +141,53 @@ public class MainPlay extends AppCompatActivity {
             highScoreDisp.setText(highScoreValueStr);
 
         }else{
-
-            //display "incorrect" image
             feedbackImg.setImageResource(R.drawable.incorrectsign);
 
             //set up button sounds
             final MediaPlayer incorrectButtonClick = MediaPlayer.create(this, R.raw.wrong);
             incorrectButtonClick.start();
 
-            //life counter decrementation below
             String livesCounterStr = livesCounter.getText().toString();
             int livesCounterInt = Integer.valueOf(livesCounterStr);
-            livesCounterInt -= 1;
+            livesCounterInt = livesCounterInt - 1;
             livesCounterStr = Integer.toString(livesCounterInt);
             livesCounter.setText(livesCounterStr);
 
-            //if life reaches zero, game will end
+            //sets a hearts to grey when a life is lost
+            if(livesCounterInt == 2){
+                life3.setImageResource(R.drawable.heartdie);
+
+            }
+
+
+            if(livesCounterInt == 1){
+
+                life2.setImageResource(R.drawable.heartdie);
+            }
+
             if(livesCounterInt==0){
-                gameEnds();
+
+                life1.setImageResource(R.drawable.heartdie);
+
+                if (dbHighScore.getHighScore()<highScoreValueInt) {
+                    addingHighscore(highScoreValueInt);
+                }
+
+                Intent i = new Intent(this, HighScore.class);
+
+
+                final TextView highScoreDisp = (TextView) findViewById(R.id.highScoreDisp);
+                String userMessage = highScoreDisp.getText().toString();
+                i.putExtra("highscoredisp", userMessage); //extra information, using appleMessage as the reference
+                startActivity(i); // to call the intent
             }
         }
     }
 
-    //things that happen when the game ends
-    public void gameEnds(){
-        Intent i = new Intent(this, HighScore.class); //create intent
-        int hsMessage = -1; //hsMessage will contain the location of the "new high score" image, which will appear on the high score screen,
-        //the integer -1 denotes that the image does not need to be displayed (if the player did not reach high score)
+    /*
+    TODO: LIFESUBSTRACTION()
 
-        //if the player beats the highscore
-        if (dbHighScore.getHighScore()<highScoreValueInt) {
-            //winning sound creation
-            final MediaPlayer winButtonClicked = MediaPlayer.create(this, R.raw.win);
-            winButtonClicked.start();
-
-            addingHighscore(highScoreValueInt); //then add the higher highscore to the database
-            hsMessage = R.drawable.newscore; //give hsMessage the location of the new high score image
-        }else{
-            //losing sound creation
-            final MediaPlayer loseButtonClicked = MediaPlayer.create(this, R.raw.lose);
-            loseButtonClicked.start();
-        }
-
-        i.putExtra("newhighscoremessage", hsMessage); //pass hsMessage to the next intent
-
-        final TextView highScoreDisp = (TextView) findViewById(R.id.highScoreDisp); //send the latest high score to next intent
-        String userMessage = highScoreDisp.getText().toString();
-
-        i.putExtra("highscoredisp", userMessage); //extra information, using userMessage as the reference
-        startActivity(i); // to call the intent
-
-    }
-
-    //adds the new high score to the database
-    public void addingHighscore(int highScoreValue){
-        HighScoreItem highScoreItem = new HighScoreItem(highScoreValue);
-        dbHighScore.addHighScore(highScoreItem);
-    }
+     */
 
     //this function changes the question text to a random question in the database
     public void setRandomQuestion (){
@@ -207,36 +206,42 @@ public class MainPlay extends AppCompatActivity {
 //        printDatabase();
 //    }
 
+    public void addingHighscore(int highScoreValue){
+        HighScoreItem highScoreItem = new HighScoreItem(highScoreValue);
+        dbHighScore.addHighScore(highScoreItem);
+    }
+
+
     //function that adds question to the database (add button is not clicked)
-//    public void addingQuestion(String englishWord, String answer){
-//        Questions question = new Questions(englishWord, answer);
-//        dbHandler.addQuestion(question);
-//
-//    }
+    public void addingQuestion(String englishWord, String answer){
+        Questions question = new Questions(englishWord, answer);
+        dbHandler.addQuestion(question);
+
+    }
 
     //function that deletes items from the database
-//    public void deleteButtonClicked(View view){
-//        //String inputText = myInput.getText().toString();
-//        //dbHandler.deleteQuestion(inputText);
-//        printDatabase();
-//    }
+    public void deleteButtonClicked(View view){
+        //String inputText = myInput.getText().toString();
+        //dbHandler.deleteQuestion(inputText);
+        printDatabase();
+    }
 
     //random button to generate random question
-//    public void randomButtonClicked(View view){
-//        setRandomQuestion();
-//    }
+    public void randomButtonClicked(View view){
+        setRandomQuestion();
+    }
 
     //function that prints the questions in the database (for debugging purposes)
-//    public void printDatabase(){
-//        String dbString = dbHandler.databaseToString();
-//        feedbackText.setText(dbString);
-//    }
+    public void printDatabase(){
+        String dbString = dbHandler.databaseToString();
+        feedbackText.setText(dbString);
+    }
 
     //function that prints the answers in the database (for debugging purposes)
-//    public void printDatabaseAnswer(){
-//        String dbString = dbHandler.databaseToStringAnswer();
-//        feedbackText.setText(dbString);
-//    }
+    public void printDatabaseAnswer(){
+        String dbString = dbHandler.databaseToStringAnswer();
+        feedbackText.setText(dbString);
+    }
 
 }
 
