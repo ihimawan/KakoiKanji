@@ -107,10 +107,10 @@ public class MainPlay extends AppCompatActivity {
 
         for (int i=0; i<3; i++) {
             randomDistractor = rand.nextInt(askedQuestions.size() - 1);
-            while(distractors.contains(randomDistractor)) {
+            while(distractors.contains(askedQuestions.get(randomDistractor))) {
                 randomDistractor = rand.nextInt(askedQuestions.size() - 1);
             }
-            distractors.add(randomDistractor);
+            distractors.add(askedQuestions.get(randomDistractor));
         }
 
         return distractors;
