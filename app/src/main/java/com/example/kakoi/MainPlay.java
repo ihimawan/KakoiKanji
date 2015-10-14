@@ -80,7 +80,6 @@ public class MainPlay extends AppCompatActivity {
         answer4 = (Button) findViewById(R.id.answer4);
 
 
-
         roundNumber=1;
         answer2.setVisibility(View.GONE);
         answer3.setVisibility(View.GONE);
@@ -108,7 +107,7 @@ public class MainPlay extends AppCompatActivity {
 
         for (int i=0; i<3; i++) {
             randomDistractor = rand.nextInt(askedQuestions.size() - 1);
-            while(distractors.contains(randomDistractor) || randomDistractor == n) {
+            while(distractors.contains(randomDistractor)) {
                 randomDistractor = rand.nextInt(askedQuestions.size() - 1);
             }
             distractors.add(randomDistractor);
