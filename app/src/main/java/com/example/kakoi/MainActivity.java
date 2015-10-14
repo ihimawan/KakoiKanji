@@ -44,13 +44,12 @@ public class MainActivity extends AppCompatActivity {
             addingQuestion("two", "ni");
             addingQuestion("three", "san");
             addingQuestion("four", "yong");
-
-//            addingQuestion("five", "go");
-//            addingQuestion("six", "roku");
-//            addingQuestion("seven", "nana");
-//            addingQuestion("eight", "hachi");
-//            addingQuestion("nine", "kyuu");
-//            addingQuestion("ten", "jyuu");
+            addingQuestion("five", "go");
+            addingQuestion("six", "roku");
+            addingQuestion("seven", "nana");
+            addingQuestion("eight", "hachi");
+            addingQuestion("nine", "kyuu");
+            addingQuestion("ten", "jyuu");
 
         }
 

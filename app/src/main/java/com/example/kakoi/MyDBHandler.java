@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class MyDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "questionsnew3.db"; //name of database
+    private static final String DATABASE_NAME = "questionsnew4.db"; //name of database
     public static final String TABLE_QUESTIONS = "questions"; //name of the table
     public static final String COLUMN_ID = "id"; //name of the column containing ID
     public static final String COLUMN_ENGLISHWORD = "englishword"; //name of column containing the englishwords
@@ -80,7 +80,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         int position = 0;
         c.moveToPosition(position);
 
-        while (position<4){
+        while (position<getProfilesCount()){
             if(c.getString(c.getColumnIndex(COLUMN_ENGLISHWORD))!= null){
                 String posString = Integer.toString(position);
                 dbString += c.getString(c.getColumnIndex(COLUMN_ENGLISHWORD));
@@ -104,7 +104,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         int position = 0;
         c.moveToPosition(position);
 
-        while (position<4){
+        while (position<getProfilesCount()){
             if(c.getString(c.getColumnIndex(COLUMN_ENGLISHWORD))!= null){
                 String posString = Integer.toString(position);
                 dbString += c.getString(c.getColumnIndex(COLUMN_ANSWER));
@@ -138,6 +138,18 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     }
 
+    public String getAnswer(int position){
+
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
+        Cursor c = db.rawQuery(query, null);
+
+        c.moveToPosition(position);
+
+        return c.getString(c.getColumnIndex(COLUMN_ANSWER));
+
+    }
+
     //get the question given the position of the word.
     public String getQuestion (int position){
 
@@ -153,7 +165,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     //chooses a random row in the database and returns the random row number.
     public int generateRandomQuestion(){
         Random rand = new Random();
-        int n = rand.nextInt(4); // Gives n such that 0 <= n < 4
+        int n = rand.nextInt(getProfilesCount()); // Gives n such that 0 <= n < 4
         return n;
     }
 

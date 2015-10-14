@@ -14,13 +14,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 /*
 THIS IS THE MAIN PLAYING SCREEN UPDATE
  */
 
 public class MainPlay extends AppCompatActivity {
 
-    //EditText myInput; //not used now.
+    ArrayList<Integer> askedQuestions = new ArrayList<Integer>();
+
 
     MyDBHandler dbHandler;      //create the database for englishwords
     HighscoreDB dbHighScore;    //create the database for highscore
@@ -29,14 +34,22 @@ public class MainPlay extends AppCompatActivity {
     ImageView feedbackImg;      //the image that shows if the answer was correct/wrong
     TextView highScoreDisp;     //the highscore display text
     int highScoreValueInt;      //the int value of the high score
-
-    TextView feedbackText; //text that shows if the answer chosen is Correct or Wrong
-    ImageView life3; //The left heart that shows if there is a life or not
-    ImageView life2; //The middle heart that shows if there is a life or not
-    ImageView life1; //The right heart that shows if there is a life or not
-
-    int livesCounterInt;
+    ImageView life3;        //The left heart that shows if there is a life or not
+    ImageView life2;        //The middle heart that shows if there is a life or not
+    ImageView life1;        //The right heart that shows if there is a life or not
+    int livesCounterInt;    //is the number of lives the player has
     Button quitButton;
+    Button answer1;
+    Button answer2;
+    Button answer3;
+    Button answer4;
+    Random rand;
+
+    int nPrevious;
+
+    int randomDistractor;
+
+    int roundNumber;
 
     //initial function
     @Override
@@ -58,16 +71,111 @@ public class MainPlay extends AppCompatActivity {
         life1 = (ImageView) findViewById(R.id.life1);
         livesCounterInt = 3;
         highScoreDisp = (TextView) findViewById(R.id.highScoreDisp);
+        rand = new Random();
 
-        setRandomQuestion();
 
-        //printDatabaseAnswer();
+        answer1 = (Button) findViewById(R.id.answer1);
+        answer2 = (Button) findViewById(R.id.answer2);
+        answer3 = (Button) findViewById(R.id.answer3);
+        answer4 = (Button) findViewById(R.id.answer4);
+
+
+
+        roundNumber=1;
+        answer2.setVisibility(View.GONE);
+        answer3.setVisibility(View.GONE);
+        answer4.setVisibility(View.GONE);
+
+        setRound();
+
     }
 
     //player cannot move back to previous screen
     @Override
     public void onBackPressed() {
         return;
+    }
+
+    public void setRound(){
+        setRandomQuestion();
+        setAnswerChoice();
+        roundNumber++;
+    }
+
+    public ArrayList<Integer> getDistractors(){
+
+        ArrayList<Integer> distractors = new ArrayList<Integer>();
+
+        for (int i=0; i<3; i++) {
+            randomDistractor = rand.nextInt(askedQuestions.size() - 1);
+            while(distractors.contains(randomDistractor) || randomDistractor == n) {
+                randomDistractor = rand.nextInt(askedQuestions.size() - 1);
+            }
+            distractors.add(randomDistractor);
+        }
+
+        return distractors;
+    }
+
+    public void setAnswerChoice(){
+
+        Button[] answer = {answer1,answer2,answer3, answer4};
+
+
+        if (roundNumber==1){
+            answer1.setText(dbHandler.getAnswer(n));
+
+        }else if (roundNumber==2){
+
+            answer2.setVisibility(View.VISIBLE);
+            int randomPlacement = rand.nextInt(2); // Gives n such that 0 <= n < 2
+
+            answer[randomPlacement].setText(dbHandler.getAnswer(n));
+            answer[(randomPlacement+1)%2].setText(dbHandler.getAnswer(askedQuestions.get(0)));
+
+        }else if (roundNumber==3){
+
+            int[] answerPlacementArray = {0,1,2};
+
+            answer3.setVisibility(View.VISIBLE);
+            shuffleArray(answerPlacementArray);
+
+            answer[answerPlacementArray[0]].setText(dbHandler.getAnswer(n));
+
+            for (int i=1, j=0; i<3; i++, j++) {
+                answer[answerPlacementArray[i]].setText(dbHandler.getAnswer(askedQuestions.get(j))); //EDIT: SOME PREVIOUS ANSWER
+            }
+
+        }else{
+
+            int[] answerPlacementArray = {0,1,2,3};
+
+            answer4.setVisibility(View.VISIBLE);
+            shuffleArray(answerPlacementArray);
+            answer[answerPlacementArray[0]].setText(dbHandler.getAnswer(n));
+
+            ArrayList<Integer> distractors = getDistractors();
+
+            for (int i=1, j=0; i<4; i++, j++) {
+                answer[answerPlacementArray[i]].setText(dbHandler.getAnswer(distractors.get(j))); //EDIT: SOME PREVIOUS ANSWER
+            }
+
+        }
+    }
+
+    // Implementing Fisher–Yates shuffle
+    static void shuffleArray(int[] ar)
+    {
+        // If running on Java 6 or older, use `new Random()` on RHS here
+        Random rnd = new Random();
+        for (int i = ar.length - 1; i > 0; i--)
+        {
+            int index = rnd.nextInt(i + 1);
+            // Simple swap
+            int a = ar[index];
+            ar[index] = ar[i];
+            ar[i] = a;
+        }
     }
 
     //if quit button is clicked
@@ -96,34 +204,34 @@ public class MainPlay extends AppCompatActivity {
 
     //function that runs if the first button is clicked.
     public void onClick1 (View view){
-        Button answer1 = (Button) findViewById(R.id.answer1);
+
         String buttonText = answer1.getText().toString(); //get the text of the button clicked
         isCorrectAnswer(n, buttonText); //checks if it is the correct answer
-        setRandomQuestion(); //get another random question
+        setRound(); //get another random question
     }
 
     //function that runs if the second button is clicked.
     public void onClick2 (View view){
-        Button answer2 = (Button) findViewById(R.id.answer2);
+
         String buttonText = answer2.getText().toString();
         isCorrectAnswer(n, buttonText);
-        setRandomQuestion();
+        setRound();
     }
 
     //function that runs if the third button is clicked.
     public void onClick3 (View view){
-        Button answer3 = (Button) findViewById(R.id.answer3);
+
         String buttonText = answer3.getText().toString();
         isCorrectAnswer(n, buttonText);
-        setRandomQuestion();
+        setRound();
     }
 
     //function that runs if the fourth button is clicked.
     public void onClick4 (View view) {
-        Button answer4 = (Button) findViewById(R.id.answer4);
+
         String buttonText = answer4.getText().toString();
         isCorrectAnswer(n, buttonText);
-        setRandomQuestion();
+        setRound();
     }
 
     //checks if correct answer
@@ -144,30 +252,21 @@ public class MainPlay extends AppCompatActivity {
             highScoreValueStr = Integer.toString(highScoreValueInt);
             highScoreDisp.setText(highScoreValueStr);
 
-        }else{
+        } else {
             feedbackImg.setImageResource(R.drawable.incorrectsign);
 
             //set up button sounds
             final MediaPlayer incorrectButtonClick = MediaPlayer.create(this, R.raw.wrong);
             incorrectButtonClick.start();
 
-            //String livesCounterStr = livesCounter.getText().toString();
             livesCounterInt = livesCounterInt - 1;
-            //livesCounterStr = Integer.toString(livesCounterInt);
-            //livesCounter.setText(livesCounterStr);
 
             //sets a hearts to grey when a life is lost
-            if(livesCounterInt == 2){
+            if(livesCounterInt == 2) {
                 life3.setImageResource(R.drawable.heartdie);
-            }
-
-
-            if(livesCounterInt == 1){
-
+            }else if(livesCounterInt == 1){
                 life2.setImageResource(R.drawable.heartdie);
-            }
-
-            if(livesCounterInt==0){
+            }else if(livesCounterInt == 0) {
                 life1.setImageResource(R.drawable.heartdie);
                 gameEnds();
             }
@@ -212,8 +311,26 @@ public class MainPlay extends AppCompatActivity {
 
     //this function changes the question text to a random question in the database
     public void setRandomQuestion (){
-        n = dbHandler.generateRandomQuestion(); //get the random position
+
+        n = rand.nextInt(dbHandler.getProfilesCount());
+
+        if (roundNumber<5) {
+            while (askedQuestions.contains(n)){
+                n = rand.nextInt(dbHandler.getProfilesCount());
+            }
+        }else{
+            while (nPrevious==n){
+                n = rand.nextInt(dbHandler.getProfilesCount());
+            }
+        }
+
         questionText.setText(dbHandler.getQuestion(n)); //get the question based on the random position
+
+        if(!askedQuestions.contains(n)) {
+            askedQuestions.add(n);
+        }
+
+        nPrevious=n;
     }
 
     /*
