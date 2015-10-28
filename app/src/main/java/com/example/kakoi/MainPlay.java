@@ -46,7 +46,11 @@ public class MainPlay extends AppCompatActivity {
     Button answer4;
     Random rand;
 
+    //to edit the kanji characters
     TextView kanjiChoice1;
+    TextView kanjiChoice2;
+    TextView kanjiChoice3;
+    TextView kanjiChoice4;
 
     int nPrevious;
 
@@ -78,18 +82,23 @@ public class MainPlay extends AppCompatActivity {
         rand = new Random();
 
         kanjiChoice1 = (TextView) findViewById(R.id.kanjiChoice1);
-
+        kanjiChoice2 = (TextView) findViewById(R.id.kanjiChoice2);
+        kanjiChoice3 = (TextView) findViewById(R.id.kanjiChoice3);
+        kanjiChoice4 = (TextView) findViewById(R.id.kanjiChoice4);
 
         answer1 = (Button) findViewById(R.id.answer1);
         answer2 = (Button) findViewById(R.id.answer2);
         answer3 = (Button) findViewById(R.id.answer3);
         answer4 = (Button) findViewById(R.id.answer4);
 
-
         roundNumber=1;
         answer2.setVisibility(View.GONE);
         answer3.setVisibility(View.GONE);
         answer4.setVisibility(View.GONE);
+
+        kanjiChoice2.setVisibility(View.GONE);
+        kanjiChoice3.setVisibility(View.GONE);
+        kanjiChoice4.setVisibility(View.GONE);
 
         setRound();
 
@@ -125,29 +134,38 @@ public class MainPlay extends AppCompatActivity {
     public void setAnswerChoice(){
 
         Button[] answer = {answer1,answer2,answer3, answer4};
+        TextView[] kanjiChoice = {kanjiChoice1,kanjiChoice2,kanjiChoice3, kanjiChoice4};
 
         if (roundNumber==1){
             answer1.setText(dbHandler.getAnswer(n));
+            kanjiChoice1.setText(dbHandler.getKanji(n));
 
         }else if (roundNumber==2){
 
             answer2.setVisibility(View.VISIBLE);
+            kanjiChoice2.setVisibility(View.VISIBLE);
             int randomPlacement = rand.nextInt(2); // Gives n such that 0 <= n < 2
 
             answer[randomPlacement].setText(dbHandler.getAnswer(n));
+            kanjiChoice[randomPlacement].setText(dbHandler.getKanji(n));
+
             answer[(randomPlacement+1)%2].setText(dbHandler.getAnswer(askedQuestions.get(0)));
+            kanjiChoice[(randomPlacement+1)%2].setText(dbHandler.getKanji(askedQuestions.get(0)));
 
         }else if (roundNumber==3){
 
             int[] answerPlacementArray = {0,1,2};
 
             answer3.setVisibility(View.VISIBLE);
+            kanjiChoice3.setVisibility(View.VISIBLE);
             shuffleArray(answerPlacementArray);
 
             answer[answerPlacementArray[0]].setText(dbHandler.getAnswer(n));
+            kanjiChoice[answerPlacementArray[0]].setText(dbHandler.getKanji(n));
 
             for (int i=1, j=0; i<3; i++, j++) {
                 answer[answerPlacementArray[i]].setText(dbHandler.getAnswer(askedQuestions.get(j))); //EDIT: SOME PREVIOUS ANSWER
+                kanjiChoice[answerPlacementArray[i]].setText(dbHandler.getKanji(askedQuestions.get(j))); //EDIT: SOME PREVIOUS ANSWER
             }
 
         }else{
@@ -155,13 +173,16 @@ public class MainPlay extends AppCompatActivity {
             int[] answerPlacementArray = {0,1,2,3};
 
             answer4.setVisibility(View.VISIBLE);
+            kanjiChoice4.setVisibility(View.VISIBLE);
             shuffleArray(answerPlacementArray);
             answer[answerPlacementArray[0]].setText(dbHandler.getAnswer(n));
+            kanjiChoice[answerPlacementArray[0]].setText(dbHandler.getKanji(n));
 
             ArrayList<Integer> distractors = getDistractors();
 
             for (int i=1, j=0; i<4; i++, j++) {
                 answer[answerPlacementArray[i]].setText(dbHandler.getAnswer(distractors.get(j))); //EDIT: SOME PREVIOUS ANSWER
+                kanjiChoice[answerPlacementArray[i]].setText(dbHandler.getKanji(distractors.get(j))); //EDIT: SOME PREVIOUS ANSWER
             }
 
         }
@@ -240,6 +261,7 @@ public class MainPlay extends AppCompatActivity {
 
     //checks if correct answer
     public void isCorrectAnswer(int n, String answerChoice){
+
         if ((dbHandler.isCorrectAnswer(n, answerChoice))){
 
             //display "correct" image
@@ -329,31 +351,8 @@ public class MainPlay extends AppCompatActivity {
         }
 
         questionText.setText(dbHandler.getQuestion(n)); //get the question based on the random position
-        kanjiChoice1.setText(dbHandler.getKanji(n)); //get the question based on the random position
+//        kanjiChoice1.setText(dbHandler.getKanji(n));
         questionView.setImageResource(dbHandler.getImage(n));
-
-//        switch(n+1){
-//            case 1: questionView.setImageResource(R.drawable.kanji1);
-//                break;
-//            case 2: questionView.setImageResource(R.drawable.kanji2);
-//                break;
-//            case 3: questionView.setImageResource(R.drawable.kanji3);
-//                break;
-//            case 4: questionView.setImageResource(R.drawable.kanji4);
-//                break;
-//            case 5: questionView.setImageResource(R.drawable.kanji5);
-//                break;
-//            case 6: questionView.setImageResource(R.drawable.kanji6);
-//                break;
-//            case 7: questionView.setImageResource(R.drawable.kanji7);
-//                break;
-//            case 8: questionView.setImageResource(R.drawable.kanji8);
-//                break;
-//            case 9: questionView.setImageResource(R.drawable.kanji9);
-//                break;
-//            case 10: questionView.setImageResource(R.drawable.kanji10);
-//                break;
-//        }
 
         if(!askedQuestions.contains(n)) {
             askedQuestions.add(n);

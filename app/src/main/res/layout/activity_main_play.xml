@@ -8,111 +8,176 @@
     android:clickable="true"
     android:id="@+id/rellay">
 
-
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView3"
+        android:layout_width="500dp"
+        android:layout_height="700dp"
+        android:id="@+id/card"
         android:src="@drawable/card"
-        android:layout_above="@+id/answer1"
+        android:clickable="true"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/frameLayout2"
+        android:layout_below="@+id/quitButton"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:clickable="true" />
+        android:layout_alignParentEnd="true" />
+
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="questionhere"
+        android:text="QUESTION"
         android:id="@+id/questionText"
-        android:layout_marginTop="68dp"
-        android:textSize="35sp"
+        android:gravity="center"
+        android:textSize="30sp"
         android:clickable="true"
-        android:layout_alignTop="@+id/imageView3"
-        android:layout_alignLeft="@+id/answer1"
-        android:layout_alignStart="@+id/answer1"
-        android:background="#000"
-        android:textColor="#fff" />
+        android:textColor="#000"
 
-    <ImageView
+        android:layout_below="@+id/questionImage"
+        android:layout_alignLeft="@+id/questionImage"
+        android:layout_alignStart="@+id/questionImage"
+        android:textAlignment="inherit" />
+
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
-        android:layout_alignBottom="@+id/questionText"
-        android:layout_centerHorizontal="true" />
+        android:background="#00FF00"
+        android:id="@+id/frameLayout1"
+        android:layout_marginTop="61dp"
+        android:layout_below="@+id/questionImage"
+        android:layout_alignLeft="@+id/life2"
+        android:layout_alignStart="@+id/life2">
 
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="ichi"
-        android:id="@+id/answer1"
-        android:onClick="onClick1"
-        android:background="#F55D60"
-        android:layout_centerVertical="true"
-        android:paddingBottom="15dp"
-        android:layout_toLeftOf="@+id/imageView2"
-        android:layout_toStartOf="@+id/imageView2"
-        android:textColor="#fff"
-        android:layout_margin="3dp"
-        android:gravity="center_horizontal|bottom" />
+        <TextView
+            android:id="@+id/kanjiChoice1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="00"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:textSize="50dip"
+            android:textColor="#FFFFFF"
+            android:elevation="100dp"/>
 
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="ni"
-        android:id="@+id/answer2"
-        android:onClick="onClick2"
-        android:paddingBottom="15dp"
-        android:gravity="center_horizontal|bottom"
-        android:background="#F55D60"
-        android:textColor="#fff"
-        android:layout_alignTop="@+id/answer1"
-        android:layout_toLeftOf="@+id/quitButton"
-        android:layout_toStartOf="@+id/quitButton" />
+        <Button
+            android:id="@+id/answer1"
+            android:layout_width="wrap_content"
+            android:layout_height="100dip"
+            android:text="ICHI"
+            android:paddingTop="60dp"
+            android:background="#F35F64"
+            android:onClick="onClick1"
+            android:layout_gravity="right|top"></Button>
 
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="san"
-        android:id="@+id/answer3"
-        android:layout_below="@+id/answer1"
-        android:gravity="center_horizontal|bottom"
-        android:layout_alignLeft="@+id/answer1"
-        android:layout_alignStart="@+id/answer1"
-        android:onClick="onClick3"
-        android:paddingBottom="15dp"
-        android:layout_alignRight="@+id/answer1"
-        android:layout_alignEnd="@+id/answer1"
-        android:background="#F55D60"
-        android:textColor="#fff" />
+    </FrameLayout>
 
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="yong"
-        android:id="@+id/answer4"
-        android:gravity="center_horizontal|bottom"
-        android:paddingBottom="15dp"
-        android:layout_alignBottom="@+id/answer3"
-        android:layout_alignLeft="@+id/answer2"
-        android:layout_alignStart="@+id/answer2"
-        android:onClick="onClick4"
-        android:background="#F55D60"
-        android:textColor="#fff" />
-
-    <ImageView
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#00FF00"
+        android:id="@+id/frameLayout2"
+        android:layout_alignTop="@+id/frameLayout1"
+        android:layout_toRightOf="@+id/feedbackImg"
+        android:layout_toEndOf="@+id/feedbackImg">
+
+        <TextView
+            android:id="@+id/kanjiChoice2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="00"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:textSize="50dip"
+            android:textColor="#FFFFFF"
+            android:elevation="100dp"/>
+
+        <Button
+            android:id="@+id/answer2"
+            android:layout_width="wrap_content"
+            android:layout_height="100dip"
+            android:text="NI"
+            android:paddingTop="60dp"
+            android:background="#F35F64"
+            android:onClick="onClick2"
+            android:layout_gravity="center_horizontal|top"></Button>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FF00"
+        android:id="@+id/frameLayout3"
+        android:layout_above="@+id/feedbackImg"
+        android:layout_alignLeft="@+id/frameLayout1"
+        android:layout_alignStart="@+id/frameLayout1">
+
+        <Button
+            android:id="@+id/answer3"
+            android:layout_width="wrap_content"
+            android:layout_height="100dip"
+            android:text="SAN"
+            android:paddingTop="60dp"
+            android:onClick="onClick3"
+            android:background="#F35F64"></Button>
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="00"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:textSize="50dip"
+            android:textColor="#FFFFFF"
+            android:elevation="100dp"
+            android:id="@+id/kanjiChoice3" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FF00"
+        android:id="@+id/frameLayout4"
+        android:layout_above="@+id/feedbackImg"
+        android:layout_alignLeft="@+id/frameLayout2"
+        android:layout_alignStart="@+id/frameLayout2">
+
+        <TextView
+            android:id="@+id/kanjiChoice4"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="00"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:textSize="50dip"
+            android:textColor="#FFFFFF"
+            android:elevation="100dp"/>
+
+        <Button
+            android:id="@+id/answer4"
+            android:layout_width="wrap_content"
+            android:layout_height="100dip"
+            android:text="YONG"
+            android:paddingTop="60dp"
+            android:onClick="onClick4"
+            android:background="#F35F64"
+            android:layout_gravity="center_horizontal|bottom"></Button>
+
+    </FrameLayout>
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="60dp"
         android:id="@+id/feedbackImg"
-        android:layout_below="@+id/answer3"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/imageView3"
-        android:layout_alignEnd="@+id/imageView3"
         android:clickable="true"
-        android:contextClickable="false" />
+        android:contextClickable="false"
+        android:layout_centerVertical="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -120,10 +185,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="0"
         android:id="@+id/highScoreDisp"
-        android:layout_below="@+id/imageView2"
-        android:layout_centerHorizontal="true"
         android:background="#F55D60"
-        android:textColor="#fff" />
+        android:textColor="#fff"
+        android:layout_alignRight="@+id/questionImage"
+        android:layout_alignEnd="@+id/questionImage" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -134,8 +199,8 @@
         android:onClick="quitButtonClicked"
         android:background="#F55D60"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/imageView3"
-        android:layout_alignEnd="@+id/imageView3" />
+        android:layout_alignRight="@+id/card"
+        android:layout_alignEnd="@+id/card" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -143,45 +208,33 @@
         android:id="@+id/life3"
         android:src="@drawable/heart"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_toRightOf="@+id/life2"
+        android:layout_toEndOf="@+id/life2" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/life2"
         android:src="@drawable/heart"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/life3"
-        android:layout_toEndOf="@+id/life3" />
+        android:layout_above="@+id/card"
+        android:layout_toRightOf="@+id/life1"
+        android:layout_toEndOf="@+id/life1" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/life1"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/life2"
-        android:layout_toEndOf="@+id/life2"
-        android:src="@drawable/heart" />
+        android:src="@drawable/heart"
+        android:layout_alignTop="@+id/life2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <ImageView
         android:layout_width="200dp"
-        android:layout_height="150dp"
+        android:layout_height="140dp"
         android:id="@+id/questionImage"
-        android:layout_below="@+id/life2"
-        android:layout_alignRight="@+id/questionText"
-        android:layout_alignEnd="@+id/questionText" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/kanjiChoice1"
-        android:background="#000"
-        android:layout_above="@+id/answer1"
-        android:layout_alignLeft="@+id/answer1"
-        android:layout_alignStart="@+id/answer1" />
+        android:layout_below="@+id/life3"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
