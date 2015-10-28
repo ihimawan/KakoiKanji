@@ -34,16 +34,15 @@
         android:textSize="30sp"
         android:clickable="true"
         android:textColor="#000"
-
         android:layout_below="@+id/questionImage"
         android:layout_alignLeft="@+id/questionImage"
         android:layout_alignStart="@+id/questionImage"
-        android:textAlignment="inherit" />
+        android:textAlignment="inherit"
+        android:textAllCaps="true" />
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#00FF00"
         android:id="@+id/frameLayout1"
         android:layout_marginTop="61dp"
         android:layout_below="@+id/questionImage"
@@ -53,30 +52,30 @@
         <TextView
             android:id="@+id/kanjiChoice1"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="match_parent"
             android:text="00"
             android:gravity="center"
             android:layout_centerHorizontal="true"
             android:textSize="50dip"
             android:textColor="#FFFFFF"
-            android:elevation="100dp"/>
+            android:elevation="100dp" />
 
         <Button
             android:id="@+id/answer1"
-            android:layout_width="wrap_content"
+            android:layout_width="100dip"
             android:layout_height="100dip"
             android:text="ICHI"
             android:paddingTop="60dp"
-            android:background="#F35F64"
+            android:background="@drawable/answerbutton"
             android:onClick="onClick1"
-            android:layout_gravity="right|top"></Button>
+            android:layout_gravity="right|top"
+            ></Button>
 
     </FrameLayout>
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#00FF00"
         android:id="@+id/frameLayout2"
         android:layout_alignTop="@+id/frameLayout1"
         android:layout_toRightOf="@+id/feedbackImg"
@@ -85,7 +84,7 @@
         <TextView
             android:id="@+id/kanjiChoice2"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="match_parent"
             android:text="00"
             android:gravity="center"
             android:layout_centerHorizontal="true"
@@ -95,11 +94,11 @@
 
         <Button
             android:id="@+id/answer2"
-            android:layout_width="wrap_content"
+            android:layout_width="100dip"
             android:layout_height="100dip"
             android:text="NI"
             android:paddingTop="60dp"
-            android:background="#F35F64"
+            android:background="@drawable/answerbutton"
             android:onClick="onClick2"
             android:layout_gravity="center_horizontal|top"></Button>
 
@@ -108,7 +107,6 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#00FF00"
         android:id="@+id/frameLayout3"
         android:layout_above="@+id/feedbackImg"
         android:layout_alignLeft="@+id/frameLayout1"
@@ -116,30 +114,30 @@
 
         <Button
             android:id="@+id/answer3"
-            android:layout_width="wrap_content"
+            android:layout_width="100dip"
             android:layout_height="100dip"
             android:text="SAN"
             android:paddingTop="60dp"
             android:onClick="onClick3"
-            android:background="#F35F64"></Button>
+            android:background="@drawable/answerbutton"
+            ></Button>
 
         <TextView
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:text="00"
-            android:gravity="center"
-            android:layout_centerHorizontal="true"
+
             android:textSize="50dip"
             android:textColor="#FFFFFF"
             android:elevation="100dp"
-            android:id="@+id/kanjiChoice3" />
+            android:id="@+id/kanjiChoice3"
+            android:gravity="center" />
 
     </FrameLayout>
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#00FF00"
         android:id="@+id/frameLayout4"
         android:layout_above="@+id/feedbackImg"
         android:layout_alignLeft="@+id/frameLayout2"
@@ -148,7 +146,7 @@
         <TextView
             android:id="@+id/kanjiChoice4"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:text="00"
             android:gravity="center"
             android:layout_centerHorizontal="true"
@@ -158,13 +156,13 @@
 
         <Button
             android:id="@+id/answer4"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="100dip"
             android:text="YONG"
             android:paddingTop="60dp"
             android:onClick="onClick4"
-            android:background="#F35F64"
-            android:layout_gravity="center_horizontal|bottom"></Button>
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@drawable/answerbutton"></Button>
 
     </FrameLayout>
 
@@ -185,10 +183,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="0"
         android:id="@+id/highScoreDisp"
-        android:background="#F55D60"
         android:textColor="#fff"
         android:layout_alignRight="@+id/questionImage"
-        android:layout_alignEnd="@+id/questionImage" />
+        android:layout_alignEnd="@+id/questionImage"
+        android:textSize="35dp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"

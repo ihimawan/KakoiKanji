@@ -21,6 +21,7 @@ public class HighScore extends AppCompatActivity {
     HighscoreDB dbHighScore;    //create the database
     TextView highscore;         //the text that displays the current high score
     ImageView newhighscore;     //the image that displays if a new high score is achieved
+    int kanjiSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class HighScore extends AppCompatActivity {
         //getting information from previous intent
         int newhighscoreMessage = highscoreData.getInt("newhighscoremessage");
         String highscoreMessage = highscoreData.getString("highscoredisp");
+        kanjiSwitch = highscoreData.getInt("isswitchon");
 
         //displays the score the user obtains
         final TextView highscore2 = (TextView) findViewById(R.id.highscore2);
@@ -78,6 +80,7 @@ public class HighScore extends AppCompatActivity {
         final MediaPlayer goButtonClicked = MediaPlayer.create(this, R.raw.go);
         goButtonClicked.start();
         Intent i = new Intent(this, MainPlay.class);
+        i.putExtra("isswitchon", kanjiSwitch);
         startActivity(i);
     }
 

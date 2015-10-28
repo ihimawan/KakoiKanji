@@ -3,15 +3,19 @@ package com.example.kakoi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.Image;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -33,6 +37,9 @@ public class MainPlay extends AppCompatActivity {
     int n;                      //the position of the random question in the database
     int nPrevious;          //keeps the id of the previously generated question, so that no same question appear twice in a row
     int roundNumber;        //tracking the round number because in round 1, there's only 1 answer choice, round 2 has 2 choices, etc.
+
+    //kanji Pronounciation
+    int kanjiSwitch;
 
     //HighScore related
     HighscoreDB dbHighScore;    //The database that actually stores the highscore
@@ -115,6 +122,17 @@ public class MainPlay extends AppCompatActivity {
         kanjiChoice3.setVisibility(View.GONE);
         kanjiChoice4.setVisibility(View.GONE);
 
+        //for Kanji Pronounciation
+        Bundle extras = getIntent().getExtras();
+        kanjiSwitch = extras.getInt("isswitchon");
+
+        if (kanjiSwitch==0){ //if user does not want to see the pronounciation, make them transparent
+            answer1.setTextColor(Color.TRANSPARENT);
+            answer2.setTextColor(Color.TRANSPARENT);
+            answer3.setTextColor(Color.TRANSPARENT);
+            answer4.setTextColor(Color.TRANSPARENT);
+        }
+
         rand = new Random(); //creating random object to generate random numbers later
         setRound(); //starts the function that sets the whole round
 
@@ -138,7 +156,6 @@ public class MainPlay extends AppCompatActivity {
 
         //the distractors arrayList
         ArrayList<Integer> distractors = new ArrayList<Integer>();
-        String correctAnswer = Integer.toString(n);
 
         //get 3 distractors
         for (int i=0; i<3; i++) {
@@ -369,6 +386,7 @@ public class MainPlay extends AppCompatActivity {
         final TextView highScoreDisp = (TextView) findViewById(R.id.highScoreDisp); //send the latest high score to next intent
         String userMessage = highScoreDisp.getText().toString();
 
+        i.putExtra("isswitchon", kanjiSwitch);
         i.putExtra("highscoredisp", userMessage); //extra information, using userMessage as the reference
         startActivity(i); // to call the intent
 

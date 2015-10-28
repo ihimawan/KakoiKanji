@@ -1,5 +1,7 @@
 package com.example.kakoi;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 /*
@@ -19,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     HighscoreDB dbHighScore;    //create database for high score
     MyDBHandler dbHandler;      //create database
     TextView highscore;         //text of high score in the device
+
+    Switch kanjiSwitch;
+    int isSwitchOn=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         //database initializations
         dbHandler = new MyDBHandler(this, null, null, 1);
         dbHighScore = new HighscoreDB(this, null, null, 1);
+
+        kanjiSwitch = (Switch) findViewById(R.id.kanjiSwitch);
 
         highscore = (TextView) findViewById(R.id.highscore); //obtain UI element
 
@@ -52,6 +61,42 @@ public class MainActivity extends AppCompatActivity {
             addingQuestion("ten", "juu", R.drawable.kanji10, "十");
 
         }
+
+        //alert dialog object that notifies pronounciation will be shown
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Kanji pronounciation will be shown.")
+                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel(); //then do nothing
+                    }
+                });
+        final AlertDialog alert = builder.create();
+
+        //alert dialog object that notifies pronounciation will be hidden
+        AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+        builder.setMessage("Kanji pronounciation will be hidden.")
+                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel(); //then do nothing
+                    }
+                });
+        final AlertDialog alert2 = builder.create();
+
+        //attach a listener for the switch to check for changes in state
+        kanjiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,
+                                         boolean isChecked) {
+
+                if(isChecked){
+                    isSwitchOn=1;
+                    alert.show();
+                }else{
+                    isSwitchOn=0;
+                    alert2.show();
+                }
+            }
+        });
 
         //display the high score in the device
         String bestscore = dbHighScore.databaseToInt();
@@ -81,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
         final MediaPlayer goButtonClicked = MediaPlayer.create(this, R.raw.go);
         goButtonClicked.start();
         Intent i = new Intent(this, MainPlay.class);
+        i.putExtra("isswitchon", isSwitchOn);
         startActivity(i);
     }
 
