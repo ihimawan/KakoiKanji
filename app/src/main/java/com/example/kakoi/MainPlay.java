@@ -146,11 +146,12 @@ public class MainPlay extends AppCompatActivity {
             //randomDistractor contains the index of an incorrect answer in the askedQuestions array list
             randomDistractor = rand.nextInt(askedQuestions.size()); //choose an index randomly
 
-            while(distractors.contains(askedQuestions.get(randomDistractor))
-                    || (askedQuestions.get(randomDistractor)).equals(correctAnswer)) { //if that index is already put into the distractor arrayList
+            while(distractors.contains(askedQuestions.get(randomDistractor))||
+                    askedQuestions.get(randomDistractor) == n) {
 
                 randomDistractor = rand.nextInt(askedQuestions.size()); //keep looking for a different distractor
 
+//                boolean flag = (askedQuestions.get(randomDistractor)).equals(correctAnswer);
             }
             distractors.add(askedQuestions.get(randomDistractor)); //add that distractor int he distractor arrayList
         }
