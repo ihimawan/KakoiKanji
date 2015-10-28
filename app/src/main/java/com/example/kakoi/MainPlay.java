@@ -138,7 +138,7 @@ public class MainPlay extends AppCompatActivity {
 
         //the distractors arrayList
         ArrayList<Integer> distractors = new ArrayList<Integer>();
-        String correctAnswer = dbHandler.getAnswer(n);
+        String correctAnswer = Integer.toString(n);
 
         //get 3 distractors
         for (int i=0; i<3; i++) {
@@ -162,7 +162,9 @@ public class MainPlay extends AppCompatActivity {
     //getting the correct answer and distractor to be put as the answer choices.
     public void setAnswerChoice(){
 
+        //array that contains all the buttons
         Button[] answer = {answer1,answer2,answer3, answer4};
+        //array that contains all the kanji characters on the buttons
         TextView[] kanjiChoice = {kanjiChoice1,kanjiChoice2,kanjiChoice3, kanjiChoice4};
 
         //if it's the first round, there's no need for a distractor
@@ -176,18 +178,18 @@ public class MainPlay extends AppCompatActivity {
             answer2.setVisibility(View.VISIBLE);
             kanjiChoice2.setVisibility(View.VISIBLE);
 
-            //obtain a placement randomly to put the correct answer
+            //obtain a button placement randomly to put the correct answer
             int randomPlacement = rand.nextInt(2); // Gives n such that 0 <= n < 2
 
-            //place the correct answer at that placement
+            //place the correct answer at that button placement
             answer[randomPlacement].setText(dbHandler.getAnswer(n));
             kanjiChoice[randomPlacement].setText(dbHandler.getKanji(n));
 
-            //set the other placement as incorrect answer
+            //set the first asked question to the other button placement
             answer[(randomPlacement+1)%2].setText(dbHandler.getAnswer(askedQuestions.get(0)));
             kanjiChoice[(randomPlacement+1)%2].setText(dbHandler.getKanji(askedQuestions.get(0)));
 
-        }else if (roundNumber==3){ //if it's the third round
+        }else if (roundNumber==3){ //if it's the third round, place the correct answer, and obtain distractor from the previous two questions
 
             //make the third answer choice to appear
             answer3.setVisibility(View.VISIBLE);
@@ -195,28 +197,36 @@ public class MainPlay extends AppCompatActivity {
 
             //create an array, which tells the answer placement
             int[] answerPlacementArray = {0,1,2};
-            shuffleArray(answerPlacementArray);
+            shuffleArray(answerPlacementArray); //shuffle this array to create randomization
 
+            //place the answer on the button that appears first index of the answerPlacementArray after the randomization
             answer[answerPlacementArray[0]].setText(dbHandler.getAnswer(n));
             kanjiChoice[answerPlacementArray[0]].setText(dbHandler.getKanji(n));
 
+            //place the first two asked questions to the other buttons
             for (int i=1, j=0; i<3; i++, j++) {
-                answer[answerPlacementArray[i]].setText(dbHandler.getAnswer(askedQuestions.get(j))); //EDIT: SOME PREVIOUS ANSWER
-                kanjiChoice[answerPlacementArray[i]].setText(dbHandler.getKanji(askedQuestions.get(j))); //EDIT: SOME PREVIOUS ANSWER
+                answer[answerPlacementArray[i]].setText(dbHandler.getAnswer(askedQuestions.get(j)));
+                kanjiChoice[answerPlacementArray[i]].setText(dbHandler.getKanji(askedQuestions.get(j)));
             }
 
-        }else{
+        }else{ //if it is the 4th round or above, place the correct answer, and obtain 3 distracts from previous questions
 
-            int[] answerPlacementArray = {0,1,2,3};
-
+            //make the fourth answer choice to appear
             answer4.setVisibility(View.VISIBLE);
             kanjiChoice4.setVisibility(View.VISIBLE);
-            shuffleArray(answerPlacementArray);
+
+            //create an array, which tells the answer placement
+            int[] answerPlacementArray = {0,1,2,3};
+            shuffleArray(answerPlacementArray); //shuffle this array to create randomization
+
+            //place the answer on the button that appears first index of the answerPlacementArray after the randomization
             answer[answerPlacementArray[0]].setText(dbHandler.getAnswer(n));
             kanjiChoice[answerPlacementArray[0]].setText(dbHandler.getKanji(n));
 
+            //get 3 distractors
             ArrayList<Integer> distractors = getDistractors();
 
+            //place the distractors in the rest of the buttons
             for (int i=1, j=0; i<4; i++, j++) {
                 answer[answerPlacementArray[i]].setText(dbHandler.getAnswer(distractors.get(j))); //EDIT: SOME PREVIOUS ANSWER
                 kanjiChoice[answerPlacementArray[i]].setText(dbHandler.getKanji(distractors.get(j))); //EDIT: SOME PREVIOUS ANSWER
@@ -225,7 +235,7 @@ public class MainPlay extends AppCompatActivity {
         }
     }
 
-    // Implementing FisherñYates shuffle
+    // Implementing Fisher Yates shuffle
     static void shuffleArray(int[] ar)
     {
         // If running on Java 6 or older, use `new Random()` on RHS here
@@ -266,7 +276,6 @@ public class MainPlay extends AppCompatActivity {
 
     //function that runs if the first button is clicked.
     public void onClick1 (View view){
-
         String buttonText = answer1.getText().toString(); //get the text of the button clicked
         isCorrectAnswer(n, buttonText); //checks if it is the correct answer
         setRound(); //get another random question
@@ -274,7 +283,6 @@ public class MainPlay extends AppCompatActivity {
 
     //function that runs if the second button is clicked.
     public void onClick2 (View view){
-
         String buttonText = answer2.getText().toString();
         isCorrectAnswer(n, buttonText);
         setRound();
@@ -282,7 +290,6 @@ public class MainPlay extends AppCompatActivity {
 
     //function that runs if the third button is clicked.
     public void onClick3 (View view){
-
         String buttonText = answer3.getText().toString();
         isCorrectAnswer(n, buttonText);
         setRound();
@@ -290,7 +297,6 @@ public class MainPlay extends AppCompatActivity {
 
     //function that runs if the fourth button is clicked.
     public void onClick4 (View view) {
-
         String buttonText = answer4.getText().toString();
         isCorrectAnswer(n, buttonText);
         setRound();
@@ -309,29 +315,30 @@ public class MainPlay extends AppCompatActivity {
             correctButtonClick.start();
 
             //high score incrementation below
-            String highScoreValueStr = highScoreDisp.getText().toString();
-            highScoreValueInt = Integer.valueOf(highScoreValueStr);
-            highScoreValueInt += 5;
-            highScoreValueStr = Integer.toString(highScoreValueInt);
-            highScoreDisp.setText(highScoreValueStr);
+            highScoreValueInt += 5; //increment the backend highscore
+            String highScoreValueStr = Integer.toString(highScoreValueInt); //convert the integer into a string
+            highScoreDisp.setText(highScoreValueStr); //display that string into the UI
 
         } else {
+
+            //display "incorrect" image
             feedbackImg.setImageResource(R.drawable.incorrectsign);
 
             //set up button sounds
             final MediaPlayer incorrectButtonClick = MediaPlayer.create(this, R.raw.wrong);
             incorrectButtonClick.start();
 
+            //decrement the life by 1 (backend purpose)
             livesCounterInt = livesCounterInt - 1;
 
-            //sets a hearts to grey when a life is lost
+            //sets a hearts to grey when a life is lost (display to the UI)
             if(livesCounterInt == 2) {
                 life3.setImageResource(R.drawable.heartdie);
             }else if(livesCounterInt == 1){
                 life2.setImageResource(R.drawable.heartdie);
             }else if(livesCounterInt == 0) {
                 life1.setImageResource(R.drawable.heartdie);
-                gameEnds();
+                gameEnds(); //when life is zero, the game ends.
             }
         }
     }
@@ -375,25 +382,28 @@ public class MainPlay extends AppCompatActivity {
     //this function changes the question text to a random question in the database
     public void setRandomQuestion (){
 
+        //choose a random question ID from the database
         n = rand.nextInt(dbHandler.getProfilesCount());
 
-        if (roundNumber<5) {
-            while (askedQuestions.contains(n)){
-                n = rand.nextInt(dbHandler.getProfilesCount());
+        if (roundNumber<5) { //if it is round 1,2,3, or 4, make sure that there are no questions that are asked twice
+            while (askedQuestions.contains(n)){ //if it is already asked
+                n = rand.nextInt(dbHandler.getProfilesCount()); //get another question
             }
-        }else{
-            while (nPrevious==n){
-                n = rand.nextInt(dbHandler.getProfilesCount());
+        }else{ //if it is round 5 or above, make sure that no question are asked twice in a row
+            while (nPrevious==n){ //if the previous question is the same as the current question
+                n = rand.nextInt(dbHandler.getProfilesCount()); //keep looking for a new question
             }
         }
 
         questionText.setText(dbHandler.getQuestion(n)); //get the question based on the random position
-        questionView.setImageResource(dbHandler.getImage(n));
+        questionView.setImageResource(dbHandler.getImage(n)); //get the corresponding image
 
+        //if the question is not yet asked, place it on the askedQuestions ArrayList
         if(!askedQuestions.contains(n)) {
             askedQuestions.add(n);
         }
 
+        //saves the current question as the previous question
         nPrevious=n;
     }
 
