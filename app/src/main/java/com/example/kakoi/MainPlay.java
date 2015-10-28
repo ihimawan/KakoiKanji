@@ -24,39 +24,44 @@ THIS IS THE MAIN PLAYING SCREEN UPDATE
 
 public class MainPlay extends AppCompatActivity {
 
-    ArrayList<Integer> askedQuestions = new ArrayList<Integer>();
-
-
-    MyDBHandler dbHandler;      //create the database for englishwords
-    HighscoreDB dbHighScore;    //create the database for highscore
+    //For Random Question Generation & basic gameplay
+    MyDBHandler dbHandler;  //The database that contains the english word, kanji pronounciation, kanji character, and image, all questions will be pulled from this database
+    ArrayList<Integer> askedQuestions = new ArrayList<Integer>(); //the askedQuestions ArrayList keeps the question that have already been asked previously
     TextView questionText;      //text that shows the question (english word)
-    int n;                      //the position of the random question in the database
+    ImageView questionView;     //the image representation of the question
     ImageView feedbackImg;      //the image that shows if the answer was correct/wrong
-    ImageView questionView;
-    TextView highScoreDisp;     //the highscore display text
-    int highScoreValueInt;      //the int value of the high score
-    ImageView life3;        //The left heart that shows if there is a life or not
-    ImageView life2;        //The middle heart that shows if there is a life or not
-    ImageView life1;        //The right heart that shows if there is a life or not
-    int livesCounterInt;    //is the number of lives the player has
-    Button quitButton;
-    Button answer1;
-    Button answer2;
-    Button answer3;
-    Button answer4;
-    Random rand;
+    int n;                      //the position of the random question in the database
+    int nPrevious;          //keeps the id of the previously generated question, so that no same question appear twice in a row
+    int roundNumber;        //tracking the round number because in round 1, there's only 1 answer choice, round 2 has 2 choices, etc.
 
-    //to edit the kanji characters
-    TextView kanjiChoice1;
-    TextView kanjiChoice2;
-    TextView kanjiChoice3;
-    TextView kanjiChoice4;
+    //HighScore related
+    HighscoreDB dbHighScore;    //The database that actually stores the highscore
+    int highScoreValueInt;      //the int value of the high score, for backend purposes
+    TextView highScoreDisp;     //the highscore display text, for UI purposes
 
-    int nPrevious;
+    //Life-counter related
+    ImageView life3;        //The left heart that shows if there is a life or not, UI
+    ImageView life2;        //The middle heart that shows if there is a life or not, UI
+    ImageView life1;        //The right heart that shows if there is a life or not, UI
+    int livesCounterInt;    //is the number of lives the player has, backend purposes
+
+    //The four buttons on the screen
+    Button answer1;     //the button on the top left
+    Button answer2;     //the button on the top right
+    Button answer3;     //the button on the bottom left
+    Button answer4;     //the button on the bottom right
+
+    //The kanji characters, answer'n' refers to the buttons mentioned above
+    TextView kanjiChoice1;  //kanji character on answer1
+    TextView kanjiChoice2;  //kanji character on answer2
+    TextView kanjiChoice3;  //kanji character on answer3
+    TextView kanjiChoice4;  //kanji character on answer4
+
+    //Miscellaneous
+    Button quitButton;      //The quit button
+    Random rand;            //a random object to generate random numbers later
 
     int randomDistractor;
-
-    int roundNumber;
 
     //initial function
     @Override
@@ -67,40 +72,51 @@ public class MainPlay extends AppCompatActivity {
         //Remove notification bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        //getting the elements to variables
+        /*
+        The assignments below are to get the UI elements to variables, and for initializations
+         */
+
+        //For Random Question Generation & basic gameplay
+        dbHandler = new MyDBHandler(this, null, null, 1); //database initialization
         questionText = (TextView) findViewById(R.id.questionText);
         questionView = (ImageView) findViewById(R.id.questionImage);
-        dbHandler = new MyDBHandler(this, null, null, 1);
-        dbHighScore = new HighscoreDB(this, null, null, 1);
-        quitButton = (Button) findViewById(R.id.quitButton);
         feedbackImg = (ImageView) findViewById(R.id.feedbackImg);
+
+        //highScore related
+        dbHighScore = new HighscoreDB(this, null, null, 1); //highscore database initialization
+        highScoreDisp = (TextView) findViewById(R.id.highScoreDisp);
+
+        //life-related
+        livesCounterInt = 3; //initialize life to 3
         life3 = (ImageView) findViewById(R.id.life3);
         life2 = (ImageView) findViewById(R.id.life2);
         life1 = (ImageView) findViewById(R.id.life1);
-        livesCounterInt = 3;
-        highScoreDisp = (TextView) findViewById(R.id.highScoreDisp);
-        rand = new Random();
 
-        kanjiChoice1 = (TextView) findViewById(R.id.kanjiChoice1);
-        kanjiChoice2 = (TextView) findViewById(R.id.kanjiChoice2);
-        kanjiChoice3 = (TextView) findViewById(R.id.kanjiChoice3);
-        kanjiChoice4 = (TextView) findViewById(R.id.kanjiChoice4);
-
+        //buttons
         answer1 = (Button) findViewById(R.id.answer1);
         answer2 = (Button) findViewById(R.id.answer2);
         answer3 = (Button) findViewById(R.id.answer3);
         answer4 = (Button) findViewById(R.id.answer4);
 
-        roundNumber=1;
+        //kanji characters
+        kanjiChoice1 = (TextView) findViewById(R.id.kanjiChoice1);
+        kanjiChoice2 = (TextView) findViewById(R.id.kanjiChoice2);
+        kanjiChoice3 = (TextView) findViewById(R.id.kanjiChoice3);
+        kanjiChoice4 = (TextView) findViewById(R.id.kanjiChoice4);
+
+        quitButton = (Button) findViewById(R.id.quitButton); //quit button
+        roundNumber=1; //the round number initializes to 1
+
+        //in the first round, 3 of the answer choices are not there
         answer2.setVisibility(View.GONE);
         answer3.setVisibility(View.GONE);
         answer4.setVisibility(View.GONE);
-
         kanjiChoice2.setVisibility(View.GONE);
         kanjiChoice3.setVisibility(View.GONE);
         kanjiChoice4.setVisibility(View.GONE);
 
-        setRound();
+        rand = new Random(); //creating random object to generate random numbers later
+        setRound(); //starts the function that sets the whole round
 
     }
 
@@ -110,54 +126,75 @@ public class MainPlay extends AppCompatActivity {
         return;
     }
 
+    //function that sets the round
     public void setRound(){
-        setRandomQuestion();
-        setAnswerChoice();
-        roundNumber++;
+        setRandomQuestion();    //sets the question
+        setAnswerChoice();      //sets the answer choices
+        roundNumber++;          //increment round
     }
 
+    //obtain distractors (incorrect answers) from the askedQuestions array list
     public ArrayList<Integer> getDistractors(){
 
+        //the distractors arrayList
         ArrayList<Integer> distractors = new ArrayList<Integer>();
+        String correctAnswer = dbHandler.getAnswer(n);
 
+        //get 3 distractors
         for (int i=0; i<3; i++) {
-            randomDistractor = rand.nextInt(askedQuestions.size() - 1);
-            while(distractors.contains(askedQuestions.get(randomDistractor))) {
-                randomDistractor = rand.nextInt(askedQuestions.size() - 1);
+
+            //randomDistractor contains the index of an incorrect answer in the askedQuestions array list
+            randomDistractor = rand.nextInt(askedQuestions.size()); //choose an index randomly
+
+            while(distractors.contains(askedQuestions.get(randomDistractor))
+                    || (askedQuestions.get(randomDistractor)).equals(correctAnswer)) { //if that index is already put into the distractor arrayList
+
+                randomDistractor = rand.nextInt(askedQuestions.size()); //keep looking for a different distractor
+
             }
-            distractors.add(askedQuestions.get(randomDistractor));
+            distractors.add(askedQuestions.get(randomDistractor)); //add that distractor int he distractor arrayList
         }
 
+        //return the arrayList with the distractors
         return distractors;
     }
 
+    //getting the correct answer and distractor to be put as the answer choices.
     public void setAnswerChoice(){
 
         Button[] answer = {answer1,answer2,answer3, answer4};
         TextView[] kanjiChoice = {kanjiChoice1,kanjiChoice2,kanjiChoice3, kanjiChoice4};
 
+        //if it's the first round, there's no need for a distractor
         if (roundNumber==1){
             answer1.setText(dbHandler.getAnswer(n));
             kanjiChoice1.setText(dbHandler.getKanji(n));
 
-        }else if (roundNumber==2){
+        }else if (roundNumber==2){ //if it's the second round, randomly place the correct answer between the two answer choices.
 
+            //make the second answer choice to appear
             answer2.setVisibility(View.VISIBLE);
             kanjiChoice2.setVisibility(View.VISIBLE);
+
+            //obtain a placement randomly to put the correct answer
             int randomPlacement = rand.nextInt(2); // Gives n such that 0 <= n < 2
 
+            //place the correct answer at that placement
             answer[randomPlacement].setText(dbHandler.getAnswer(n));
             kanjiChoice[randomPlacement].setText(dbHandler.getKanji(n));
 
+            //set the other placement as incorrect answer
             answer[(randomPlacement+1)%2].setText(dbHandler.getAnswer(askedQuestions.get(0)));
             kanjiChoice[(randomPlacement+1)%2].setText(dbHandler.getKanji(askedQuestions.get(0)));
 
-        }else if (roundNumber==3){
+        }else if (roundNumber==3){ //if it's the third round
 
-            int[] answerPlacementArray = {0,1,2};
-
+            //make the third answer choice to appear
             answer3.setVisibility(View.VISIBLE);
             kanjiChoice3.setVisibility(View.VISIBLE);
+
+            //create an array, which tells the answer placement
+            int[] answerPlacementArray = {0,1,2};
             shuffleArray(answerPlacementArray);
 
             answer[answerPlacementArray[0]].setText(dbHandler.getAnswer(n));
@@ -351,7 +388,6 @@ public class MainPlay extends AppCompatActivity {
         }
 
         questionText.setText(dbHandler.getQuestion(n)); //get the question based on the random position
-//        kanjiChoice1.setText(dbHandler.getKanji(n));
         questionView.setImageResource(dbHandler.getImage(n));
 
         if(!askedQuestions.contains(n)) {
