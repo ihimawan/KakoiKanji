@@ -32,6 +32,7 @@ public class MainPlay extends AppCompatActivity {
     TextView questionText;      //text that shows the question (english word)
     int n;                      //the position of the random question in the database
     ImageView feedbackImg;      //the image that shows if the answer was correct/wrong
+    ImageView questionView;
     TextView highScoreDisp;     //the highscore display text
     int highScoreValueInt;      //the int value of the high score
     ImageView life3;        //The left heart that shows if there is a life or not
@@ -44,6 +45,8 @@ public class MainPlay extends AppCompatActivity {
     Button answer3;
     Button answer4;
     Random rand;
+
+    TextView kanjiChoice1;
 
     int nPrevious;
 
@@ -62,6 +65,7 @@ public class MainPlay extends AppCompatActivity {
 
         //getting the elements to variables
         questionText = (TextView) findViewById(R.id.questionText);
+        questionView = (ImageView) findViewById(R.id.questionImage);
         dbHandler = new MyDBHandler(this, null, null, 1);
         dbHighScore = new HighscoreDB(this, null, null, 1);
         quitButton = (Button) findViewById(R.id.quitButton);
@@ -72,6 +76,8 @@ public class MainPlay extends AppCompatActivity {
         livesCounterInt = 3;
         highScoreDisp = (TextView) findViewById(R.id.highScoreDisp);
         rand = new Random();
+
+        kanjiChoice1 = (TextView) findViewById(R.id.kanjiChoice1);
 
 
         answer1 = (Button) findViewById(R.id.answer1);
@@ -120,7 +126,6 @@ public class MainPlay extends AppCompatActivity {
 
         Button[] answer = {answer1,answer2,answer3, answer4};
 
-
         if (roundNumber==1){
             answer1.setText(dbHandler.getAnswer(n));
 
@@ -162,7 +167,7 @@ public class MainPlay extends AppCompatActivity {
         }
     }
 
-    // Implementing Fisher–Yates shuffle
+    // Implementing FisherñYates shuffle
     static void shuffleArray(int[] ar)
     {
         // If running on Java 6 or older, use `new Random()` on RHS here
@@ -324,6 +329,31 @@ public class MainPlay extends AppCompatActivity {
         }
 
         questionText.setText(dbHandler.getQuestion(n)); //get the question based on the random position
+        kanjiChoice1.setText(dbHandler.getKanji(n)); //get the question based on the random position
+        questionView.setImageResource(dbHandler.getImage(n));
+
+//        switch(n+1){
+//            case 1: questionView.setImageResource(R.drawable.kanji1);
+//                break;
+//            case 2: questionView.setImageResource(R.drawable.kanji2);
+//                break;
+//            case 3: questionView.setImageResource(R.drawable.kanji3);
+//                break;
+//            case 4: questionView.setImageResource(R.drawable.kanji4);
+//                break;
+//            case 5: questionView.setImageResource(R.drawable.kanji5);
+//                break;
+//            case 6: questionView.setImageResource(R.drawable.kanji6);
+//                break;
+//            case 7: questionView.setImageResource(R.drawable.kanji7);
+//                break;
+//            case 8: questionView.setImageResource(R.drawable.kanji8);
+//                break;
+//            case 9: questionView.setImageResource(R.drawable.kanji9);
+//                break;
+//            case 10: questionView.setImageResource(R.drawable.kanji10);
+//                break;
+//        }
 
         if(!askedQuestions.contains(n)) {
             askedQuestions.add(n);

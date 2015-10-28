@@ -164,5 +164,24 @@
         android:layout_toEndOf="@+id/life2"
         android:src="@drawable/heart" />
 
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:id="@+id/questionImage"
+        android:layout_below="@+id/life2"
+        android:layout_alignRight="@+id/questionText"
+        android:layout_alignEnd="@+id/questionText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/kanjiChoice1"
+        android:background="#000"
+        android:layout_above="@+id/answer1"
+        android:layout_alignLeft="@+id/answer1"
+        android:layout_alignStart="@+id/answer1" />
+
 
 </RelativeLayout>

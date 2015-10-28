@@ -14,11 +14,13 @@ import java.util.Random;
 
 public class MyDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "questionsnew4.db"; //name of database
+    private static final String DATABASE_NAME = "questionsnew8.db"; //name of database
     public static final String TABLE_QUESTIONS = "questions"; //name of the table
     public static final String COLUMN_ID = "id"; //name of the column containing ID
     public static final String COLUMN_ENGLISHWORD = "englishword"; //name of column containing the englishwords
     public static final String COLUMN_ANSWER = "answer"; //name of column containing the answer
+    public static final String COLUMN_IMAGE = "image"; //name of column containing the answer
+    public static final String COLUMN_KANJI = "kanji"; //name of column containing the answer
 
     //just a constructor for the database
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -32,7 +34,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
         String query = "CREATE TABLE " + TABLE_QUESTIONS + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_ENGLISHWORD + " TEXT, " +
-                COLUMN_ANSWER + " TEXT " +
+                COLUMN_ANSWER + " TEXT, " +
+                COLUMN_IMAGE + " INTEGER, " +
+                COLUMN_KANJI + " TEXT " +
                 ");";
         db.execSQL(query);
     }
@@ -49,6 +53,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_ENGLISHWORD, question.get_englishword());
         values.put(COLUMN_ANSWER, question.get_answer());
+        values.put(COLUMN_IMAGE, question.get_image());
+        values.put(COLUMN_KANJI, question.get_kanji());
         SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_QUESTIONS, null, values);
         db.close();
@@ -61,6 +67,73 @@ public class MyDBHandler extends SQLiteOpenHelper {
         int cnt = cursor.getCount();
         cursor.close();
         return cnt;
+    }
+
+    //to check if it is correct answer
+    public boolean isCorrectAnswer(int position, String answerChoice){
+        boolean flag = false;
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
+
+        Cursor c = db.rawQuery(query, null);
+        c.moveToPosition(position);
+
+        if((c.getString(c.getColumnIndex(COLUMN_ANSWER))).equalsIgnoreCase(answerChoice)) {
+            flag = true;
+        }
+
+        c.close();
+        db.close();
+        return flag;
+
+    }
+
+    public String getAnswer(int position){
+
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
+        Cursor c = db.rawQuery(query, null);
+
+        c.moveToPosition(position);
+
+        return c.getString(c.getColumnIndex(COLUMN_ANSWER));
+
+    }
+
+    public String getKanji(int position){
+
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
+        Cursor c = db.rawQuery(query, null);
+
+        c.moveToPosition(position);
+
+        return c.getString(c.getColumnIndex(COLUMN_KANJI));
+
+    }
+
+    public int getImage(int position){
+
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
+        Cursor c = db.rawQuery(query, null);
+
+        c.moveToPosition(position);
+
+        return c.getInt(c.getColumnIndex(COLUMN_IMAGE));
+
+    }
+
+    //get the question given the position of the word.
+    public String getQuestion (int position){
+
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
+        Cursor c = db.rawQuery(query, null);
+
+        c.moveToPosition(position);
+
+        return c.getString(c.getColumnIndex(COLUMN_ENGLISHWORD));
     }
 
 
@@ -117,49 +190,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
         return dbString;
 
-    }
-
-    //to check if it is correct answer
-    public boolean isCorrectAnswer(int position, String answerChoice){
-        boolean flag = false;
-        SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
-
-        Cursor c = db.rawQuery(query, null);
-        c.moveToPosition(position);
-
-        if((c.getString(c.getColumnIndex(COLUMN_ANSWER))).equalsIgnoreCase(answerChoice)) {
-            flag = true;
-        }
-
-        c.close();
-        db.close();
-        return flag;
-
-    }
-
-    public String getAnswer(int position){
-
-        SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
-        Cursor c = db.rawQuery(query, null);
-
-        c.moveToPosition(position);
-
-        return c.getString(c.getColumnIndex(COLUMN_ANSWER));
-
-    }
-
-    //get the question given the position of the word.
-    public String getQuestion (int position){
-
-        SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
-        Cursor c = db.rawQuery(query, null);
-
-        c.moveToPosition(position);
-
-        return c.getString(c.getColumnIndex(COLUMN_ENGLISHWORD));
     }
 
     //chooses a random row in the database and returns the random row number.

@@ -40,16 +40,16 @@ public class MainActivity extends AppCompatActivity {
         //database initializations
         if (profile_counts==0) { //if database is empty, then add.
             addingHighscore(0);
-            addingQuestion("one", "ichi");
-            addingQuestion("two", "ni");
-            addingQuestion("three", "san");
-            addingQuestion("four", "yong");
-            addingQuestion("five", "go");
-            addingQuestion("six", "roku");
-            addingQuestion("seven", "nana");
-            addingQuestion("eight", "hachi");
-            addingQuestion("nine", "kyuu");
-            addingQuestion("ten", "jyuu");
+            addingQuestion("one", "ichi", R.drawable.kanji1, "一");
+            addingQuestion("two", "ni", R.drawable.kanji2, "二");
+            addingQuestion("three", "san", R.drawable.kanji3, "三");
+            addingQuestion("four", "yon", R.drawable.kanji4, "四");
+            addingQuestion("five", "go", R.drawable.kanji5, "五");
+            addingQuestion("six", "roku", R.drawable.kanji6, "六");
+            addingQuestion("seven", "nana", R.drawable.kanji7, "匕");
+            addingQuestion("eight", "hachi", R.drawable.kanji8, "八");
+            addingQuestion("nine", "kyuu", R.drawable.kanji9, "九");
+            addingQuestion("ten", "juu", R.drawable.kanji10, "十");
 
         }
 
@@ -65,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //to add english words to the database
-    public void addingQuestion(String englishWord, String answer){
-        Questions question = new Questions(englishWord, answer);
+    public void addingQuestion(String englishWord, String answer, int image, String kanji){
+        Questions question = new Questions(englishWord, answer, image, kanji);
         dbHandler.addQuestion(question);
     }
 

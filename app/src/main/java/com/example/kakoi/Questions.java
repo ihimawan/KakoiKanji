@@ -12,14 +12,34 @@ public class Questions {
     private int _id;
     private String _englishword;
     private String _answer;
+    private int _image;
+    private String _kanji;
 
     public Questions() {
 
     }
 
-    public Questions(String _englishword, String _answer) {
-        this._answer = _answer;
+    public Questions(String _englishword, String _answer, int _image, String _kanji) {
         this._englishword = _englishword;
+        this._answer = _answer;
+        this._image = _image;
+        this._kanji = _kanji;
+    }
+
+    public String get_kanji() {
+        return _kanji;
+    }
+
+    public void set_kanji(String _kanji) {
+        this._kanji = _kanji;
+    }
+
+    public int get_image() {
+        return _image;
+    }
+
+    public void set_image(int _image) {
+        this._image = _image;
     }
 
     public String get_answer() {
