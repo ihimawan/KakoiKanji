@@ -78,8 +78,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/frameLayout2"
         android:layout_alignTop="@+id/frameLayout1"
-        android:layout_toRightOf="@+id/feedbackImg"
-        android:layout_toEndOf="@+id/feedbackImg">
+        android:layout_toLeftOf="@+id/quitButton"
+        android:layout_toStartOf="@+id/quitButton">
 
         <TextView
             android:id="@+id/kanjiChoice2"
@@ -167,12 +167,13 @@
     </FrameLayout>
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="60dp"
+        android:layout_width="400dp"
+        android:layout_height="50dp"
         android:id="@+id/feedbackImg"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:gravity ="center"
         android:clickable="true"
         android:contextClickable="false"
         android:layout_centerVertical="true" />
