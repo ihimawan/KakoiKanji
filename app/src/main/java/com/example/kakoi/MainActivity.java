@@ -59,7 +59,16 @@ public class MainActivity extends AppCompatActivity {
             addingQuestion("eight", "hachi", R.drawable.kanji8, "八");
             addingQuestion("nine", "kyuu", R.drawable.kanji9, "九");
             addingQuestion("ten", "juu", R.drawable.kanji10, "十");
-
+            addingQuestion("child", "juu", R.drawable.kanjichild, "子");
+            addingQuestion("ear", "mimi", R.drawable.kanjiear, "耳");
+            addingQuestion("eye", "me", R.drawable.kanjieye, "目");
+            addingQuestion("father", "chichi", R.drawable.kanjifather, "父");
+            addingQuestion("female", "onna", R.drawable.kanjifemale, "女");
+            addingQuestion("hand", "te", R.drawable.kanjihand, "手");
+            addingQuestion("heart", "kokoro", R.drawable.kanjiheart, "心");
+            addingQuestion("mother", "haha", R.drawable.kanjimother, "母");
+            addingQuestion("mouth", "kuchi", R.drawable.kanjimouth, "口");
+            addingQuestion("person", "hito", R.drawable.kanjiperson, "人");
         }
 
         //alert dialog object that notifies pronounciation will be shown
