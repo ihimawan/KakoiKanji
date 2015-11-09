@@ -16,7 +16,8 @@
         android:onClick="playClicked"
         android:layout_above="@+id/kanjiSwitch"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:contentDescription="playButton" />
 
     <ImageView
         android:layout_width="300dp"
@@ -26,7 +27,8 @@
         android:src="@drawable/logo"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-10dp" />
+        android:layout_marginTop="-10dp"
+        android:contentDescription="logoImage" />
 
     <Switch
         android:layout_width="wrap_content"

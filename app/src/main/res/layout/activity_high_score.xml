@@ -14,8 +14,7 @@
         android:id="@+id/gameover"
         android:src="@drawable/gameoversign"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -59,8 +58,7 @@
         android:id="@+id/highscore"
         android:textColor="#fff"
         android:layout_above="@+id/quitButton"
-        android:layout_toRightOf="@+id/bestscoreText"
-        android:layout_toEndOf="@+id/bestscoreText" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,9 +67,8 @@
         android:text="BEST SCORE: "
         android:id="@+id/bestscoreText"
         android:textColor="#fff"
-        android:layout_alignTop="@+id/highscore"
-        android:layout_alignRight="@+id/imageView"
-        android:layout_alignEnd="@+id/imageView" />
+        android:layout_below="@+id/highscore2"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -40,10 +40,8 @@ public class MainActivity extends AppCompatActivity {
         dbHandler = new MyDBHandler(this, null, null, 1);
         dbHighScore = new HighscoreDB(this, null, null, 1);
 
-        kanjiSwitch = (Switch) findViewById(R.id.kanjiSwitch);
-
+        kanjiSwitch = (Switch) findViewById(R.id.kanjiSwitch); //obtain UI element
         highscore = (TextView) findViewById(R.id.highscore); //obtain UI element
-
         int profile_counts = dbHighScore.getProfilesCount(); //to see if database is empty
 
         //database initializations
@@ -98,10 +96,10 @@ public class MainActivity extends AppCompatActivity {
                                          boolean isChecked) {
 
                 if(isChecked){
-                    isSwitchOn=1;
+                    isSwitchOn=1; //if it is checked, then the switch is denoted as the integer 1.
                     alert.show();
                 }else{
-                    isSwitchOn=0;
+                    isSwitchOn=0; //if it is unchecked, then the switch is denoted as the integer 0.
                     alert2.show();
                 }
             }

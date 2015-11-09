@@ -124,6 +124,7 @@ public class MainPlay extends AppCompatActivity {
         kanjiChoice3 = (TextView) findViewById(R.id.kanjiChoice3);
         kanjiChoice4 = (TextView) findViewById(R.id.kanjiChoice4);
 
+        //misc
         quitButton = (Button) findViewById(R.id.quitButton); //quit button
         roundNumber=1; //the round number initializes to 1
 
@@ -317,14 +318,12 @@ public class MainPlay extends AppCompatActivity {
     //function that runs if the first button is clicked.
     public void onClick1 (View view){
 
-
         chosenAnswer = 1;
         String buttonText = answer1.getText().toString(); //get the text of the button clicked
         isCorrectAnswer(n, buttonText); //checks if it is the correct answer, and adjust button colors accordingly.
 
         handler.postDelayed(new Runnable() {
             public void run() {
-                //need to move these two lines somewhere :)
                 setRound(); //get another random question
             }
         }, 500);
@@ -339,7 +338,6 @@ public class MainPlay extends AppCompatActivity {
         isCorrectAnswer(n, buttonText);
         handler.postDelayed(new Runnable() {
             public void run() {
-                //need to move these two lines somewhere :)
                 setRound(); //get another random question
             }
         }, 500);
@@ -352,7 +350,6 @@ public class MainPlay extends AppCompatActivity {
         isCorrectAnswer(n, buttonText);
         handler.postDelayed(new Runnable() {
             public void run() {
-                //need to move these two lines somewhere :)
                 setRound(); //get another random question
             }
         }, 500);
@@ -365,7 +362,6 @@ public class MainPlay extends AppCompatActivity {
         isCorrectAnswer(n, buttonText);
         handler.postDelayed(new Runnable() {
             public void run() {
-                //need to move these two lines somewhere :)
                 setRound(); //get another random question
             }
         }, 500);
@@ -445,7 +441,7 @@ public class MainPlay extends AppCompatActivity {
         final TextView highScoreDisp = (TextView) findViewById(R.id.highScoreDisp); //send the latest high score to next intent
         String userMessage = highScoreDisp.getText().toString();
 
-        i.putExtra("isswitchon", kanjiSwitch);
+        i.putExtra("isswitchon", kanjiSwitch); //extra information, using kanjiSwitch as the reference
         i.putExtra("highscoredisp", userMessage); //extra information, using userMessage as the reference
         startActivity(i); // to call the intent
 
