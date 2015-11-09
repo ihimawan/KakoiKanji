@@ -21,8 +21,11 @@ public class HighscoreDB extends SQLiteOpenHelper {
     //public static final String COLUMN_ANSWER = "answer"; //name of column containing the answer
 
     //just a constructor for the database
-    public HighscoreDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+
+    // 11/9/15 Pujan Ban
+    //changed the database here memeber definition here as recomended by the android lint
+    public HighscoreDB(Context context, String name) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -78,7 +81,7 @@ public class HighscoreDB extends SQLiteOpenHelper {
         c.moveToLast();
         int colIndex = c.getColumnIndex(COLUMN_VALUES);
         result = c.getInt(colIndex);
-
+        c.close();
         return result;
     }
 
@@ -92,7 +95,7 @@ public class HighscoreDB extends SQLiteOpenHelper {
         c.moveToLast();
         int colIndex = c.getColumnIndex(COLUMN_VALUES);
         dbString += c.getString(colIndex);
-
+        c.close();
         return dbString;
     }
 
@@ -107,6 +110,7 @@ public class HighscoreDB extends SQLiteOpenHelper {
         int colIndex = c.getColumnIndex(COLUMN_VALUES);
 
         dbString += c.getString(colIndex);
+        c.close();
         db.close();
         return dbString;
     }
