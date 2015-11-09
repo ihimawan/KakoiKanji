@@ -38,7 +38,8 @@
         android:layout_alignLeft="@+id/questionImage"
         android:layout_alignStart="@+id/questionImage"
         android:textAlignment="inherit"
-        android:textAllCaps="true" />
+        android:textAllCaps="true"
+        tools:ignore="HardcodedText" />
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -58,7 +59,8 @@
             android:layout_centerHorizontal="true"
             android:textSize="50dip"
             android:textColor="#FFFFFF"
-            android:elevation="100dp" />
+            android:elevation="100dp"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/answer1"
@@ -69,7 +71,7 @@
             android:background="@drawable/answerbutton"
             android:onClick="onClick1"
             android:layout_gravity="right|top"
-            ></Button>
+            tools:ignore="HardcodedText"></Button>
 
     </FrameLayout>
 
@@ -90,7 +92,8 @@
             android:layout_centerHorizontal="true"
             android:textSize="50dip"
             android:textColor="#FFFFFF"
-            android:elevation="100dp"/>
+            android:elevation="100dp"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/answer2"
@@ -100,7 +103,8 @@
             android:paddingTop="60dp"
             android:background="@drawable/answerbutton"
             android:onClick="onClick2"
-            android:layout_gravity="center_horizontal|top"></Button>
+            android:layout_gravity="center_horizontal|top"
+            tools:ignore="HardcodedText" />
 
     </FrameLayout>
 
@@ -120,7 +124,7 @@
             android:paddingTop="60dp"
             android:onClick="onClick3"
             android:background="@drawable/answerbutton"
-            ></Button>
+            tools:ignore="HardcodedText"></Button>
 
         <TextView
             android:layout_width="100dp"
@@ -131,7 +135,8 @@
             android:textColor="#FFFFFF"
             android:elevation="100dp"
             android:id="@+id/kanjiChoice3"
-            android:gravity="center" />
+            android:gravity="center"
+            tools:ignore="HardcodedText" />
 
     </FrameLayout>
 
@@ -162,7 +167,8 @@
             android:paddingTop="60dp"
             android:onClick="onClick4"
             android:layout_gravity="center_horizontal|bottom"
-            android:background="@drawable/answerbutton"></Button>
+            android:background="@drawable/answerbutton"
+            tools:ignore="HardcodedText"></Button>
 
     </FrameLayout>
 
@@ -187,7 +193,8 @@
         android:textColor="#fff"
         android:layout_alignRight="@+id/questionImage"
         android:layout_alignEnd="@+id/questionImage"
-        android:textSize="35dp" />
+        android:textSize="35dp"
+        tools:ignore="HardcodedText" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -199,7 +206,8 @@
         android:background="#F55D60"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/card"
-        android:layout_alignEnd="@+id/card" />
+        android:layout_alignEnd="@+id/card"
+        tools:ignore="HardcodedText" />
 
     <ImageView
         android:layout_width="wrap_content"
