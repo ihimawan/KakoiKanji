@@ -55,7 +55,7 @@ public class HighScore extends AppCompatActivity {
         }
 
         //display the high score in the database
-        dbHighScore = new HighscoreDB(this, null, null, 1);
+        dbHighScore = new HighscoreDB(this, null);
         highscore = (TextView) findViewById(R.id.highscore);
         String bestscore = dbHighScore.databaseToInt();
         highscore.setText(bestscore);

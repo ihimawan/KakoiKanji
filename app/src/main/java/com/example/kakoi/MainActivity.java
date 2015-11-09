@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         //database initializations
         dbHandler = new MyDBHandler(this, null, null, 1);
-        dbHighScore = new HighscoreDB(this, null, null, 1);
+        dbHighScore = new HighscoreDB(this, null);
 
         kanjiSwitch = (Switch) findViewById(R.id.kanjiSwitch); //obtain UI element
         highscore = (TextView) findViewById(R.id.highscore); //obtain UI element

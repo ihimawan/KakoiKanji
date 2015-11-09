@@ -99,7 +99,7 @@ public class MainPlay extends AppCompatActivity {
         feedbackImg = (ImageView) findViewById(R.id.feedbackImg);
 
         //highScore related
-        dbHighScore = new HighscoreDB(this, null, null, 1); //highscore database initialization
+        dbHighScore = new HighscoreDB(this, null); //highscore database initialization
         highScoreDisp = (TextView) findViewById(R.id.highScoreDisp);
 
         //life-related
