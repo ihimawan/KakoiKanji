@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.media.MediaPlayer;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,16 +18,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.os.Handler;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+
+import java.util.logging.LogRecord;
 
 /*
 THIS IS THE MAIN PLAYING SCREEN UPDATE
  */
 
 public class MainPlay extends AppCompatActivity {
+
+    final Handler handler = new Handler();
 
     //For Random Question Generation & basic gameplay
     MyDBHandler dbHandler;  //The database that contains the english word, kanji pronounciation, kanji character, and image, all questions will be pulled from this database
@@ -57,6 +63,7 @@ public class MainPlay extends AppCompatActivity {
     Button answer2;     //the button on the top right
     Button answer3;     //the button on the bottom left
     Button answer4;     //the button on the bottom right
+    ArrayList<Button> buttonArray = new ArrayList<Button>();
 
     //The kanji characters, answer'n' refers to the buttons mentioned above
     TextView kanjiChoice1;  //kanji character on answer1
@@ -67,6 +74,8 @@ public class MainPlay extends AppCompatActivity {
     //Miscellaneous
     Button quitButton;      //The quit button
     Random rand;            //a random object to generate random numbers later
+    int whereCorrectAnswer=1; //the Button number that contains the correct answer.
+    int chosenAnswer = 1;
 
     int randomDistractor;
 
@@ -104,6 +113,10 @@ public class MainPlay extends AppCompatActivity {
         answer2 = (Button) findViewById(R.id.answer2);
         answer3 = (Button) findViewById(R.id.answer3);
         answer4 = (Button) findViewById(R.id.answer4);
+        buttonArray.add(answer1);
+        buttonArray.add(answer2);
+        buttonArray.add(answer3);
+        buttonArray.add(answer4);
 
         //kanji characters
         kanjiChoice1 = (TextView) findViewById(R.id.kanjiChoice1);
@@ -146,6 +159,11 @@ public class MainPlay extends AppCompatActivity {
 
     //function that sets the round
     public void setRound(){
+
+        //restore the colors of the buttons
+        buttonArray.get(whereCorrectAnswer-1).setBackgroundResource(R.drawable.answerbutton);
+        buttonArray.get(chosenAnswer-1).setBackgroundResource(R.drawable.answerbutton);
+
         setRandomQuestion();    //sets the question
         setAnswerChoice();      //sets the answer choices
         roundNumber++;          //increment round
@@ -168,7 +186,6 @@ public class MainPlay extends AppCompatActivity {
 
                 randomDistractor = rand.nextInt(askedQuestions.size()); //keep looking for a different distractor
 
-//                boolean flag = (askedQuestions.get(randomDistractor)).equals(correctAnswer);
             }
             distractors.add(askedQuestions.get(randomDistractor)); //add that distractor int he distractor arrayList
         }
@@ -182,12 +199,14 @@ public class MainPlay extends AppCompatActivity {
 
         //array that contains all the buttons
         Button[] answer = {answer1,answer2,answer3, answer4};
+
         //array that contains all the kanji characters on the buttons
         TextView[] kanjiChoice = {kanjiChoice1,kanjiChoice2,kanjiChoice3, kanjiChoice4};
 
         //if it's the first round, there's no need for a distractor
         if (roundNumber==1){
             answer1.setText(dbHandler.getAnswer(n));
+            whereCorrectAnswer = 1;
             kanjiChoice1.setText(dbHandler.getKanji(n));
 
         }else if (roundNumber==2){ //if it's the second round, randomly place the correct answer between the two answer choices.
@@ -202,6 +221,7 @@ public class MainPlay extends AppCompatActivity {
             //place the correct answer at that button placement
             answer[randomPlacement].setText(dbHandler.getAnswer(n));
             kanjiChoice[randomPlacement].setText(dbHandler.getKanji(n));
+            whereCorrectAnswer = randomPlacement+1;
 
             //set the first asked question to the other button placement
             answer[(randomPlacement+1)%2].setText(dbHandler.getAnswer(askedQuestions.get(0)));
@@ -220,6 +240,7 @@ public class MainPlay extends AppCompatActivity {
             //place the answer on the button that appears first index of the answerPlacementArray after the randomization
             answer[answerPlacementArray[0]].setText(dbHandler.getAnswer(n));
             kanjiChoice[answerPlacementArray[0]].setText(dbHandler.getKanji(n));
+            whereCorrectAnswer = answerPlacementArray[0]+1;
 
             //place the first two asked questions to the other buttons
             for (int i=1, j=0; i<3; i++, j++) {
@@ -240,6 +261,7 @@ public class MainPlay extends AppCompatActivity {
             //place the answer on the button that appears first index of the answerPlacementArray after the randomization
             answer[answerPlacementArray[0]].setText(dbHandler.getAnswer(n));
             kanjiChoice[answerPlacementArray[0]].setText(dbHandler.getKanji(n));
+            whereCorrectAnswer = answerPlacementArray[0]+1;
 
             //get 3 distractors
             ArrayList<Integer> distractors = getDistractors();
@@ -294,36 +316,65 @@ public class MainPlay extends AppCompatActivity {
 
     //function that runs if the first button is clicked.
     public void onClick1 (View view){
+
+
+        chosenAnswer = 1;
         String buttonText = answer1.getText().toString(); //get the text of the button clicked
-        isCorrectAnswer(n, buttonText); //checks if it is the correct answer
-        setRound(); //get another random question
+        isCorrectAnswer(n, buttonText); //checks if it is the correct answer, and adjust button colors accordingly.
+
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                //need to move these two lines somewhere :)
+                setRound(); //get another random question
+            }
+        }, 500);
+
+
     }
 
     //function that runs if the second button is clicked.
     public void onClick2 (View view){
+        chosenAnswer = 2;
         String buttonText = answer2.getText().toString();
         isCorrectAnswer(n, buttonText);
-        setRound();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                //need to move these two lines somewhere :)
+                setRound(); //get another random question
+            }
+        }, 500);
     }
 
     //function that runs if the third button is clicked.
     public void onClick3 (View view){
+        chosenAnswer = 3;
         String buttonText = answer3.getText().toString();
         isCorrectAnswer(n, buttonText);
-        setRound();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                //need to move these two lines somewhere :)
+                setRound(); //get another random question
+            }
+        }, 500);
     }
 
     //function that runs if the fourth button is clicked.
     public void onClick4 (View view) {
+        chosenAnswer = 4;
         String buttonText = answer4.getText().toString();
         isCorrectAnswer(n, buttonText);
-        setRound();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                //need to move these two lines somewhere :)
+                setRound(); //get another random question
+            }
+        }, 500);
     }
 
     //checks if correct answer
     public void isCorrectAnswer(int n, String answerChoice){
 
-        if ((dbHandler.isCorrectAnswer(n, answerChoice))){
+        if (whereCorrectAnswer == chosenAnswer){ //(dbHandler.isCorrectAnswer(n, answerChoice))
 
             //display "correct" image
             feedbackImg.setImageResource(R.drawable.correctsign);
@@ -337,6 +388,10 @@ public class MainPlay extends AppCompatActivity {
             String highScoreValueStr = Integer.toString(highScoreValueInt); //convert the integer into a string
             highScoreDisp.setText(highScoreValueStr); //display that string into the UI
 
+            //change the button to green
+            buttonArray.get(whereCorrectAnswer - 1).setBackgroundResource(R.drawable.greenbox);
+
+
         } else {
 
             //display "incorrect" image
@@ -348,6 +403,10 @@ public class MainPlay extends AppCompatActivity {
 
             //decrement the life by 1 (backend purpose)
             livesCounterInt = livesCounterInt - 1;
+
+            //change the correct button to green, chosen answer to red
+            buttonArray.get(whereCorrectAnswer-1).setBackgroundResource(R.drawable.greenbox);
+            buttonArray.get(chosenAnswer-1).setBackgroundResource(R.drawable.redbox);
 
             //sets a hearts to grey when a life is lost (display to the UI)
             if(livesCounterInt == 2) {
