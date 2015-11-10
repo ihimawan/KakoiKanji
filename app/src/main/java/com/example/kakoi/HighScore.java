@@ -64,7 +64,8 @@ public class HighScore extends AppCompatActivity {
     //player cannot move back to previous screen
     @Override
     public void onBackPressed() {
-        return;
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
     //function for quit button

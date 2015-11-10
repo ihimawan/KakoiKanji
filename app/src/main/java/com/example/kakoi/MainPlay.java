@@ -153,10 +153,11 @@ public class MainPlay extends AppCompatActivity {
     }
 
     //player cannot move back to previous screen
-    @Override
-    public void onBackPressed() {
-        return;
-    }
+//    @Override
+//    public void onBackPressed() {
+//        Intent i = new Intent(this, MainActivity.class);
+//        startActivity(i);
+//    }
 
     //function that sets the round
     public void setRound(){
@@ -317,7 +318,6 @@ public class MainPlay extends AppCompatActivity {
 
     //function that runs if the first button is clicked.
     public void onClick1 (View view){
-
         chosenAnswer = 1;
         String buttonText = answer1.getText().toString(); //get the text of the button clicked
         isCorrectAnswer(n, buttonText); //checks if it is the correct answer, and adjust button colors accordingly.
@@ -327,8 +327,6 @@ public class MainPlay extends AppCompatActivity {
                 setRound(); //get another random question
             }
         }, 500);
-
-
     }
 
     //function that runs if the second button is clicked.

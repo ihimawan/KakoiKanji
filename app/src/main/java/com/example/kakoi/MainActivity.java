@@ -110,11 +110,11 @@ public class MainActivity extends AppCompatActivity {
         highscore.setText(bestscore);
     }
 
-    //player cannot move back to previous screen
-    @Override
-    public void onBackPressed() {
-        return;
-    }
+//    //player cannot move back to previous screen
+//    @Override
+//    public void onBackPressed() {
+//        return;
+//    }
 
     //to add english words to the database
     public void addingQuestion(String englishWord, String answer, int image, String kanji){
