@@ -153,7 +153,7 @@ public class MainPlay extends AppCompatActivity {
 
         rand = new Random(); //creating random object to generate random numbers later
         setRound(); //starts the function that sets the whole round
-        myViewFlipper = (ViewFlipper) findViewById(R.id.myViewFlipper);
+        //myViewFlipper = (ViewFlipper) findViewById(R.id.myViewFlipper);
 
     }
     @Override
