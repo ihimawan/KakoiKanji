@@ -151,13 +151,31 @@ public class MainPlay extends AppCompatActivity {
         setRound(); //starts the function that sets the whole round
 
     }
+    @Override
+    public void onBackPressed(){
+        final MediaPlayer goButtonClicked = MediaPlayer.create(this, R.raw.go);
+        goButtonClicked.start();
 
-    //player cannot move back to previous screen
-//    @Override
-//    public void onBackPressed() {
-//        Intent i = new Intent(this, MainActivity.class);
-//        startActivity(i);
-//    }
+        //then show an alert dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to quit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes, I give up!", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        gameEnds(); //then run the game end function
+                    }
+                })
+                .setNegativeButton("Nevermind.", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        goButtonClicked.start();
+                        dialog.cancel(); //then do nothing
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+//    player cannot move back to previous screen
 
     //function that sets the round
     public void setRound(){
@@ -293,6 +311,7 @@ public class MainPlay extends AppCompatActivity {
     }
 
     //if quit button is clicked
+
     public void quitButtonClicked(final View view){
         final MediaPlayer goButtonClicked = MediaPlayer.create(this, R.raw.go);
         goButtonClicked.start();
@@ -315,6 +334,7 @@ public class MainPlay extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
 
     //function that runs if the first button is clicked.
     public void onClick1 (View view){
