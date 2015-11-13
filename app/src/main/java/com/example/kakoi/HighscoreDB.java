@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class HighscoreDB extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "highscorenew13.db"; //name of database
+    private static final String DATABASE_NAME = "highscorenew14.db"; //name of database
     public static final String TABLE_HIGHSCORE = "highscore"; //name of the table
     public static final String COLUMN_ID = "id"; //name of the column containing ID
     public static final String COLUMN_VALUES = "highscore_store"; //name of column containing the highscore

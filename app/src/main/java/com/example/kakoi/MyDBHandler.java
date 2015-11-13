@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class MyDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "questionsnew13.db"; //name of database
+    private static final String DATABASE_NAME = "questionsnew14.db"; //name of database
     public static final String TABLE_QUESTIONS = "questions"; //name of the table
     public static final String COLUMN_ID = "id"; //name of the column containing ID
     public static final String COLUMN_ENGLISHWORD = "englishword"; //name of column containing the englishwords
