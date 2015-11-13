@@ -8,6 +8,17 @@
     android:clickable="true"
     android:id="@+id/rellay">
 
+    <ViewFlipper
+        android:id="@+id/myViewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="39dp"
+        android:layout_alignBottom="@+id/questionImage"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+    </ViewFlipper>
+
     <ImageView
         android:layout_width="500dp"
         android:layout_height="700dp"
@@ -112,9 +123,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/frameLayout3"
-        android:layout_above="@+id/feedbackImg"
-        android:layout_alignLeft="@+id/frameLayout1"
-        android:layout_alignStart="@+id/frameLayout1">
+        android:layout_below="@+id/frameLayout1"
+        android:layout_toRightOf="@+id/life1"
+        android:layout_toEndOf="@+id/life1"
+        android:layout_marginTop="39dp">
 
         <Button
             android:id="@+id/answer3"
@@ -144,7 +156,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/frameLayout4"
-        android:layout_above="@+id/feedbackImg"
+        android:layout_alignTop="@+id/frameLayout3"
         android:layout_alignLeft="@+id/frameLayout2"
         android:layout_alignStart="@+id/frameLayout2">
 
@@ -171,18 +183,6 @@
             tools:ignore="HardcodedText"></Button>
 
     </FrameLayout>
-
-    <ImageView
-        android:layout_width="400dp"
-        android:layout_height="50dp"
-        android:id="@+id/feedbackImg"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:gravity ="center"
-        android:clickable="true"
-        android:contextClickable="false"
-        android:layout_centerVertical="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -242,6 +242,17 @@
         android:id="@+id/questionImage"
         android:layout_below="@+id/life3"
         android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="50dp"
+        android:id="@+id/feedbackImg"
+        android:gravity ="center"
+        android:clickable="true"
+        android:contextClickable="false"
+        android:layout_alignBottom="@+id/myViewFlipper"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

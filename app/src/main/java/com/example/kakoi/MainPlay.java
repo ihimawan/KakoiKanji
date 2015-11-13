@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.os.Handler;
+import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -76,6 +79,7 @@ public class MainPlay extends AppCompatActivity {
     Random rand;            //a random object to generate random numbers later
     int whereCorrectAnswer=1; //the Button number that contains the correct answer.
     int chosenAnswer = 1;
+    ViewFlipper myViewFlipper;
 
     int randomDistractor;
 
@@ -149,6 +153,7 @@ public class MainPlay extends AppCompatActivity {
 
         rand = new Random(); //creating random object to generate random numbers later
         setRound(); //starts the function that sets the whole round
+        myViewFlipper = (ViewFlipper) findViewById(R.id.myViewFlipper);
 
     }
     @Override
@@ -162,7 +167,8 @@ public class MainPlay extends AppCompatActivity {
                 .setCancelable(false)
                 .setPositiveButton("Yes, I give up!", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        gameEnds(); //then run the game end function
+                        exitGame();
+//                        gameEnds(); //then run the game end function
                     }
                 })
                 .setNegativeButton("Nevermind.", new DialogInterface.OnClickListener() {
@@ -175,7 +181,10 @@ public class MainPlay extends AppCompatActivity {
         alert.show();
     }
 
-//    player cannot move back to previous screen
+    public void exitGame(){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
 
     //function that sets the round
     public void setRound(){
@@ -183,6 +192,8 @@ public class MainPlay extends AppCompatActivity {
         //restore the colors of the buttons
         buttonArray.get(whereCorrectAnswer-1).setBackgroundResource(R.drawable.answerbutton);
         buttonArray.get(chosenAnswer-1).setBackgroundResource(R.drawable.answerbutton);
+
+        feedbackImg.setImageResource(0);
 
         setRandomQuestion();    //sets the question
         setAnswerChoice();      //sets the answer choices
@@ -203,9 +214,7 @@ public class MainPlay extends AppCompatActivity {
 
             while(distractors.contains(askedQuestions.get(randomDistractor))||
                     askedQuestions.get(randomDistractor) == n) {
-
                 randomDistractor = rand.nextInt(askedQuestions.size()); //keep looking for a different distractor
-
             }
             distractors.add(askedQuestions.get(randomDistractor)); //add that distractor int he distractor arrayList
         }
@@ -346,7 +355,7 @@ public class MainPlay extends AppCompatActivity {
             public void run() {
                 setRound(); //get another random question
             }
-        }, 500);
+        }, 650);
     }
 
     //function that runs if the second button is clicked.
@@ -358,7 +367,7 @@ public class MainPlay extends AppCompatActivity {
             public void run() {
                 setRound(); //get another random question
             }
-        }, 500);
+        }, 650);
     }
 
     //function that runs if the third button is clicked.
@@ -370,7 +379,7 @@ public class MainPlay extends AppCompatActivity {
             public void run() {
                 setRound(); //get another random question
             }
-        }, 500);
+        }, 650);
     }
 
     //function that runs if the fourth button is clicked.
@@ -382,7 +391,7 @@ public class MainPlay extends AppCompatActivity {
             public void run() {
                 setRound(); //get another random question
             }
-        }, 500);
+        }, 650);
     }
 
     //checks if correct answer
@@ -390,8 +399,18 @@ public class MainPlay extends AppCompatActivity {
 
         if (whereCorrectAnswer == chosenAnswer){ //(dbHandler.isCorrectAnswer(n, answerChoice))
 
+//            Animation grow_from_middle, shrink_to_middle, slide_in_left, slide_out_right;
+//
+//            grow_from_middle = AnimationUtils.loadAnimation(this, R.anim.grow_from_middle);
+//            shrink_to_middle = AnimationUtils.loadAnimation(this, R.anim.shrink_to_middle);
+//            slide_in_left = AnimationUtils.loadAnimation(this, R.anim.slide_in_left);
+//            slide_out_right = AnimationUtils.loadAnimation(this, R.anim.slide_out_right);
+
             //display "correct" image
             feedbackImg.setImageResource(R.drawable.correctsign);
+
+//            myViewFlipper.setInAnimation(slide_in_left);
+//            myViewFlipper.setOutAnimation(slide_out_right);
 
             //set up button sounds
             final MediaPlayer correctButtonClick = MediaPlayer.create(this, R.raw.correct);
@@ -473,9 +492,6 @@ public class MainPlay extends AppCompatActivity {
 
     //this function changes the question text to a random question in the database
     public void setRandomQuestion (){
-
-//        //choose a random question ID from the database
-//        n = rand.nextInt(dbHandler.getProfilesCount());
 
         int divide = rand.nextInt(4)+1;
 
