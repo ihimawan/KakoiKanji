@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         //database initializations
         if (profile_counts==0) { //if database is empty, then add.
             addingHighscore(0);
+
+            //DATABASE ADDED BY CATHERINA 11/12/15 (HER COMPUTER WAS NOT WORKING)
             addingQuestion("one", "ichi", R.drawable.kanji1, "一");
             addingQuestion("two", "ni", R.drawable.kanji2, "二");
             addingQuestion("three", "san", R.drawable.kanji3, "三");
@@ -68,55 +70,56 @@ public class MainActivity extends AppCompatActivity {
             addingQuestion("mouth", "kuchi", R.drawable.kanjimouth, "口");
             addingQuestion("person", "hito", R.drawable.kanjiperson, "人");
             addingQuestion("male", "otoko", R.drawable.kanjiperson , "男");
-//             addingQuestion("circle", "en", R.drawable.kanjiperson , "円"); 
-//            addingQuestion("book", "hon", R.drawable.kanjiperson , "本"); 
-//            addingQuestion("car", "kuruma", R.drawable.kanjiperson , "車");
-//             addingQuestion("moon", "tsuki", R.drawable.kanjiperson , "月");
-//             addingQuestion("fire", "hi", R.drawable.kanjiperson , "火");
-//             addingQuestion("water", "mizu", R.drawable.kanjiperson , "水");
-//             addingQuestion("tree", "ki", R.drawable.kanjiperson , "木");
-//             addingQuestion("gold", "kin", R.drawable.kanjiperson , "金"); 
-//            addingQuestion("rain", "ame", R.drawable.kanjiperson , "雨");
-//             addingQuestion("snow", "yuki", R.drawable.kanjiperson , "雪");
-//             addingQuestion("flower", "hana", R.drawable.kanjiperson , "花");
-//             addingQuestion("mountain", "yama", R.drawable.kanjiperson , "山");
-//             addingQuestion("river", "kawa", R.drawable.kanjiperson , "川");
-//             addingQuestion("stone", "ishi", R.drawable.kanjiperson , "石");
-//             addingQuestion("cloud", "kumo", R.drawable.kanjiperson , "雲"); 
-//            addingQuestion("red", "aka", R.drawable.kanjiperson , "赤"); 
-//            addingQuestion("blue", "ao", R.drawable.kanjiperson , "青");
-//             addingQuestion("white", "shiro", R.drawable.kanjiperson , "白");
-//             addingQuestion("black", "kuro", R.drawable.kanjiperson , "黒");
-//             addingQuestion("yellow", "ki", R.drawable.kanjiperson , "黄");
-//            addingQuestion("foot", "ashi", R.drawable.kanjiperson , "足"); 
-//            addingQuestion("legs", "ashi", R.drawable.kanjiperson, "脚"); 
-//            addingQuestion("head", "atama", R.drawable.kanjiperson , "頭"); 
-//            addingQuestion("house", "ie", R.drawable.kanjiperson , "家"); 
-//            addingQuestion("sea", "umi", R.drawable.kanjiperson , "海"); 
-//            addingQuestion("picture", "e", R.drawable.kanjiperson , "絵");
-//             addingQuestion("king", "o", R.drawable.kanjiperson , "王"); 
-//            addingQuestion("hill", "oka", R.drawable.kanjiperson , "丘");
-//             addingQuestion("face", "kao", R.drawable.kanjiperson , "顔"); 
-//            addingQuestion("mirror", "kagami", R.drawable.kanjiperson , "鏡");
-//             addingQuestion("umbrella", "kasa", R.drawable.kanjiperson , "傘"); 
-//            addingQuestion("hair", "kami", R.drawable.kanjiperson , "髪"); 
-//            addingQuestion("chicken", "niwatori", R.drawable.kanjiperson , "鶏");
-//             addingQuestion("whale", "kujira", R.drawable.kanjiperson , "鯨"); 
-//            addingQuestion("wolf", "okami", R.drawable.kanjiperson , "狼");
-//             addingQuestion("horse", "uma", R.drawable.kanjiperson , "馬"); 
-//            addingQuestion("cow", "ushi", R.drawable.kanjiperson , "牛"); 
-//            addingQuestion("crow", "karasu", R.drawable.kanjiperson , "烏"); 
-//            addingQuestion("fish", "sakana", R.drawable.kanjiperson , "魚"); 
-//            addingQuestion("dog", "inu", R.drawable.kanjiperson , "犬");
-//            addingQuestion("cat", "neko", R.drawable.kanjiperson , "猫");
-//             addingQuestion("west", "nishi", R.drawable.kanjiperson , "西");
-//             addingQuestion("south", "minami", R.drawable.kanjiperson , "南"); 
-//            addingQuestion("north", "kita", R.drawable.kanjiperson , "北"); 
-//            addingQuestion("east", "higashi", R.drawable.kanjiperson , "東");
-//             addingQuestion("spring", "haru", R.drawable.kanjiperson , "春"); 
-//            addingQuestion("summer", "natsu", R.drawable.kanjiperson , "夏"); 
-//            addingQuestion("autumn", "aki", R.drawable.kanjiperson , "秋"); 
-//            addingQuestion("winter", "fuyu", R.drawable.kanjiperson , "冬");
+            addingQuestion("circle", "en", R.drawable.kanjiperson , "円");
+            addingQuestion("book", "hon", R.drawable.kanjiperson , "本");
+            addingQuestion("car", "kuruma", R.drawable.kanjiperson , "車");
+            addingQuestion("moon", "tsuki", R.drawable.kanjiperson , "月");
+            addingQuestion("fire", "hi", R.drawable.kanjiperson , "火");
+            addingQuestion("water", "mizu", R.drawable.kanjiperson , "水");
+            addingQuestion("tree", "ki", R.drawable.kanjiperson , "木");
+            addingQuestion("gold", "kin", R.drawable.kanjiperson , "金");
+            addingQuestion("rain", "ame", R.drawable.kanjiperson , "雨");
+            addingQuestion("snow", "yuki", R.drawable.kanjiperson , "雪");
+            addingQuestion("flower", "hana", R.drawable.kanjiperson , "花");
+            addingQuestion("mountain", "yama", R.drawable.kanjiperson , "山");
+            addingQuestion("river", "kawa", R.drawable.kanjiperson , "川");
+            addingQuestion("stone", "ishi", R.drawable.kanjiperson , "石");
+            addingQuestion("cloud", "kumo", R.drawable.kanjiperson , "雲");
+            addingQuestion("red", "aka", R.drawable.kanjiperson , "赤");
+            addingQuestion("blue", "ao", R.drawable.kanjiperson , "青");
+            addingQuestion("white", "shiro", R.drawable.kanjiperson , "白");
+            addingQuestion("black", "kuro", R.drawable.kanjiperson , "黑");
+            addingQuestion("yellow", "ki", R.drawable.kanjiperson , "黃");
+            addingQuestion("foot", "ashi", R.drawable.kanjiperson , "足");
+            addingQuestion("legs", "ashi", R.drawable.kanjiperson , "脚");
+            addingQuestion("head", "atama", R.drawable.kanjiperson , "頭");
+            addingQuestion("house", "ie", R.drawable.kanjiperson , "家");
+            addingQuestion("sea", "umi", R.drawable.kanjiperson , "海");
+            addingQuestion("picture", "e", R.drawable.kanjiperson , "絵");
+            addingQuestion("king", "o", R.drawable.kanjiperson , "王");
+            addingQuestion("hill", "oka", R.drawable.kanjiperson , "丘");
+            addingQuestion("face", "kao", R.drawable.kanjiperson , "顔");
+            addingQuestion("mirror", "kagami", R.drawable.kanjiperson , "鏡");
+            addingQuestion("umbrella", "kasa", R.drawable.kanjiperson , "傘");
+            addingQuestion("hair", "kami", R.drawable.kanjiperson , "髪");
+            addingQuestion("chicken", "niwatori", R.drawable.kanjiperson , "鶏");
+            addingQuestion("whale", "kujira", R.drawable.kanjiperson , "鯨");
+            addingQuestion("wolf", "okami", R.drawable.kanjiperson , "狼");
+            addingQuestion("horse", "uma", R.drawable.kanjiperson , "馬");
+            addingQuestion("cow", "ushi", R.drawable.kanjiperson , "牛");
+            addingQuestion("crow", "karasu", R.drawable.kanjiperson , "烏");
+            addingQuestion("fish", "sakana", R.drawable.kanjiperson , "魚");
+            addingQuestion("dog", "inu", R.drawable.kanjiperson , "犬");
+            addingQuestion("cat", "neko", R.drawable.kanjiperson , "猫");
+            addingQuestion("west", "nishi", R.drawable.kanjiperson , "西");
+            addingQuestion("south", "minami", R.drawable.kanjiperson , "南");
+            addingQuestion("north", "kita", R.drawable.kanjiperson , "北");
+            addingQuestion("east", "higashi", R.drawable.kanjiperson , "東");
+            addingQuestion("spring", "haru", R.drawable.kanjiperson , "春");
+            addingQuestion("summer", "natsu", R.drawable.kanjiperson , "夏");
+            addingQuestion("autumn", "aki", R.drawable.kanjiperson , "秋");
+            addingQuestion("winter", "fuyu", R.drawable.kanjiperson , "冬");
+
         }
 
         //alert dialog object that notifies pronounciation will be shown
