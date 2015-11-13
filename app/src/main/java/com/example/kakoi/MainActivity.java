@@ -119,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
             addingQuestion("summer", "natsu", R.drawable.summer, "夏");
             addingQuestion("autumn", "aki", R.drawable.autumn , "秋");
             addingQuestion("winter", "fuyu", R.drawable.winter, "冬");
-
         }
 
         //alert dialog object that notifies pronounciation will be shown

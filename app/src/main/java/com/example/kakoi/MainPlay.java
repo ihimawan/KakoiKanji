@@ -340,7 +340,7 @@ public class MainPlay extends AppCompatActivity {
     public void onClick1 (View view){
         chosenAnswer = 1;
         String buttonText = answer1.getText().toString(); //get the text of the button clicked
-        isCorrectAnswer(n, buttonText); //checks if it is the correct answer, and adjust button colors accordingly.
+        isCorrectAnswer(); //checks if it is the correct answer, and adjust button colors accordingly.
 
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -353,7 +353,7 @@ public class MainPlay extends AppCompatActivity {
     public void onClick2 (View view){
         chosenAnswer = 2;
         String buttonText = answer2.getText().toString();
-        isCorrectAnswer(n, buttonText);
+        isCorrectAnswer();
         handler.postDelayed(new Runnable() {
             public void run() {
                 setRound(); //get another random question
@@ -365,7 +365,7 @@ public class MainPlay extends AppCompatActivity {
     public void onClick3 (View view){
         chosenAnswer = 3;
         String buttonText = answer3.getText().toString();
-        isCorrectAnswer(n, buttonText);
+        isCorrectAnswer();
         handler.postDelayed(new Runnable() {
             public void run() {
                 setRound(); //get another random question
@@ -377,7 +377,7 @@ public class MainPlay extends AppCompatActivity {
     public void onClick4 (View view) {
         chosenAnswer = 4;
         String buttonText = answer4.getText().toString();
-        isCorrectAnswer(n, buttonText);
+        isCorrectAnswer();
         handler.postDelayed(new Runnable() {
             public void run() {
                 setRound(); //get another random question
@@ -386,7 +386,7 @@ public class MainPlay extends AppCompatActivity {
     }
 
     //checks if correct answer
-    public void isCorrectAnswer(int n, String answerChoice){
+    public void isCorrectAnswer(){ //int n, String answerChoice
 
         if (whereCorrectAnswer == chosenAnswer){ //(dbHandler.isCorrectAnswer(n, answerChoice))
 
@@ -474,8 +474,19 @@ public class MainPlay extends AppCompatActivity {
     //this function changes the question text to a random question in the database
     public void setRandomQuestion (){
 
-        //choose a random question ID from the database
-        n = rand.nextInt(dbHandler.getProfilesCount());
+//        //choose a random question ID from the database
+//        n = rand.nextInt(dbHandler.getProfilesCount());
+
+        int divide = rand.nextInt(4)+1;
+
+        if (roundNumber>4) {
+            if (divide%2 == 0) {
+                n = askedQuestions.get(rand.nextInt(askedQuestions.size() - 1));
+            } else {
+                //choose a random question ID from the database
+                n = rand.nextInt(dbHandler.getProfilesCount());
+            }
+        }
 
         if (roundNumber<5) { //if it is round 1,2,3, or 4, make sure that there are no questions that are asked twice
             while (askedQuestions.contains(n)){ //if it is already asked
