@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
             addingQuestion("wolf", "okami", R.drawable.wolf, "狼");
             addingQuestion("horse", "uma", R.drawable.horse, "馬");
             addingQuestion("cow", "ushi", R.drawable.crow, "牛");
-//            addingQuestion("crow", "karasu", R.drawable.kanjiperson , "烏");
             addingQuestion("fish", "sakana", R.drawable.fish, "魚");
             addingQuestion("dog", "inu", R.drawable.dog, "犬");
             addingQuestion("cat", "neko", R.drawable.cat, "猫");
@@ -119,6 +118,36 @@ public class MainActivity extends AppCompatActivity {
             addingQuestion("summer", "natsu", R.drawable.summer, "夏");
             addingQuestion("autumn", "aki", R.drawable.autumn , "秋");
             addingQuestion("winter", "fuyu", R.drawable.winter, "冬");
+            addingQuestion("ball", "tama", R.drawable.ball, "球");
+            addingQuestion("wheat", "mugi", R.drawable.wheat, "麦");
+            addingQuestion("forest", "mori", R.drawable.forest, "森");
+            addingQuestion("grass", "kusa", R.drawable.grass, "草");
+            addingQuestion("gate", "mon", R.drawable.gate, "門");
+            addingQuestion("monkey", "saru", R.drawable.monkey, "猿");
+            addingQuestion("finger", "yubi", R.drawable.finger, "指");
+            addingQuestion("island", "shima", R.drawable.island, "島");
+            addingQuestion("leaf", "ha", R.drawable.leaf, "葉");
+            addingQuestion("egg", "tamago", R.drawable.egg, "卵");
+            addingQuestion("lake", "mizumi", R.drawable.lake, "湖");
+            addingQuestion("insect", "mushi", R.drawable.insects, "虫");
+            addingQuestion("outside", "soto", R.drawable.outside, "外");
+            addingQuestion("boat", "fune", R.drawable.boat, "舟");
+            addingQuestion("bridge", "hashi", R.drawable.bridge, "橋");
+            addingQuestion("shore", "kishi", R.drawable.shore, "岸");
+            addingQuestion("shellfish", "kai", R.drawable.shellfish, "貝");
+            addingQuestion("salt", "shio", R.drawable.salt, "塩");
+            addingQuestion("sheep", "hitsuji", R.drawable.sheep, "羊");
+            addingQuestion("prize", "sho", R.drawable.prize, "賞");
+            addingQuestion("elephant", "zo", R.drawable.elephant, "象");
+            addingQuestion("turtle", "kame", R.drawable.turtle, "亀");
+            addingQuestion("plum", "ume", R.drawable.plum, "梅");
+            addingQuestion("tiger", "tora", R.drawable.tiger, "虎");
+            addingQuestion("paper", "kami", R.drawable.paper, "紙");
+            addingQuestion("tooth", "ha", R.drawable.tooth, "歯");
+            addingQuestion("nest", "su", R.drawable.nest, "巣");
+            addingQuestion("thread", "ito", R.drawable.thread, "糸");
+            addingQuestion("right", "migi", R.drawable.right, "右");
+            addingQuestion("left", "hidari", R.drawable.left, "左");
         }
 
         //alert dialog object that notifies pronounciation will be shown
