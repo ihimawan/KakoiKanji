@@ -14,7 +14,10 @@
         android:id="@+id/gameover"
         android:src="@drawable/gameoversign"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:typeface="serif"
+        android:textStyle="bold"/>
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -47,7 +50,9 @@
         android:src="@drawable/scoretext"
         android:layout_below="@+id/gameover"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
+        android:typeface="serif"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -58,7 +63,9 @@
         android:id="@+id/highscore"
         android:textColor="#fff"
         android:layout_above="@+id/quitButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:typeface="serif"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -68,7 +75,9 @@
         android:id="@+id/bestscoreText"
         android:textColor="#fff"
         android:layout_below="@+id/highscore2"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:typeface="serif"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -80,7 +89,9 @@
         android:textColor="#fff"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-10dp" />
+        android:layout_marginTop="-10dp"
+        android:typeface="serif"
+        android:textStyle="bold"/>
 
     <ImageView
         android:layout_width="wrap_content"
