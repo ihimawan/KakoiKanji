@@ -83,11 +83,11 @@ public class MainActivity extends AppCompatActivity {
             addingQuestion("river", "kawa", R.drawable.river, "川");
             addingQuestion("stone", "ishi", R.drawable.stone, "石");
             addingQuestion("cloud", "kumo", R.drawable.cloud, "雲");
-            addingQuestion("red", "aka", R.drawable.red, "赤");
+            addingQuestion("red", "aka", R.drawable.red1, "赤");
             addingQuestion("blue", "ao", R.drawable.blue, "青");
-            addingQuestion("white", "shiro", R.drawable.white, "白");
-            addingQuestion("black", "kuro", R.drawable.black, "黑");
-            addingQuestion("yellow", "ki", R.drawable.yellow, "黃");
+            addingQuestion("white", "shiro", R.drawable.white1, "白");
+            addingQuestion("black", "kuro", R.drawable.black1, "黑");
+            addingQuestion("yellow", "ki", R.drawable.yellow1, "黃");
             addingQuestion("foot", "ashi", R.drawable.foot, "足");
             addingQuestion("legs", "ashi", R.drawable.leg, "脚");
             addingQuestion("head", "atama", R.drawable.head, "頭");
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             addingQuestion("whale", "kujira", R.drawable.whale, "鯨");
             addingQuestion("wolf", "okami", R.drawable.wolf, "狼");
             addingQuestion("horse", "uma", R.drawable.horse, "馬");
-            addingQuestion("cow", "ushi", R.drawable.cow, "牛");
+            addingQuestion("crow", "ushi", R.drawable.crow, "牛");
             addingQuestion("fish", "sakana", R.drawable.fish, "魚");
             addingQuestion("dog", "inu", R.drawable.dog, "犬");
             addingQuestion("cat", "neko", R.drawable.cat, "猫");
