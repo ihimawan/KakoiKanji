@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
             addingQuestion("heart", "kokoro", R.drawable.kanjiheart, "心");
             addingQuestion("mother", "haha", R.drawable.kanjimother, "母");
             addingQuestion("mouth", "kuchi", R.drawable.kanjimouth, "口");
-//            addingQuestion("person", "hito", R.drawable.kanjiperson, "人");
-//            addingQuestion("male", "otoko", R.drawable.kanjiperson , "男");
             addingQuestion("circle", "en", R.drawable.circle, "円");
             addingQuestion("book", "hon", R.drawable.book, "本");
             addingQuestion("car", "kuruma", R.drawable.car, "車");
@@ -106,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             addingQuestion("whale", "kujira", R.drawable.whale, "鯨");
             addingQuestion("wolf", "okami", R.drawable.wolf, "狼");
             addingQuestion("horse", "uma", R.drawable.horse, "馬");
-            addingQuestion("cow", "ushi", R.drawable.crow, "牛");
+            addingQuestion("cow", "ushi", R.drawable.cow, "牛");
             addingQuestion("fish", "sakana", R.drawable.fish, "魚");
             addingQuestion("dog", "inu", R.drawable.dog, "犬");
             addingQuestion("cat", "neko", R.drawable.cat, "猫");
@@ -116,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             addingQuestion("east", "higashi", R.drawable.east2, "東");
             addingQuestion("spring", "haru", R.drawable.spring, "春");
             addingQuestion("summer", "natsu", R.drawable.summer, "夏");
-            addingQuestion("autumn", "aki", R.drawable.autumn , "秋");
+            addingQuestion("autumn", "aki", R.drawable.autumn, "秋");
             addingQuestion("winter", "fuyu", R.drawable.winter, "冬");
             addingQuestion("ball", "tama", R.drawable.ball, "球");
             addingQuestion("wheat", "mugi", R.drawable.wheat, "麦");
@@ -232,7 +230,9 @@ public class MainActivity extends AppCompatActivity {
                         intent.addCategory(Intent.CATEGORY_HOME);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
-                        finish();
+                        //closes all the activity and starts from the main_menu after the
+                        //game is closed and run again
+                        finishAffinity();
                         System.exit(0);
 
                     }

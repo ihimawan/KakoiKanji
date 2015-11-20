@@ -6,7 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.example.kakoi"
-        minSdkVersion 8
+        //changed the minimum sdk to API level 21
+        minSdkVersion 21
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
