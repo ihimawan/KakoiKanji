@@ -4,30 +4,19 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.Image;
 import android.media.MediaPlayer;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.os.Handler;
 import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
-
-import java.util.logging.LogRecord;
 
 /*
 THIS IS THE MAIN PLAYING SCREEN UPDATE
@@ -355,7 +344,7 @@ public class MainPlay extends AppCompatActivity {
             public void run() {
                 setRound(); //get another random question
             }
-        }, 650);
+        }, 500);
     }
 
     //function that runs if the second button is clicked.
@@ -367,7 +356,7 @@ public class MainPlay extends AppCompatActivity {
             public void run() {
                 setRound(); //get another random question
             }
-        }, 650);
+        }, 500);
     }
 
     //function that runs if the third button is clicked.
@@ -379,7 +368,7 @@ public class MainPlay extends AppCompatActivity {
             public void run() {
                 setRound(); //get another random question
             }
-        }, 650);
+        }, 500);
     }
 
     //function that runs if the fourth button is clicked.
@@ -391,7 +380,7 @@ public class MainPlay extends AppCompatActivity {
             public void run() {
                 setRound(); //get another random question
             }
-        }, 650);
+        }, 500);
     }
 
     //checks if correct answer
