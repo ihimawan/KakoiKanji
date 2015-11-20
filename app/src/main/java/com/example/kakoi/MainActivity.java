@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             addingQuestion("whale", "kujira", R.drawable.whale, "鯨");
             addingQuestion("wolf", "okami", R.drawable.wolf, "狼");
             addingQuestion("horse", "uma", R.drawable.horse, "馬");
-            addingQuestion("crow", "ushi", R.drawable.crow, "牛");
+            addingQuestion("cow", "ushi", R.drawable.cow, "牛");
             addingQuestion("fish", "sakana", R.drawable.fish, "魚");
             addingQuestion("dog", "inu", R.drawable.dog, "犬");
             addingQuestion("cat", "neko", R.drawable.cat, "猫");
