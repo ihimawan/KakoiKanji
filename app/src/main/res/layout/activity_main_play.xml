@@ -185,18 +185,20 @@
             android:layout_width="match_parent"
             android:layout_height="87dp"
             android:text="00"
+            android:textColor="#FFF"
             android:gravity="center"
             android:layout_centerHorizontal="true"
             android:textStyle="bold"
             android:typeface="serif"
             android:textSize="60dip"
-            android:elevation="100dp"/>
+            android:elevation="100dp" />
 
         <Button
             android:id="@+id/answer4"
             android:layout_width="125dp"
             android:layout_height="125dip"
             android:text="YONG"
+            android:textColor="#FFF"
             android:textStyle="bold"
             android:typeface="serif"
             android:textSize="20dp"
