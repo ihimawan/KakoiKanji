@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.Handler;
-import android.widget.ViewFlipper;
+
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -68,7 +68,6 @@ public class MainPlay extends AppCompatActivity {
     Random rand;            //a random object to generate random numbers later
     int whereCorrectAnswer=1; //the Button number that contains the correct answer.
     int chosenAnswer = 1;
-    ViewFlipper myViewFlipper;
 
     int randomDistractor;
 

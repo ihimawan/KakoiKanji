@@ -4,12 +4,10 @@ package com.example.kakoi;
  * Created by IndriHimawan on 10/6/15
  */
 public class HighScoreItem {
-    private int _id;
-    private int _values;//
 
-    public HighScoreItem(){
+    private int _values;
 
-    }
+
 
     public HighScoreItem(int _values) {
         this._values = _values;
@@ -19,8 +17,5 @@ public class HighScoreItem {
         return _values;
     }
 
-    public void set_values(int _values) {
-        this._values = _values;
-    }
 
 }

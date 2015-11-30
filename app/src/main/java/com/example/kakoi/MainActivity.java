@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 })
-                .setNegativeButton("Continue", new DialogInterface.OnClickListener() {
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //backButton.start();
                         dialog.cancel(); //then do nothing
