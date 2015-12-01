@@ -72,53 +72,55 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     //to get the answer given the position
     public String getAnswer(int position){
-
+        String positionAnswer;
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
         Cursor c = db.rawQuery(query, null);
-
         c.moveToPosition(position);
-
-        return c.getString(c.getColumnIndex(COLUMN_ANSWER));
+        positionAnswer= c.getString(c.getColumnIndex(COLUMN_ANSWER));
+        c.close();
+        return positionAnswer;
 
     }
 
     //to get the kanji word given the position
     public String getKanji(int position){
-
+        String kanjiPosition;
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
         Cursor c = db.rawQuery(query, null);
-
         c.moveToPosition(position);
-
-        return c.getString(c.getColumnIndex(COLUMN_KANJI));
+        kanjiPosition = c.getString(c.getColumnIndex(COLUMN_KANJI));
+        c.close();
+        return kanjiPosition;
 
     }
 
     //to get the image given the position
     public int getImage(int position){
-
+        int imagePosition;
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
         Cursor c = db.rawQuery(query, null);
-
         c.moveToPosition(position);
-
-        return c.getInt(c.getColumnIndex(COLUMN_IMAGE));
+        imagePosition = c.getInt(c.getColumnIndex(COLUMN_IMAGE));
+        c.close();
+        return imagePosition;
 
     }
 
     //get the question given the position of the word.
     public String getQuestion (int position){
-
+        String questionPosition;
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE 1";
         Cursor c = db.rawQuery(query, null);
 
         c.moveToPosition(position);
 
-        return c.getString(c.getColumnIndex(COLUMN_ENGLISHWORD));
+        questionPosition = c.getString(c.getColumnIndex(COLUMN_ENGLISHWORD));
+        c.close();
+        return questionPosition;
     }
 
     /*
