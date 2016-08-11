@@ -1,6 +1,6 @@
 # Kakoi Kanji
-Click <a href="https://github.com/ihimawan/KakoiKanji/tree/master/Screenshots">here</a> for game screenshots.
-<br><br>
+<i>Click <a href="https://github.com/ihimawan/KakoiKanji/tree/master/Screenshots">here</a> for game screenshots.
+<br><br></i>
 Japanese learning game for Android. The game itself is a bit hard to explain, so here is the storyboard sequence on how the game works:
 
 <p><b>Step 1:</b> You are given an image and the associated English word. You are only given one answer choice, and said answer choice is the correct answer.</p> 
