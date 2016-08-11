@@ -1,6 +1,7 @@
 # Kakoi Kanji
 Japanese learning game for Android. The game itself is a bit hard to explain, so here is the storyboard sequence on how the game works:
 
+<p>Step 1:</p> 
 <img src="Screenshots/step1.jpg" width=400>
 <img src="Screenshots/step2.jpg" width=400>
 <img src="Screenshots/step3.jpg" width=400>
