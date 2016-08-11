@@ -15,5 +15,5 @@ Japanese learning game for Android. The game itself is a bit hard to explain, so
 <img src="Screenshots/step5.jpg" width=300>
 <img src="Screenshots/step6.jpg" width=300>
 
-
+# Enjoy the game! :)
 <img src="Screenshots/correctmockup.jpg">
