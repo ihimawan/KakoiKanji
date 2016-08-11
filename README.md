@@ -1,4 +1,4 @@
 # KakoiKanji
 Japanese learning game for Android
 
-<img src="Screenshots/correctmockup.jpg" width=500>
+<img src="Screenshots/correctmockup.jpg" width=700>
